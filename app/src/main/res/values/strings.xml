@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">MyProfile</string>
+    <string name="setting">Settings</string>
+    <string name="view_my_contacts">VIEW MY CONTACTS</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="go_to_settings_and_fill_out_the_profile">Go to settings and fill out the profile</string>
+    <string name="profile_image_description">Profile image</string>
+    <string name="title">MyProfile</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="signup_description">Fill out the profile and go to the application!</string>
+    <string name="signup_label">Let\'s get acquainted</string>
+    <string name="register_sign_in">Sign In</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="terms__and_conditions">By clicking Register you agree to our Terms \n and Conditions</string>
+    <string name="button_register">Register</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="profile_name">%1$s %2$s</string>
+    <string name="main_home_address">Home Address</string>
+    <string name="main_career">Career</string>
+    <string name="user_email">EMAIL</string>
+    <string name="user_pass">PASS</string>
+    <string name="auth_remember_me">Remember me</string>
+
+</resources>
