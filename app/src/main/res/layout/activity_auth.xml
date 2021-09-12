@@ -27,6 +27,7 @@
         style="@style/WrapContent.Bordered.fontSansWhite"
         android:text="@string/signup_description"
         android:textSize="@dimen/small_text_size"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/textViewTitle"
         app:layout_constraintStart_toStartOf="@+id/textViewTitle"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
@@ -38,7 +39,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/email"
         android:theme="@style/InputTheme"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSubtitle" >
+        app:layout_constraintTop_toBottomOf="@+id/textViewSubtitle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextEmail"
@@ -73,22 +74,25 @@
     <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/checkBoxRememberMe"
         style="@style/WrapContent.fontSansGray"
-        android:text="@string/auth_remember_me"
         android:buttonTint="@color/white"
+        android:text="@string/auth_remember_me"
+        app:layout_constraintBottom_toTopOf="@+id/buttonRegister"
         app:layout_constraintStart_toStartOf="@+id/textInputPass"
-        app:layout_constraintTop_toBottomOf="@+id/textInputPass" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputPass"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonRegister"
         style="@style/outlineBigButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="goToMyProfile"
         android:text="@string/button_register"
         android:textSize="@dimen/text_size"
         app:layout_constraintBottom_toTopOf="@+id/textViewTerms"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxRememberMe" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewTerms"
@@ -106,7 +110,9 @@
         android:text="@string/already_have_an_account"
         android:textSize="@dimen/small_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textViewSignIn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -116,6 +122,6 @@
         android:textSize="@dimen/small_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="goToLoginActivity"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textViewSignInTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

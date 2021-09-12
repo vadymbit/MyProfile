@@ -28,5 +28,9 @@
     <string name="user_email">EMAIL</string>
     <string name="user_pass">PASS</string>
     <string name="auth_remember_me">Remember me</string>
+    <string name="auth_error_required">Required field!</string>
+    <string name="auth_error_incorrect_email">Incorrect E-mail address!</string>
+    <string name="auth_error_short_password">Password must be at least %1$d symbols!</string>
+    <string name="auth_error_big_password">Password can\'t be more than %1$d symbols!</string>
 
 </resources>

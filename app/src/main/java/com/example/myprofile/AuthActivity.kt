@@ -1,6 +1,5 @@
 package com.example.myprofile
 
-import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -42,8 +41,8 @@ class AuthActivity : AppCompatActivity() {
     /**
      * Go to profile activity after validating password and email
      */
-    fun goToMyProfile(view: View) {
-        if (isValidate()) {
+    private fun goToMyProfile() {
+        if (isInputValidate()) {
             val intent = Intent(this, MainActivity::class.java).apply {
                 putExtra(EMAIL, binding.editTextEmail.text.toString())
             }
@@ -61,8 +60,8 @@ class AuthActivity : AppCompatActivity() {
      *
      * @return True if they valid
      */
-    private fun isValidate(): Boolean {
-        return validateEmail() && validatePassword()
+    private fun isInputValidate(): Boolean {
+        return validateEmail() && isPasswordValid()
     }
 
     /**
@@ -71,16 +70,18 @@ class AuthActivity : AppCompatActivity() {
      * @return True if email correct or is not empty
      */
     private fun validateEmail(): Boolean {
-        if (binding.editTextEmail.text.toString().trim().isEmpty()) {
-            binding.textInputEmail.error = "Required field!"
-            binding.editTextEmail.requestFocus()
-            return false
-        } else if (!isValidEmail(binding.editTextEmail.text.toString())) {
-            binding.textInputEmail.error = "Incorrect E-mail address!"
-            binding.editTextEmail.requestFocus()
-            return false
-        } else {
-            binding.textInputEmail.isErrorEnabled = false
+        binding.apply {
+            if (editTextEmail.text.toString().trim().isEmpty()) {
+                textInputEmail.error = getString(R.string.auth_error_required)
+                editTextEmail.requestFocus()
+                return false
+            } else if (!isEmailValid(editTextEmail.text.toString())) {
+                textInputEmail.error = getString(R.string.auth_error_incorrect_email)
+                editTextEmail.requestFocus()
+                return false
+            } else {
+                textInputEmail.isErrorEnabled = false
+            }
         }
         return true
     }
@@ -90,7 +91,7 @@ class AuthActivity : AppCompatActivity() {
      *
      * @return True if the email matches the pattern
      */
-    private fun isValidEmail(email: String): Boolean {
+    private fun isEmailValid(email: String): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
@@ -99,26 +100,29 @@ class AuthActivity : AppCompatActivity() {
      *
      * @return True if length of password more than [MIN_PASS_LENGTH] and less than [MAX_PASS_LENGTH]
      */
-    private fun validatePassword(): Boolean {
-        when {
-            binding.editTextPass.text.toString().trim().isEmpty() -> {
-                binding.textInputPass.error = "Required field!"
-                binding.editTextPass.requestFocus()
-                return false
-            }
-            binding.editTextPass.text.toString().length < MIN_PASS_LENGTH -> {
-                binding.textInputPass.error = "Password must be at least $MIN_PASS_LENGTH symbols!"
-                binding.editTextPass.requestFocus()
-                return false
-            }
-            binding.editTextPass.text.toString().length > MAX_PASS_LENGTH -> {
-                binding.textInputPass.error =
-                    "Password can't be more than $MAX_PASS_LENGTH symbols!"
-                binding.editTextPass.requestFocus()
-                return false
-            }
-            else -> {
-                binding.textInputPass.isErrorEnabled = false
+    private fun isPasswordValid(): Boolean {
+        binding.apply {
+            when {
+                editTextPass.text.toString().trim().isEmpty() -> {
+                    textInputPass.error = getString(R.string.auth_error_required)
+                    editTextPass.requestFocus()
+                    return false
+                }
+                editTextPass.text.toString().length < MIN_PASS_LENGTH -> {
+                    textInputPass.error =
+                        getString(R.string.auth_error_short_password, MIN_PASS_LENGTH)
+                    editTextPass.requestFocus()
+                    return false
+                }
+                editTextPass.text.toString().length > MAX_PASS_LENGTH -> {
+                    textInputPass.error =
+                        getString(R.string.auth_error_big_password, MAX_PASS_LENGTH)
+                    editTextPass.requestFocus()
+                    return false
+                }
+                else -> {
+                    textInputPass.isErrorEnabled = false
+                }
             }
         }
         return true
@@ -128,14 +132,18 @@ class AuthActivity : AppCompatActivity() {
      * Setup listeners for input fields email and password
      */
     private fun setupListeners() {
-        binding.editTextEmail.addTextChangedListener(TextFieldValidation(binding.editTextEmail))
-        binding.editTextPass.addTextChangedListener(TextFieldValidation(binding.editTextPass))
+        binding.apply {
+            editTextEmail.addTextChangedListener(TextFieldValidation(editTextEmail))
+            editTextPass.addTextChangedListener(TextFieldValidation(editTextPass))
+            buttonRegister.setOnClickListener { goToMyProfile() }
+            textViewSignIn.setOnClickListener { goToLoginActivity() }
+        }
     }
 
     /**
      * Go to login activity
      */
-    fun goToLoginActivity(view: View) {
+    private fun goToLoginActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
@@ -163,9 +171,11 @@ class AuthActivity : AppCompatActivity() {
         if (!sharedPref.contains(pass) || !sharedPref.contains(email)) {
             return
         }
-        binding.editTextEmail.setText(sharedPref.getString(email, ""))
-        binding.editTextPass.setText(sharedPref.getString(pass, ""))
-        binding.buttonRegister.performClick()
+        binding.apply {
+            editTextEmail.setText(sharedPref.getString(email, ""))
+            editTextPass.setText(sharedPref.getString(pass, ""))
+            buttonRegister.performClick()
+        }
     }
 
     /**
@@ -178,7 +188,7 @@ class AuthActivity : AppCompatActivity() {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             when (view.id) {
                 R.id.editTextEmail -> validateEmail()
-                R.id.editTextPass -> validatePassword()
+                R.id.editTextPass -> isPasswordValid()
             }
         }
 
