@@ -10,5 +10,6 @@
     <color name="blue">#242235</color>
     <color name="orange">#FB5E06</color>
     <color name="gray">#B2B2B3</color>
+    <color name="contact_gray">#828282</color>
     <color name="light_red">#F93E3E</color>
 </resources>
