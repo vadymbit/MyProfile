@@ -1,7 +1,9 @@
 package com.example.myprofile
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.myprofile.contacts.ContactsActivity
 import com.example.myprofile.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -13,6 +15,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setName()
+        binding.buttonViewContacts.setOnClickListener {
+            startActivity(Intent(this, ContactsActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        }
     }
 
     /**
