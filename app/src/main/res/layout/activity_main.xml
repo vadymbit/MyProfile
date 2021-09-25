@@ -27,7 +27,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewProfileSettings"
-        style="@style/White"
+        style="@style/Bordered.White"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/setting"
@@ -115,7 +115,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewEmptyProfile"
-        style="@style/Blue"
+        style="@style/Bordered.Blue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/go_to_settings_and_fill_out_the_profile"

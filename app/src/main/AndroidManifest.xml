@@ -11,6 +11,7 @@
         android:theme="@style/Theme.MyProfile">
         <activity
             android:name=".contacts.ContactsActivity"
+            android:parentActivityName=".MainActivity"
             android:exported="true" />
         <activity
             android:name=".LoginActivity"
@@ -18,7 +19,7 @@
         <activity
             android:name=".AuthActivity"
             android:exported="true"
-            android:label="@string/title">
+            android:label="@string/app_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

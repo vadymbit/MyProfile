@@ -5,7 +5,7 @@
     <string name="edit_profile">Edit profile</string>
     <string name="go_to_settings_and_fill_out_the_profile">Go to settings and fill out the profile</string>
     <string name="profile_image_description">Profile image</string>
-    <string name="title">MyProfile</string>
+    <string name="app_title">MyProfile</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -32,5 +32,8 @@
     <string name="auth_error_incorrect_email">Incorrect E-mail address!</string>
     <string name="auth_error_short_password">Password must be at least %1$d symbols!</string>
     <string name="auth_error_big_password">Password can\'t be more than %1$d symbols!</string>
+    <string name="toolbar_contact_search">Search…</string>
+    <string name="contacts_add_contacts">Add Contacts</string>
+    <string name="contacts_title">Contacts</string>
 
 </resources>

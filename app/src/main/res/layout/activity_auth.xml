@@ -43,7 +43,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextEmail"
-            style="@style/White"
+            style="@style/Bordered.White"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/transparent"
@@ -62,7 +62,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextPass"
-            style="@style/White"
+            style="@style/Bordered.White"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/transparent"
