@@ -1,6 +1,4 @@
-package com.example.myprofile.contacts
-
-import java.util.*
+package com.example.myprofile.data
 
 data class Contact(
     val name: String,

@@ -16,6 +16,10 @@
         <item name="android:textColor">@color/blue</item>
     </style>
 
+    <style name="Bordered.Black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <style name="WrapContent">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -53,6 +57,7 @@
         <item name="android:paddingTop">@dimen/vertical_padding</item>
         <item name="android:paddingBottom">@dimen/vertical_padding</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:layout_margin">@dimen/border_margin</item>
     </style>
 
@@ -67,11 +72,14 @@
 
     <style name="TextInput">
         <item name="android:layout_margin">@dimen/border_margin</item>
-        <item name="layout_constraintEnd_toEndOf">parent</item>
-        <item name="layout_constraintStart_toStartOf">parent</item>
         <item name="boxStrokeWidthFocused">1dp</item>
         <item name="errorEnabled">true</item>
         <item name="expandedHintEnabled">false</item>
+    </style>
+
+    <style name="TextInputAddContacts">
+        <item name="expandedHintEnabled">false</item>
+        <item name="boxStrokeWidthFocused">1dp</item>
     </style>
 
     <style name="InputTheme" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
@@ -79,11 +87,14 @@
         <item name="colorOnSurface">@color/white</item>
     </style>
 
+    <style name="InputTheme.AddContacts">
+        <item name="colorOnSurface">@color/black</item>
+    </style>
+
     <style name="ToolBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:background">@color/blue</item>
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:textColorSecondary">@color/white</item>
         <item name="titleCentered">true</item>
-        <item name="title">@string/contacts_title</item>
     </style>
 </resources>

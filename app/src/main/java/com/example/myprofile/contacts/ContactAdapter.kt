@@ -6,13 +6,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myprofile.R
+import com.example.myprofile.data.Contact
 import com.example.myprofile.databinding.ItemContactBinding
 
-class ContactAdapter :
+class ContactAdapter(private val viewModel: ContactViewModel) :
     ListAdapter<Contact, ContactAdapter.ContactViewHolder>(ContactDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
-        return ContactViewHolder.from(parent)
+        return ContactViewHolder.from(parent, viewModel)
     }
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
@@ -20,24 +21,32 @@ class ContactAdapter :
         holder.bind(item)
     }
 
-    class ContactViewHolder private constructor(private val binding: ItemContactBinding) :
+    class ContactViewHolder private constructor(
+        private val binding: ItemContactBinding,
+        private val model: ContactViewModel
+    ) :
         RecyclerView.ViewHolder(binding.root) {
 
         /**
          * Bind contact name, career and photo to the item of recycler view
          */
         fun bind(contact: Contact) {
-            binding.textViewContactCareer.text = contact.career
-            binding.textViewContactName.text = contact.name
-            binding.imageViewProfilePhoto.setImageResource(R.drawable.ic_person)
+            binding.apply {
+                textViewContactCareer.text = contact.career
+                textViewContactName.text = contact.name
+                imageViewProfilePhoto.setImageResource(R.drawable.ic_person)
+                buttonDeleteContact.setOnClickListener {
+                    model.deleteContact(contact)
+                }
+            }
         }
 
         //Create instance of ContactViewHolder and init binding for RecyclerView
         companion object {
-            fun from(parent: ViewGroup): ContactViewHolder {
+            fun from(parent: ViewGroup, viewModel: ContactViewModel): ContactViewHolder {
                 val binding =
                     ItemContactBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                return ContactViewHolder(binding)
+                return ContactViewHolder(binding, viewModel)
             }
         }
     }

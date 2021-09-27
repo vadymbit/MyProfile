@@ -6,6 +6,7 @@ import android.view.Menu
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import com.example.myprofile.R
+import com.example.myprofile.data.Contact
 import com.example.myprofile.databinding.ActivityContactsBinding
 
 class ContactsActivity : AppCompatActivity() {
@@ -16,8 +17,8 @@ class ContactsActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.contact_toolbar_menu, menu)
-        val searchItem = menu?.findItem(R.id.action_search)
-        val searchView = searchItem?.actionView as SearchView
+        //val searchItem = menu?.findItem(R.id.action_search)
+        //val searchView = searchItem?.actionView as SearchView
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -29,14 +30,24 @@ class ContactsActivity : AppCompatActivity() {
         //Set up toolbar and add back button
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        //Set adapter for recyclerview
-        contactAdapter = ContactAdapter()
-        binding.contactList.adapter = contactAdapter
 
+        //Set adapter and itemDecoration for recyclerview
+        contactAdapter = ContactAdapter(viewModel)
+        binding.apply {
+            contactList.adapter = contactAdapter
+            contactList.addItemDecoration(
+                ContactItemDecoration(
+                    resources.getDimensionPixelSize(
+                        R.dimen.item_contact_margin
+                    )
+                )
+            )
+            textViewAddContact.setOnClickListener {
+                ContactAddDialogFragment(viewModel).show(supportFragmentManager, "Dialog")
+            }
+        }
         viewModel.contacts.observe(this, {
-            contactAdapter.submitList(it)
+            contactAdapter.submitList(it.toMutableList())
         })
-
-
     }
 }

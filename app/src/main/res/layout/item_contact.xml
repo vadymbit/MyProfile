@@ -8,8 +8,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageViewProfilePhoto"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/item_contact_photo_size"
+        android:layout_height="@dimen/item_contact_photo_size"
         android:layout_margin="@dimen/border_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,7 +20,7 @@
         android:id="@+id/textViewContactCareer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="@dimen/border_margin"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewProfilePhoto"
         app:layout_constraintStart_toEndOf="@+id/imageViewProfilePhoto"
         app:layout_constraintTop_toBottomOf="@+id/textViewContactName"
@@ -30,7 +30,7 @@
         android:id="@+id/textViewContactName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="@dimen/border_margin"
         android:textSize="@dimen/text_size"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -40,11 +40,13 @@
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="Name" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/buttonDeleteContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/border_margin"
         android:src="@drawable/ic_delete_button"
+        android:backgroundTint="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

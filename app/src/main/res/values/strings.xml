@@ -35,5 +35,6 @@
     <string name="toolbar_contact_search">Search…</string>
     <string name="contacts_add_contacts">Add Contacts</string>
     <string name="contacts_title">Contacts</string>
+    <string name="add_contact_save">SAVE</string>
 
 </resources>

@@ -14,4 +14,10 @@
         <!-- Customize your theme here. -->
         <item name="fontFamily">@font/open_sans</item>
     </style>
+
+    <style name="DialogTheme" parent="Theme.MyProfile">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
 </resources>
