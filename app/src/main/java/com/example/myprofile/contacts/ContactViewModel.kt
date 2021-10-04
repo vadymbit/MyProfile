@@ -7,20 +7,38 @@ import com.example.myprofile.data.Contact
 
 class ContactViewModel : ViewModel() {
 
+    /**
+     * The live data list in which will be stored all user contacts
+     */
     private val _contacts = MutableLiveData<MutableList<Contact>>()
     val contacts: LiveData<MutableList<Contact>>
         get() = _contacts
-    
+
+    /**
+     * Remove existing contact from contact live data list and notify it observers of changes
+     *
+     * @param contact The contact which will be removed from contact live data list
+     */
     fun deleteContact(contact: Contact) {
         _contacts.value?.remove(contact)
         _contacts.notifyObserver()
     }
 
+    /**
+     * Add new contact to contact live data list and notify it observers of changes
+     *
+     * @param contact The contact which will be added to contact live data list
+     */
     fun addContact(contact: Contact) {
         _contacts.value?.add(contact)
         _contacts.notifyObserver()
     }
 
+    /**
+     * Function extensions created for collections saved in live data
+     * When any changes in a collection you need to call this function
+     * to notify observers. Value will be resigned by himself for update data version
+     */
     private fun <T> MutableLiveData<T>.notifyObserver() {
         this.value = this.value
     }

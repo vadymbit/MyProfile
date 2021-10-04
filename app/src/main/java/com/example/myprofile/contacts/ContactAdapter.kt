@@ -2,12 +2,13 @@ package com.example.myprofile.contacts
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myprofile.R
 import com.example.myprofile.data.Contact
 import com.example.myprofile.databinding.ItemContactBinding
+import com.example.myprofile.imagepreprocessing.loadCircledImage
 
 class ContactAdapter(private val viewModel: ContactViewModel) :
     ListAdapter<Contact, ContactAdapter.ContactViewHolder>(ContactDiffCallback()) {
@@ -34,9 +35,11 @@ class ContactAdapter(private val viewModel: ContactViewModel) :
             binding.apply {
                 textViewContactCareer.text = contact.career
                 textViewContactName.text = contact.name
-                imageViewProfilePhoto.setImageResource(R.drawable.ic_person)
+                imageViewProfilePhoto.loadCircledImage(contact.urlPhoto)
                 buttonDeleteContact.setOnClickListener {
                     model.deleteContact(contact)
+                    val context = buttonDeleteContact.context
+                    Toast.makeText(context, "Contact has been removed", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -51,6 +54,10 @@ class ContactAdapter(private val viewModel: ContactViewModel) :
         }
     }
 
+    /**
+     * Is a utility class that calculates the difference between two lists
+     * and outputs a list of update operations that converts the first list into the second one.
+     */
     class ContactDiffCallback : DiffUtil.ItemCallback<Contact>() {
         override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
             return oldItem.phoneNumber == newItem.phoneNumber

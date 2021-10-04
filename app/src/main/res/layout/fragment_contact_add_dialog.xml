@@ -18,7 +18,7 @@
             app:layout_constraintVertical_chainStyle="spread" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView"
+            android:id="@+id/imageContactPhoto"
             android:layout_width="@dimen/add_contact_photo_size"
             android:layout_height="@dimen/add_contact_photo_size"
             android:src="@drawable/ic_person"
@@ -28,14 +28,15 @@
             app:layout_constraintTop_toTopOf="@+id/view" />
 
         <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/buttonAddPhoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_add_photo"
             android:backgroundTint="@android:color/transparent"
-            app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView"
+            app:layout_constraintBottom_toBottomOf="@+id/imageContactPhoto"
             app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
-            app:layout_constraintTop_toTopOf="@+id/appCompatImageView" />
+            app:layout_constraintStart_toEndOf="@+id/imageContactPhoto"
+            app:layout_constraintTop_toTopOf="@+id/imageContactPhoto" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"
@@ -59,7 +60,7 @@
             style="@style/TextInputAddContacts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
+            android:hint="@string/contact_add_hint_username"
             android:theme="@style/InputTheme.AddContacts"
             app:layout_constraintTop_toBottomOf="@+id/guideline3">
 
@@ -77,7 +78,7 @@
             style="@style/TextInputAddContacts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Career"
+            android:hint="@string/contact_add_hint_career"
             android:theme="@style/InputTheme.AddContacts"
             app:layout_constraintTop_toBottomOf="@+id/textInputUsername">
 
@@ -95,7 +96,7 @@
             style="@style/TextInputAddContacts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/contact_add_hint_email"
             android:theme="@style/InputTheme.AddContacts"
             app:layout_constraintTop_toBottomOf="@+id/textInputCareer">
 
@@ -113,7 +114,7 @@
             style="@style/TextInputAddContacts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone"
+            android:hint="@string/contact_add_hint_phone"
             android:theme="@style/InputTheme.AddContacts"
             app:layout_constraintTop_toBottomOf="@+id/textInputEmail">
 
@@ -131,7 +132,7 @@
             style="@style/TextInputAddContacts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Adress"
+            android:hint="@string/contact_add_hint_address"
             android:theme="@style/InputTheme.AddContacts"
             app:layout_constraintTop_toBottomOf="@+id/textInputPhone">
 
@@ -149,9 +150,9 @@
             style="@style/TextInputAddContacts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Date of birth"
+            android:hint="@string/contact_add_hint_date_of_birth"
             android:theme="@style/InputTheme.AddContacts"
-            app:layout_constraintBottom_toTopOf="@+id/appCompatButton"
+            app:layout_constraintBottom_toTopOf="@+id/buttonSave"
             app:layout_constraintTop_toBottomOf="@+id/textInputAdress">
 
             <com.google.android.material.textfield.TextInputEditText
