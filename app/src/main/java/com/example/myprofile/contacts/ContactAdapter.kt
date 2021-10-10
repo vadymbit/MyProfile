@@ -10,11 +10,11 @@ import com.example.myprofile.data.Contact
 import com.example.myprofile.databinding.ItemContactBinding
 import com.example.myprofile.imagepreprocessing.loadCircledImage
 
-class ContactAdapter(private val viewModel: ContactViewModel) :
+class ContactAdapter(private val iContactClickListener: IContactClickListener) :
     ListAdapter<Contact, ContactAdapter.ContactViewHolder>(ContactDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
-        return ContactViewHolder.from(parent, viewModel)
+        return ContactViewHolder.from(parent, iContactClickListener)
     }
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
@@ -24,7 +24,7 @@ class ContactAdapter(private val viewModel: ContactViewModel) :
 
     class ContactViewHolder private constructor(
         private val binding: ItemContactBinding,
-        private val model: ContactViewModel
+        private val iContactClickListener: IContactClickListener
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -37,7 +37,7 @@ class ContactAdapter(private val viewModel: ContactViewModel) :
                 textViewContactName.text = contact.name
                 imageViewProfilePhoto.loadCircledImage(contact.urlPhoto)
                 buttonDeleteContact.setOnClickListener {
-                    model.deleteContact(contact)
+                    iContactClickListener.removeUser(contact)
                     val context = buttonDeleteContact.context
                     Toast.makeText(context, "Contact has been removed", Toast.LENGTH_SHORT).show()
                 }
@@ -46,10 +46,10 @@ class ContactAdapter(private val viewModel: ContactViewModel) :
 
         //Create instance of ContactViewHolder and init binding for RecyclerView
         companion object {
-            fun from(parent: ViewGroup, viewModel: ContactViewModel): ContactViewHolder {
+            fun from(parent: ViewGroup, iContactClickListener: IContactClickListener): ContactViewHolder {
                 val binding =
                     ItemContactBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                return ContactViewHolder(binding, viewModel)
+                return ContactViewHolder(binding, iContactClickListener)
             }
         }
     }

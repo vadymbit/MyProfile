@@ -48,9 +48,18 @@
     </style>
     
     <style name="outlineButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="android:textColor">@color/blue</item>
-        <item name="strokeColor">@color/blue</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="strokeColor">?attr/colorOnPrimary</item>
         <item name="android:layout_margin">@dimen/border_margin</item>
+    </style>
+
+    <style name="outlineBigButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:paddingTop">@dimen/activity_vertical_margin</item>
+        <item name="android:paddingBottom">@dimen/activity_vertical_margin</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="strokeColor">?attr/colorPrimary</item>
+        <item name="android:layout_margin">@dimen/border_margin</item>
+        <item name="strokeWidth">2dp</item>
     </style>
 
     <style name="BigButton">
@@ -59,15 +68,6 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_margin">@dimen/border_margin</item>
-    </style>
-
-    <style name="outlineBigButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="android:paddingTop">@dimen/activity_vertical_margin</item>
-        <item name="android:paddingBottom">@dimen/activity_vertical_margin</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="strokeColor">@color/orange</item>
-        <item name="android:layout_margin">@dimen/border_margin</item>
-        <item name="strokeWidth">2dp</item>
     </style>
 
     <style name="TextInput">
@@ -87,14 +87,25 @@
         <item name="colorOnSurface">@color/white</item>
     </style>
 
-    <style name="InputTheme.AddContacts">
-        <item name="colorOnSurface">@color/black</item>
-    </style>
-
     <style name="ToolBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:background">@color/blue</item>
+        <item name="android:background">?attr/background</item>
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:textColorSecondary">@color/white</item>
         <item name="titleCentered">true</item>
+    </style>
+
+    <style name="TextAppearance.App.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">@font/open_sans</item>
+        <item name="android:fontFamily">@font/open_sans</item>
+    </style>
+
+    <style name="TextAppearance.App.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/open_sans</item>
+        <item name="android:fontFamily">@font/open_sans</item>
+    </style>
+
+    <style name="TextAppearance.App.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/open_sans</item>
+        <item name="android:fontFamily">@font/open_sans</item>
     </style>
 </resources>

@@ -10,7 +10,7 @@
         android:id="@+id/topColor"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/blue"
+        android:background="?attr/background"
         app:layout_constraintBottom_toTopOf="@id/botColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,15 +25,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topColor" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewProfileSettings"
-        style="@style/Bordered.White"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/setting"
-        android:textSize="@dimen/label_text_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title="@string/setting"
+        android:theme="@style/ToolBarTheme"
+        app:titleCentered="false"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
@@ -44,7 +42,7 @@
         android:backgroundTint="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewProfileSettings">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageViewProfilePhoto"
@@ -115,12 +113,14 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewEmptyProfile"
-        style="@style/Bordered.Blue"
+        style="@style/Bordered"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/go_to_settings_and_fill_out_the_profile"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/buttonEditProfile" />
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/buttonEditProfile"
+        tools:layout_editor_absoluteX="16dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonEditProfile"
@@ -137,7 +137,6 @@
         style="@style/BigButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/orange"
         android:text="@string/view_my_contacts"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

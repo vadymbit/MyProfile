@@ -4,12 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.viewModels
-import androidx.appcompat.widget.SearchView
 import com.example.myprofile.R
 import com.example.myprofile.data.Contact
 import com.example.myprofile.databinding.ActivityContactsBinding
 
-class ContactsActivity : AppCompatActivity() {
+class ContactsActivity : AppCompatActivity(), IContactClickListener {
 
     private lateinit var contactAdapter: ContactAdapter
     private lateinit var binding: ActivityContactsBinding
@@ -31,8 +30,21 @@ class ContactsActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        //Set adapter and itemDecoration for recyclerview
-        contactAdapter = ContactAdapter(viewModel)
+        contactAdapter = ContactAdapter(iContactClickListener = this)
+        initContactRecyclerView()
+
+        binding.textViewAddContact.setOnClickListener {
+            ContactAddDialogFragment(viewModel).show(supportFragmentManager, "Dialog")
+        }
+        viewModel.contacts.observe(this, {
+            contactAdapter.submitList(it.toMutableList())
+        })
+    }
+
+    /**
+     * Set recycler view adapter and item decoration
+     */
+    private fun initContactRecyclerView() {
         binding.apply {
             contactList.adapter = contactAdapter
             contactList.addItemDecoration(
@@ -42,12 +54,10 @@ class ContactsActivity : AppCompatActivity() {
                     )
                 )
             )
-            textViewAddContact.setOnClickListener {
-                ContactAddDialogFragment(viewModel).show(supportFragmentManager, "Dialog")
-            }
         }
-        viewModel.contacts.observe(this, {
-            contactAdapter.submitList(it.toMutableList())
-        })
+    }
+
+    override fun removeUser(contact: Contact) {
+        viewModel.removeContact(contact)
     }
 }

@@ -5,6 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 class ContactItemDecoration(private val spaceHeight: Int) : RecyclerView.ItemDecoration() {
+
     override fun getItemOffsets(
         outRect: Rect,
         view: View,

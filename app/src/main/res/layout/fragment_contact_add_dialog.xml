@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,7 +13,7 @@
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/blue"
+            android:background="?attr/background"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:layout_constraintVertical_chainStyle="spread" />
@@ -61,16 +62,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/contact_add_hint_username"
-            android:theme="@style/InputTheme.AddContacts"
             app:layout_constraintTop_toBottomOf="@+id/guideline3">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextUsername"
-                style="@style/Bordered.Black"
+                style="@style/Bordered"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/transparent"
-                android:hint="" />
+                tools:text="@string/setting"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -79,16 +79,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/contact_add_hint_career"
-            android:theme="@style/InputTheme.AddContacts"
             app:layout_constraintTop_toBottomOf="@+id/textInputUsername">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextCareer"
-                style="@style/Bordered.Black"
+                style="@style/Bordered"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/transparent"
-                android:hint="" />
+                android:backgroundTint="@android:color/transparent" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -97,16 +95,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/contact_add_hint_email"
-            android:theme="@style/InputTheme.AddContacts"
             app:layout_constraintTop_toBottomOf="@+id/textInputCareer">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextEmail"
-                style="@style/Bordered.Black"
+                style="@style/Bordered"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/transparent"
-                android:hint="" />
+                android:hint="@string/contact_add_email_hint" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -115,12 +112,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/contact_add_hint_phone"
-            android:theme="@style/InputTheme.AddContacts"
             app:layout_constraintTop_toBottomOf="@+id/textInputEmail">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextPhone"
-                style="@style/Bordered.Black"
+                style="@style/Bordered"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/transparent"
@@ -133,16 +129,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/contact_add_hint_address"
-            android:theme="@style/InputTheme.AddContacts"
             app:layout_constraintTop_toBottomOf="@+id/textInputPhone">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextAdress"
-                style="@style/Bordered.Black"
+                android:id="@+id/editTextAddress"
+                style="@style/Bordered"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/transparent"
-                android:hint="" />
+                android:backgroundTint="@android:color/transparent" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -151,25 +145,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/contact_add_hint_date_of_birth"
-            android:theme="@style/InputTheme.AddContacts"
             app:layout_constraintBottom_toTopOf="@+id/buttonSave"
             app:layout_constraintTop_toBottomOf="@+id/textInputAdress">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextBirthDate"
-                style="@style/Bordered.Black"
+                style="@style/Bordered"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/transparent"
-                android:hint="" />
+                android:backgroundTint="@android:color/transparent" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonSave"
             style="@style/BigButton"
+            android:backgroundTint="?attr/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/orange"
+            android:layout_marginBottom="16dp"
             android:text="@string/add_contact_save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

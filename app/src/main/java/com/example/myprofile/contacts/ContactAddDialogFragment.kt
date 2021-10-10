@@ -49,6 +49,9 @@ class ContactAddDialogFragment(private val model: ContactViewModel) : DialogFrag
         }
     }
 
+    /**
+     * Open gallery to select the photo for new contact
+     */
     private val openGalleryForPhoto =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -57,6 +60,10 @@ class ContactAddDialogFragment(private val model: ContactViewModel) : DialogFrag
             }
         }
 
+    /**
+     * Create new contact from input fields in dialog fragment
+     * and save it to the live data list of contacts
+     */
     private fun saveNewContact() {
         binding.apply {
             model.addContact(
@@ -65,7 +72,7 @@ class ContactAddDialogFragment(private val model: ContactViewModel) : DialogFrag
                     editTextCareer.text.toString(),
                     editTextPhone.text.toString().toLong(),
                     editTextEmail.text.toString(),
-                    editTextAdress.text.toString(),
+                    editTextAddress.text.toString(),
                     editTextBirthDate.text.toString(),
                     contactPhoto
                 )

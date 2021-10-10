@@ -5,8 +5,8 @@
     <string name="edit_profile">Edit profile</string>
     <string name="go_to_settings_and_fill_out_the_profile">Go to settings and fill out the profile</string>
     <string name="profile_image_description">Profile image</string>
-    <string name="app_title">MyProfile</string>
-    <string name="prompt_email">Email</string>
+    <string name="app_title" translatable="false">MyProfile</string>
+    <string name="prompt_email" translatable="false">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
@@ -20,13 +20,13 @@
     <string name="already_have_an_account">Already have an account?</string>
     <string name="terms__and_conditions">By clicking Register you agree to our Terms \n and Conditions</string>
     <string name="button_register">Register</string>
-    <string name="email">E-mail</string>
+    <string name="email" translatable="false">E-mail</string>
     <string name="password">Password</string>
-    <string name="profile_name">%1$s %2$s</string>
+    <string name="profile_name" translatable="false">%1$s %2$s</string>
     <string name="main_home_address">Home Address</string>
     <string name="main_career">Career</string>
-    <string name="user_email">EMAIL</string>
-    <string name="user_pass">PASS</string>
+    <string name="user_email" translatable="false">EMAIL</string>
+    <string name="user_pass" translatable="false">PASS</string>
     <string name="auth_remember_me">Remember me</string>
     <string name="auth_error_required">Required field!</string>
     <string name="auth_error_incorrect_email">Incorrect E-mail address!</string>
@@ -38,9 +38,10 @@
     <string name="add_contact_save">SAVE</string>
     <string name="contact_add_hint_username">Username</string>
     <string name="contact_add_hint_career">Career</string>
-    <string name="contact_add_hint_email">Email</string>
+    <string name="contact_add_hint_email" translatable="false">Email</string>
     <string name="contact_add_hint_phone">Phone</string>
     <string name="contact_add_hint_address">Address</string>
     <string name="contact_add_hint_date_of_birth">Date of birth</string>
+    <string name="contact_add_email_hint" translatable="false">name@gmail.com</string>
 
 </resources>
