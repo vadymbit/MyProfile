@@ -8,6 +8,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
 import android.view.View
+import android.widget.Toast
 import com.example.myprofile.databinding.ActivityAuthBinding
 
 /**
@@ -137,6 +138,13 @@ class AuthActivity : AppCompatActivity() {
             editTextPass.addTextChangedListener(TextFieldValidation(editTextPass))
             buttonRegister.setOnClickListener { goToMyProfile() }
             textViewSignIn.setOnClickListener { goToLoginActivity() }
+            buttonLoginViaSocial.setOnClickListener {
+                Toast.makeText(
+                    this@AuthActivity,
+                    "Login via Google",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 

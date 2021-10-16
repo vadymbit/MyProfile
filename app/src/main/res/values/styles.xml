@@ -3,29 +3,17 @@
     <style name="Bordered">
         <item name="android:layout_margin">@dimen/border_margin</item>
     </style>
-
+    
     <style name="Bordered.White">
         <item name="android:textColor">@color/white</item>
     </style>
-
-    <style name="Bordered.Gray">
-        <item name="android:textColor">@color/gray</item>
-    </style>
-
-    <style name="Bordered.Blue">
-        <item name="android:textColor">@color/blue</item>
-    </style>
-
-    <style name="Bordered.Black">
-        <item name="android:textColor">@color/black</item>
-    </style>
-
+    
     <style name="WrapContent">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="WrapContent.fontSansGray">
+    <style name="WrapContent.Gray">
         <item name="android:textColor">@color/gray</item>
     </style>
 
@@ -33,11 +21,11 @@
         <item name="android:layout_margin">@dimen/border_margin</item>
     </style>
 
-    <style name="WrapContent.Bordered.fontSansGray">
+    <style name="WrapContent.Bordered.Gray">
         <item name="android:textColor">@color/gray</item>
     </style>
 
-    <style name="WrapContent.Bordered.fontSansWhite">
+    <style name="WrapContent.Bordered.White">
         <item name="android:textColor">@color/white</item>
     </style>
 
@@ -92,6 +80,7 @@
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:textColorSecondary">@color/white</item>
         <item name="titleCentered">true</item>
+        <item name="android:textSize">@dimen/label_text_size</item>
     </style>
 
     <style name="TextAppearance.App.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
@@ -107,5 +96,9 @@
     <style name="TextAppearance.App.Button" parent="TextAppearance.MaterialComponents.Button">
         <item name="fontFamily">@font/open_sans</item>
         <item name="android:fontFamily">@font/open_sans</item>
+    </style>
+    
+    <style name="Bordered.ContactAddDialogEditText">
+        <item name="android:backgroundTint">@android:color/transparent</item>
     </style>
 </resources>

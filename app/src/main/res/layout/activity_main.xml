@@ -29,44 +29,34 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:title="@string/setting"
         android:theme="@style/ToolBarTheme"
-        app:titleCentered="false"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/setting"
+        app:titleCentered="false" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardViewProfilePhoto"
-        style="@style/ProfileImage"
-        app:cardPreventCornerOverlap="false"
-        app:cardCornerRadius="360dp"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewProfilePhoto"
+        android:layout_width="@dimen/profile_image_size"
+        android:layout_height="@dimen/profile_image_size"
         android:backgroundTint="@android:color/transparent"
+        android:contentDescription="@string/profile_image_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageViewProfilePhoto"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:layout_centerHorizontal="true"
-            android:contentDescription="@string/profile_image_description"
-            android:src="@drawable/ic_person" />
-
-    </com.google.android.material.card.MaterialCardView>
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:src="@drawable/ic_person" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewProfileName"
-        style="@style/WrapContent.Bordered.fontSansWhite"
+        style="@style/WrapContent.Bordered.White"
         android:textSize="@dimen/text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardViewProfilePhoto"
+        app:layout_constraintTop_toBottomOf="@id/imageViewProfilePhoto"
         tools:text="Lucile Alvarado" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewProfileCareer"
-        style="@style/WrapContent.Bordered.fontSansGray"
+        style="@style/WrapContent.Bordered.Gray"
         android:text="@string/main_career"
         android:textSize="@dimen/small_text_size"
         app:layout_constraintBottom_toTopOf="@+id/textViewProfileAddress"
@@ -76,7 +66,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewProfileAddress"
-        style="@style/WrapContent.Bordered.fontSansGray"
+        style="@style/WrapContent.Bordered.Gray"
         android:text="@string/main_home_address"
         android:textSize="@dimen/small_text_size"
         app:layout_constraintBottom_toBottomOf="@id/topColor"

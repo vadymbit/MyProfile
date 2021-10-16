@@ -15,7 +15,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewTitle"
-        style="@style/WrapContent.Bordered.fontSansWhite"
+        style="@style/WrapContent.Bordered.White"
         android:text="@string/signup_label"
         android:textSize="@dimen/label_text_size"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,7 +24,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSubtitle"
-        style="@style/WrapContent.Bordered.fontSansWhite"
+        style="@style/WrapContent.Bordered.White"
         android:text="@string/signup_description"
         android:textSize="@dimen/small_text_size"
         android:textAlignment="center"
@@ -72,13 +72,23 @@
 
     <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/checkBoxRememberMe"
-        style="@style/WrapContent.fontSansGray"
+        style="@style/WrapContent.Gray"
         android:buttonTint="@color/white"
         android:text="@string/auth_remember_me"
         app:layout_constraintBottom_toTopOf="@+id/buttonRegister"
         app:layout_constraintStart_toStartOf="@+id/textInputPass"
         app:layout_constraintTop_toBottomOf="@+id/textInputPass"
         app:layout_constraintVertical_chainStyle="spread_inside" />
+
+    <com.example.myprofile.customButtonVIew.LoginViaButton
+        android:id="@+id/buttonLoginViaSocial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/border_margin"
+        app:layout_constraintBottom_toTopOf="@+id/buttonRegister"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/custom_login_view_text_google" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonRegister"
@@ -94,7 +104,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewTerms"
-        style="@style/WrapContent.Bordered.fontSansGray"
+        style="@style/WrapContent.Bordered.Gray"
         android:text="@string/terms__and_conditions"
         android:textAlignment="center"
         android:textSize="@dimen/small_text_size"
@@ -104,7 +114,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSignInTitle"
-        style="@style/WrapContent.Bordered.fontSansGray"
+        style="@style/WrapContent.Bordered.Gray"
         android:text="@string/already_have_an_account"
         android:textSize="@dimen/small_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -115,7 +125,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSignIn"
-        style="@style/WrapContent.Bordered.fontSansWhite"
+        style="@style/WrapContent.Bordered.White"
         android:text="@string/register_sign_in"
         android:textSize="@dimen/small_text_size"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -32,8 +32,8 @@
             android:id="@+id/buttonAddPhoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_add_photo"
             android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/ic_add_photo"
             app:layout_constraintBottom_toBottomOf="@+id/imageContactPhoto"
             app:layout_constraintEnd_toEndOf="@+id/view"
             app:layout_constraintStart_toEndOf="@+id/imageContactPhoto"
@@ -66,11 +66,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextUsername"
-                style="@style/Bordered"
+                style="@style/Bordered.ContactAddDialogEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/transparent"
-                tools:text="@string/setting"/>
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -83,10 +81,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextCareer"
-                style="@style/Bordered"
+                style="@style/Bordered.ContactAddDialogEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/transparent" />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -99,10 +96,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextEmail"
-                style="@style/Bordered"
+                style="@style/Bordered.ContactAddDialogEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/transparent"
                 android:hint="@string/contact_add_email_hint" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -116,15 +112,14 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextPhone"
-                style="@style/Bordered"
+                style="@style/Bordered.ContactAddDialogEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/transparent"
-                android:hint="" />
+                android:hint="@string/add_contact_hint_phone_number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputAdress"
+            android:id="@+id/textInputAddress"
             style="@style/TextInputAddContacts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -133,10 +128,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextAddress"
-                style="@style/Bordered"
+                style="@style/Bordered.ContactAddDialogEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/transparent" />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -146,23 +140,22 @@
             android:layout_height="wrap_content"
             android:hint="@string/contact_add_hint_date_of_birth"
             app:layout_constraintBottom_toTopOf="@+id/buttonSave"
-            app:layout_constraintTop_toBottomOf="@+id/textInputAdress">
+            app:layout_constraintTop_toBottomOf="@+id/textInputAddress">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextBirthDate"
-                style="@style/Bordered"
+                style="@style/Bordered.ContactAddDialogEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/transparent" />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonSave"
             style="@style/BigButton"
-            android:backgroundTint="?attr/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:backgroundTint="?attr/colorPrimary"
             android:text="@string/add_contact_save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
