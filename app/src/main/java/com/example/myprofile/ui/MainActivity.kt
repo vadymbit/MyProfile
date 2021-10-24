@@ -1,11 +1,14 @@
-package com.example.myprofile
+package com.example.myprofile.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.myprofile.contacts.ContactsActivity
+import com.example.myprofile.R
+import com.example.myprofile.ui.contacts.ContactsActivity
 import com.example.myprofile.databinding.ActivityMainBinding
-import com.example.myprofile.imagepreprocessing.loadCircledImage
+import com.example.myprofile.utils.imagepreprocessing.loadCircledImage
+
+private const val EMAIL = "com.example.myprofile.ui.EMAIL"
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,7 +23,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, ContactsActivity::class.java))
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
-        binding.imageViewProfilePhoto.loadCircledImage(R.drawable.icon_google)
+        binding.imageViewProfilePhoto.loadCircledImage(R.drawable.ic_person)
     }
 
     /**

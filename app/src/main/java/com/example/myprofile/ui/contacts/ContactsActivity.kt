@@ -1,12 +1,15 @@
-package com.example.myprofile.contacts
+package com.example.myprofile.ui.contacts
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.viewModels
 import com.example.myprofile.R
-import com.example.myprofile.data.Contact
+import com.example.myprofile.model.ContactModel
 import com.example.myprofile.databinding.ActivityContactsBinding
+import com.example.myprofile.ui.contacts.adapter.ContactAdapter
+import com.example.myprofile.ui.contacts.adapter.ContactItemDecoration
+import com.example.myprofile.ui.contacts.adapter.IContactClickListener
 
 class ContactsActivity : AppCompatActivity(), IContactClickListener {
 
@@ -30,11 +33,11 @@ class ContactsActivity : AppCompatActivity(), IContactClickListener {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        contactAdapter = ContactAdapter(iContactClickListener = this)
+        contactAdapter = ContactAdapter(contactClickListener = this)
         initContactRecyclerView()
 
         binding.textViewAddContact.setOnClickListener {
-            ContactAddDialogFragment(viewModel).show(supportFragmentManager, "Dialog")
+            ContactAddDialogFragment().show(supportFragmentManager, "Dialog")
         }
         viewModel.contacts.observe(this, {
             contactAdapter.submitList(it.toMutableList())
@@ -57,7 +60,33 @@ class ContactsActivity : AppCompatActivity(), IContactClickListener {
         }
     }
 
-    override fun removeUser(contact: Contact) {
+    override fun removeUser(contact: ContactModel) {
         viewModel.removeContact(contact)
+    }
+
+    /**
+     * Create new contact from input fields in dialog fragment
+     * and save it to the live data list of contacts
+     */
+    fun saveNewContact(
+        username: String,
+        career: String,
+        phone: Long,
+        email: String,
+        address: String,
+        birthDate: String,
+        uriPhoto: String?
+    ) {
+        viewModel.addContact(
+            ContactModel(
+                username,
+                career,
+                phone,
+                email,
+                address,
+                birthDate,
+                uriPhoto
+            )
+        )
     }
 }

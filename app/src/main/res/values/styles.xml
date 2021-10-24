@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Bordered">
-        <item name="android:layout_margin">@dimen/border_margin</item>
+        <item name="android:layout_margin">@dimen/default_margin</item>
     </style>
     
     <style name="Bordered.White">
@@ -14,15 +14,15 @@
     </style>
 
     <style name="WrapContent.Gray">
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/gray_500</item>
     </style>
 
     <style name="WrapContent.Bordered">
-        <item name="android:layout_margin">@dimen/border_margin</item>
+        <item name="android:layout_margin">@dimen/default_margin</item>
     </style>
 
     <style name="WrapContent.Bordered.Gray">
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/gray_500</item>
     </style>
 
     <style name="WrapContent.Bordered.White">
@@ -32,21 +32,21 @@
     <style name="ProfileImage">
         <item name="android:layout_width">@dimen/profile_image_size</item>
         <item name="android:layout_height">@dimen/profile_image_size</item>
-        <item name="android:layout_margin">@dimen/border_margin</item>
+        <item name="android:layout_margin">@dimen/default_margin</item>
     </style>
     
     <style name="outlineButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:textColor">?attr/colorOnPrimary</item>
         <item name="strokeColor">?attr/colorOnPrimary</item>
-        <item name="android:layout_margin">@dimen/border_margin</item>
+        <item name="android:layout_margin">@dimen/default_margin</item>
     </style>
 
     <style name="outlineBigButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="android:paddingTop">@dimen/activity_vertical_margin</item>
-        <item name="android:paddingBottom">@dimen/activity_vertical_margin</item>
+        <item name="android:paddingTop">@dimen/default_margin</item>
+        <item name="android:paddingBottom">@dimen/default_margin</item>
         <item name="android:textColor">@color/white</item>
         <item name="strokeColor">?attr/colorPrimary</item>
-        <item name="android:layout_margin">@dimen/border_margin</item>
+        <item name="android:layout_margin">@dimen/default_margin</item>
         <item name="strokeWidth">2dp</item>
     </style>
 
@@ -55,14 +55,21 @@
         <item name="android:paddingBottom">@dimen/vertical_padding</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:layout_margin">@dimen/border_margin</item>
+        <item name="android:layout_margin">@dimen/default_margin</item>
     </style>
 
     <style name="TextInput">
-        <item name="android:layout_margin">@dimen/border_margin</item>
+        <item name="android:layout_margin">@dimen/default_margin</item>
         <item name="boxStrokeWidthFocused">1dp</item>
         <item name="errorEnabled">true</item>
         <item name="expandedHintEnabled">false</item>
+    </style>
+
+    <style name="InputEditText">
+        <item name="android:layout_margin">@dimen/default_margin</item>
+        <item name="android:backgroundTint">@android:color/transparent</item>
+        <item name="android:colorControlActivated">@color/white</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="TextInputAddContacts">
@@ -71,7 +78,7 @@
     </style>
 
     <style name="InputTheme" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
-        <item name="colorPrimary">@color/gray</item>
+        <item name="colorPrimary">@color/white</item>
         <item name="colorOnSurface">@color/white</item>
     </style>
 
@@ -97,7 +104,7 @@
         <item name="fontFamily">@font/open_sans</item>
         <item name="android:fontFamily">@font/open_sans</item>
     </style>
-    
+
     <style name="Bordered.ContactAddDialogEditText">
         <item name="android:backgroundTint">@android:color/transparent</item>
     </style>

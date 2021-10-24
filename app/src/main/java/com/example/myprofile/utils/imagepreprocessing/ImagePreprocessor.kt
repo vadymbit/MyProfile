@@ -1,6 +1,5 @@
-package com.example.myprofile.imagepreprocessing
+package com.example.myprofile.utils.imagepreprocessing
 
-import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import com.example.myprofile.R
 
@@ -9,7 +8,7 @@ import com.example.myprofile.R
  *
  * @param src The url to the image which will be loaded to the ImageView
  */
-fun ImageView.loadCircledImage(src: String) {
+fun ImageView.loadCircledImage(src: String?) {
     GlideApp.with(this)
         .load(src)
         .circleCrop()
@@ -24,9 +23,3 @@ fun ImageView.loadCircledImage(src: Int) {
         .error(R.drawable.ic_person)
         .into(this)
 }
-
-//fun getURLForResource(resourceId: Int): String {
-//    return Uri.parse(
-//        "android.resource://" + BuildConfig.APPLICATION_ID + "/" + resourceId
-//    ).toString()
-//}

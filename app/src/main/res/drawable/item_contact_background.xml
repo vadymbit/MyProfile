@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <stroke android:width="@dimen/item_contact_border_size"
-        android:color="@color/contact_gray" />
+        android:color="@color/gray_600" />
 
     <corners
         android:radius="@dimen/item_contact_corner_radius"/>

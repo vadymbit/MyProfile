@@ -1,21 +1,10 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Theme.MyProfile" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.MyProfile" parent="Base.Theme.MyProfile">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/dark_orange</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/orange_800</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="background">@color/dark_blue</item>
+        <item name="background">@color/blue_900</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-        <item name="colorSurface">@color/white</item>
-        <item name="textAppearanceSubtitle1">@style/TextAppearance.App.Subtitle1</item>
-        <item name="textAppearanceCaption">@style/TextAppearance.App.Caption</item>
-        <item name="textAppearanceButton">@style/TextAppearance.App.Button</item>
     </style>
 </resources>

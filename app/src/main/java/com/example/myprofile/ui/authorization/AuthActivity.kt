@@ -1,30 +1,24 @@
-package com.example.myprofile
+package com.example.myprofile.ui.authorization
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Patterns
-import android.view.View
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
+import com.example.myprofile.R
 import com.example.myprofile.databinding.ActivityAuthBinding
+import com.example.myprofile.ui.MainActivity
 
 /**
  * The name of the extra data, with package prefix for intent
  */
-const val EMAIL = "com.example.myprofile.EMAIL"
+private const val EMAIL = "com.example.myprofile.ui.EMAIL"
 
-/**
- * Min length of user password
- */
-const val MIN_PASS_LENGTH = 8
+private const val MIN_PASS_LENGTH = 8
 
-/**
- * Max length of user password
- */
-const val MAX_PASS_LENGTH = 16
+private const val MAX_PASS_LENGTH = 16
 
 class AuthActivity : AppCompatActivity() {
 
@@ -39,9 +33,7 @@ class AuthActivity : AppCompatActivity() {
         setupListeners()
     }
 
-    /**
-     * Go to profile activity after validating password and email
-     */
+
     private fun goToMyProfile() {
         if (isInputValidate()) {
             val intent = Intent(this, MainActivity::class.java).apply {
@@ -72,7 +64,7 @@ class AuthActivity : AppCompatActivity() {
      */
     private fun validateEmail(): Boolean {
         binding.apply {
-            if (editTextEmail.text.toString().trim().isEmpty()) {
+            if (editTextEmail.text.isNullOrBlank()) {
                 textInputEmail.error = getString(R.string.auth_error_required)
                 editTextEmail.requestFocus()
                 return false
@@ -104,7 +96,7 @@ class AuthActivity : AppCompatActivity() {
     private fun isPasswordValid(): Boolean {
         binding.apply {
             when {
-                editTextPass.text.toString().trim().isEmpty() -> {
+                editTextPass.text.isNullOrBlank() -> {
                     textInputPass.error = getString(R.string.auth_error_required)
                     editTextPass.requestFocus()
                     return false
@@ -134,8 +126,8 @@ class AuthActivity : AppCompatActivity() {
      */
     private fun setupListeners() {
         binding.apply {
-            editTextEmail.addTextChangedListener(TextFieldValidation(editTextEmail))
-            editTextPass.addTextChangedListener(TextFieldValidation(editTextPass))
+            editTextEmail.doOnTextChanged { _, _, _, _ ->  validateEmail()}
+            editTextPass.doOnTextChanged { _, _, _, _ ->  isPasswordValid()}
             buttonRegister.setOnClickListener { goToMyProfile() }
             textViewSignIn.setOnClickListener { goToLoginActivity() }
             buttonLoginViaSocial.setOnClickListener {
@@ -170,7 +162,7 @@ class AuthActivity : AppCompatActivity() {
     }
 
     /**
-     * Go to profile activity is user saved
+     * Go to profile activity if user saved
      */
     private fun autoLogin() {
         val pass = getString(R.string.user_pass)
@@ -183,24 +175,6 @@ class AuthActivity : AppCompatActivity() {
             editTextEmail.setText(sharedPref.getString(email, ""))
             editTextPass.setText(sharedPref.getString(pass, ""))
             buttonRegister.performClick()
-        }
-    }
-
-    /**
-     * Listener for input fields
-     */
-    inner class TextFieldValidation(private val view: View) : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-        }
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            when (view.id) {
-                R.id.editTextEmail -> validateEmail()
-                R.id.editTextPass -> isPasswordValid()
-            }
-        }
-
-        override fun afterTextChanged(s: Editable?) {
         }
     }
 }

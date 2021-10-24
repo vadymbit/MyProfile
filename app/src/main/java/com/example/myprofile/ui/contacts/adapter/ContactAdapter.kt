@@ -1,20 +1,20 @@
-package com.example.myprofile.contacts
+package com.example.myprofile.ui.contacts.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myprofile.data.Contact
+import com.example.myprofile.model.ContactModel
 import com.example.myprofile.databinding.ItemContactBinding
-import com.example.myprofile.imagepreprocessing.loadCircledImage
+import com.example.myprofile.utils.ContactDiffCallback
+import com.example.myprofile.utils.imagepreprocessing.loadCircledImage
 
-class ContactAdapter(private val iContactClickListener: IContactClickListener) :
-    ListAdapter<Contact, ContactAdapter.ContactViewHolder>(ContactDiffCallback()) {
+class ContactAdapter(private val contactClickListener: IContactClickListener) :
+    ListAdapter<ContactModel, ContactAdapter.ContactViewHolder>(ContactDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
-        return ContactViewHolder.from(parent, iContactClickListener)
+        return ContactViewHolder.from(parent, contactClickListener)
     }
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
@@ -31,7 +31,7 @@ class ContactAdapter(private val iContactClickListener: IContactClickListener) :
         /**
          * Bind contact name, career and photo to the item of recycler view
          */
-        fun bind(contact: Contact) {
+        fun bind(contact: ContactModel) {
             binding.apply {
                 textViewContactCareer.text = contact.career
                 textViewContactName.text = contact.name
@@ -46,26 +46,11 @@ class ContactAdapter(private val iContactClickListener: IContactClickListener) :
 
         //Create instance of ContactViewHolder and init binding for RecyclerView
         companion object {
-            fun from(parent: ViewGroup, iContactClickListener: IContactClickListener): ContactViewHolder {
+            fun from(parent: ViewGroup, contactClickListener: IContactClickListener): ContactViewHolder {
                 val binding =
                     ItemContactBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                return ContactViewHolder(binding, iContactClickListener)
+                return ContactViewHolder(binding, contactClickListener)
             }
         }
-    }
-
-    /**
-     * Is a utility class that calculates the difference between two lists
-     * and outputs a list of update operations that converts the first list into the second one.
-     */
-    class ContactDiffCallback : DiffUtil.ItemCallback<Contact>() {
-        override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
-            return oldItem.phoneNumber == newItem.phoneNumber
-        }
-
-        override fun areContentsTheSame(oldItem: Contact, newItem: Contact): Boolean {
-            return oldItem == newItem
-        }
-
     }
 }

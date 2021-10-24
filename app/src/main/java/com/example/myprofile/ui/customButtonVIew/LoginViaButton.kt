@@ -1,4 +1,4 @@
-package com.example.myprofile.customButtonVIew
+package com.example.myprofile.ui.customButtonVIew
 
 import android.content.Context
 import android.util.AttributeSet

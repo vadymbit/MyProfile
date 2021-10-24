@@ -1,7 +1,8 @@
-package com.example.myprofile
+package com.example.myprofile.ui.authorization
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.myprofile.R
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

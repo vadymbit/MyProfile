@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/background"
-    tools:context=".AuthActivity">
+    tools:context=".ui.authorization.AuthActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -13,7 +13,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.1" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewTitle"
         style="@style/WrapContent.Bordered.White"
         android:text="@string/signup_label"
@@ -43,10 +43,9 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextEmail"
-            style="@style/Bordered.White"
+            style="@style/InputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/transparent"
             android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -62,15 +61,14 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextPass"
-            style="@style/Bordered.White"
+            style="@style/InputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/transparent"
             android:inputType="textPassword"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.appcompat.widget.AppCompatCheckBox
+    <CheckBox
         android:id="@+id/checkBoxRememberMe"
         style="@style/WrapContent.Gray"
         android:buttonTint="@color/white"
@@ -80,11 +78,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputPass"
         app:layout_constraintVertical_chainStyle="spread_inside" />
 
-    <com.example.myprofile.customButtonVIew.LoginViaButton
+    <com.example.myprofile.ui.customButtonVIew.LoginViaButton
         android:id="@+id/buttonLoginViaSocial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/border_margin"
+        android:layout_margin="@dimen/default_margin"
         app:layout_constraintBottom_toTopOf="@+id/buttonRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +117,6 @@
         android:textSize="@dimen/small_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textViewSignIn"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -130,6 +127,5 @@
         android:textSize="@dimen/small_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textViewSignInTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

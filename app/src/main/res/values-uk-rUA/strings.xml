@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">MyProfile</string>
     <string name="setting">Налаштування</string>
-    <string name="view_my_contacts">МОЇ  КОНТАКТИ</string>
+    <string name="view_my_contacts">Мої контакти</string>
     <string name="edit_profile">Редагувати профіль</string>
     <string name="go_to_settings_and_fill_out_the_profile">Перейдіть в налаштування і заповніть профіль</string>
     <string name="profile_image_description">Зображення профіля</string>
@@ -36,4 +36,5 @@
     <string name="contact_add_hint_address">Домашня адреса</string>
     <string name="contact_add_hint_date_of_birth">Дата народження</string>
     <string name="register_sign_in">Увійти</string>
+    <string name="contact_add_required">Обов\'язкове поле</string>
 </resources>

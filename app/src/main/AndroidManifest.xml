@@ -11,16 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyProfile">
         <activity
-            android:name=".contacts.ContactsActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="com.example.myprofile.ui.contacts.ContactsActivity"
+            android:parentActivityName=".ui.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.authorization.LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".AuthActivity"
+            android:name=".ui.authorization.AuthActivity"
             android:exported="true"
-            android:label="@string/app_title">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true" />
 
         <meta-data
