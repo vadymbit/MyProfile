@@ -10,7 +10,9 @@ import com.example.myprofile.databinding.ItemContactBinding
 import com.example.myprofile.utils.ContactDiffCallback
 import com.example.myprofile.utils.imagepreprocessing.loadCircledImage
 
-class ContactAdapter(private val contactClickListener: IContactClickListener) :
+class ContactAdapter(
+    private val contactClickListener: IContactClickListener
+) :
     ListAdapter<ContactModel, ContactAdapter.ContactViewHolder>(ContactDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
@@ -19,11 +21,19 @@ class ContactAdapter(private val contactClickListener: IContactClickListener) :
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         val item = getItem(position)
+        holder.itemView.rootView.setOnClickListener {
+            contactClickListener.navigateToContactDetail(
+                item,
+                holder.binding.ivProfilePhoto,
+                holder.binding.tvContactCareer,
+                holder.binding.tvContactName
+            )
+        }
         holder.bind(item)
     }
 
     class ContactViewHolder private constructor(
-        private val binding: ItemContactBinding,
+        val binding: ItemContactBinding,
         private val iContactClickListener: IContactClickListener
     ) :
         RecyclerView.ViewHolder(binding.root) {
@@ -33,12 +43,12 @@ class ContactAdapter(private val contactClickListener: IContactClickListener) :
          */
         fun bind(contact: ContactModel) {
             binding.apply {
-                textViewContactCareer.text = contact.career
-                textViewContactName.text = contact.name
-                imageViewProfilePhoto.loadCircledImage(contact.urlPhoto)
-                buttonDeleteContact.setOnClickListener {
+                tvContactCareer.text = contact.career
+                tvContactName.text = contact.name
+                ivProfilePhoto.loadCircledImage(contact.urlPhoto)
+                btnDeleteContact.setOnClickListener {
                     iContactClickListener.removeUser(contact)
-                    val context = buttonDeleteContact.context
+                    val context = itemView.context
                     Toast.makeText(context, "Contact has been removed", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -46,10 +56,16 @@ class ContactAdapter(private val contactClickListener: IContactClickListener) :
 
         //Create instance of ContactViewHolder and init binding for RecyclerView
         companion object {
-            fun from(parent: ViewGroup, contactClickListener: IContactClickListener): ContactViewHolder {
-                val binding =
-                    ItemContactBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                return ContactViewHolder(binding, contactClickListener)
+            fun from(
+                parent: ViewGroup, contactClickListener: IContactClickListener
+            ): ContactViewHolder {
+                return ContactViewHolder(
+                    ItemContactBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    ), contactClickListener
+                )
             }
         }
     }

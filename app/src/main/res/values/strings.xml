@@ -45,5 +45,9 @@
     <string name="contact_add_required">Required</string>
     <string name="custom_login_view_text_google" translatable="false">Google</string>
     <string name="add_contact_hint_phone_number" translatable="false">(264)-654-3762</string>
+    <string name="detail_message">Message</string>
+    <string name="detail_transition_photo" translatable="false">image %1$s</string>
+    <string name="detail_transition_name" translatable="false">name %1$s</string>
+    <string name="detail_transition_career" translatable="false">career %1$s</string>
 
 </resources>

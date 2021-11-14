@@ -1,135 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-    <View
-        android:id="@+id/topColor"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="?attr/background"
-        app:layout_constraintBottom_toTopOf="@id/botColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/botColor"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topColor" />
-
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:theme="@style/ToolBarTheme"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/setting"
-        app:titleCentered="false" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageViewProfilePhoto"
-        android:layout_width="@dimen/profile_image_size"
-        android:layout_height="@dimen/profile_image_size"
-        android:backgroundTint="@android:color/transparent"
-        android:contentDescription="@string/profile_image_description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:src="@drawable/ic_person" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewProfileName"
-        style="@style/WrapContent.Bordered.White"
-        android:textSize="@dimen/text_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageViewProfilePhoto"
-        tools:text="Lucile Alvarado" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewProfileCareer"
-        style="@style/WrapContent.Bordered.Gray"
-        android:text="@string/main_career"
-        android:textSize="@dimen/small_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/textViewProfileAddress"
-        app:layout_constraintEnd_toEndOf="@+id/textViewProfileName"
-        app:layout_constraintStart_toStartOf="@+id/textViewProfileName"
-        app:layout_constraintTop_toBottomOf="@id/textViewProfileName" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewProfileAddress"
-        style="@style/WrapContent.Bordered.Gray"
-        android:text="@string/main_home_address"
-        android:textSize="@dimen/small_text_size"
-        app:layout_constraintBottom_toBottomOf="@id/topColor"
-        app:layout_constraintEnd_toEndOf="@+id/textViewProfileCareer"
-        app:layout_constraintStart_toStartOf="@+id/textViewProfileCareer"
-        app:layout_constraintTop_toBottomOf="@+id/textViewProfileName" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/buttonSocialFacebook"
-        style="@style/WrapContent.Bordered"
-        android:src="@drawable/ic_facebook_button"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonSocialLinkedin"
-        app:layout_constraintEnd_toStartOf="@id/buttonSocialLinkedin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/buttonSocialLinkedin" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/buttonSocialLinkedin"
-        style="@style/WrapContent.Bordered"
-        android:src="@drawable/ic_linkedin_button"
-        app:layout_constraintBottom_toTopOf="@+id/textViewEmptyProfile"
-        app:layout_constraintEnd_toStartOf="@+id/buttonSocialVkontakte"
-        app:layout_constraintStart_toEndOf="@+id/buttonSocialFacebook"
-        app:layout_constraintTop_toBottomOf="@+id/topColor" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/buttonSocialVkontakte"
-        style="@style/WrapContent.Bordered"
-        android:src="@drawable/ic_vkontakte_button"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonSocialLinkedin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonSocialLinkedin"
-        app:layout_constraintTop_toTopOf="@+id/buttonSocialLinkedin" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewEmptyProfile"
-        style="@style/Bordered"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/go_to_settings_and_fill_out_the_profile"
-        android:textAlignment="center"
-        android:textColor="?attr/colorOnPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/buttonEditProfile"
-        tools:layout_editor_absoluteX="16dp" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonEditProfile"
-        style="@style/outlineButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/edit_profile"
-        app:layout_constraintBottom_toTopOf="@+id/buttonViewContacts"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonViewContacts"
-        style="@style/BigButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/view_my_contacts"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
+</FrameLayout>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ProfileFragment">
+
+    <View
+        android:id="@+id/topBackground"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.5"/>
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/ToolBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/setting"
+        app:titleCentered="false" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivProfilePhoto"
+        android:layout_width="@dimen/profile_image_size"
+        android:layout_height="@dimen/profile_image_size"
+        android:backgroundTint="@android:color/transparent"
+        android:contentDescription="@string/profile_image_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:src="@drawable/ic_person" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvProfileName"
+        style="@style/WrapContent.Bordered.White"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivProfilePhoto"
+        tools:text="Lucile Alvarado" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvProfileCareer"
+        style="@style/WrapContent.Bordered.Gray"
+        android:text="@string/main_career"
+        android:textSize="@dimen/small_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/tvProfileAddress"
+        app:layout_constraintEnd_toEndOf="@+id/tvProfileName"
+        app:layout_constraintStart_toStartOf="@+id/tvProfileName"
+        app:layout_constraintTop_toBottomOf="@id/tvProfileName" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvProfileAddress"
+        style="@style/WrapContent.Bordered.Gray"
+        android:text="@string/main_home_address"
+        android:textSize="@dimen/small_text_size"
+        app:layout_constraintBottom_toBottomOf="@id/topBackground"
+        app:layout_constraintEnd_toEndOf="@+id/tvProfileCareer"
+        app:layout_constraintStart_toStartOf="@+id/tvProfileCareer"
+        app:layout_constraintTop_toBottomOf="@+id/tvProfileName" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnSocialFacebook"
+        style="@style/WrapContent.Bordered"
+        android:src="@drawable/ic_facebook_button"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSocialLinkedin"
+        app:layout_constraintEnd_toStartOf="@id/btnSocialLinkedin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnSocialLinkedin" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnSocialLinkedin"
+        style="@style/WrapContent.Bordered"
+        android:src="@drawable/ic_linkedin_button"
+        app:layout_constraintBottom_toTopOf="@+id/tvEmptyProfile"
+        app:layout_constraintEnd_toStartOf="@+id/btnSocialVkontakte"
+        app:layout_constraintStart_toEndOf="@+id/btnSocialFacebook"
+        app:layout_constraintTop_toBottomOf="@+id/topBackground" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnSocialVkontakte"
+        style="@style/WrapContent.Bordered"
+        android:src="@drawable/ic_vkontakte_button"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSocialLinkedin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnSocialLinkedin"
+        app:layout_constraintTop_toTopOf="@+id/btnSocialLinkedin" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvEmptyProfile"
+        style="@style/Bordered"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/go_to_settings_and_fill_out_the_profile"
+        android:textAlignment="center"
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/btnEditProfile" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnEditProfile"
+        style="@style/outlineButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_profile"
+        app:layout_constraintBottom_toTopOf="@+id/btnViewContacts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnViewContacts"
+        style="@style/BigButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/view_my_contacts"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

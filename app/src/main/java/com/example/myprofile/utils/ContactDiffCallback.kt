@@ -5,7 +5,7 @@ import com.example.myprofile.model.ContactModel
 
 class ContactDiffCallback : DiffUtil.ItemCallback<ContactModel>() {
     override fun areItemsTheSame(oldItem: ContactModel, newItem: ContactModel): Boolean {
-        return oldItem.phoneNumber == newItem.phoneNumber
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: ContactModel, newItem: ContactModel): Boolean {

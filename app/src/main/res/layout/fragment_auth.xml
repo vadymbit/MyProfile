@@ -5,44 +5,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/background"
-    tools:context=".ui.authorization.AuthActivity">
+    tools:context=".ui.authorization.AuthFragment">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        style="@style/WrapContent"
+        android:id="@+id/guidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.1" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/textViewTitle"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTitle"
         style="@style/WrapContent.Bordered.White"
         android:text="@string/signup_label"
         android:textSize="@dimen/label_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineTop" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewSubtitle"
+        android:id="@+id/tvSubtitle"
         style="@style/WrapContent.Bordered.White"
         android:text="@string/signup_description"
         android:textSize="@dimen/small_text_size"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="@+id/textViewTitle"
-        app:layout_constraintStart_toStartOf="@+id/textViewTitle"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+        app:layout_constraintEnd_toEndOf="@+id/tvTitle"
+        app:layout_constraintStart_toStartOf="@+id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputEmail"
+        android:id="@+id/tiEmail"
         style="@style/TextInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/email"
         android:theme="@style/InputTheme"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSubtitle">
+        app:layout_constraintTop_toBottomOf="@+id/tvSubtitle">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextEmail"
+            android:id="@+id/etEmail"
             style="@style/InputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,81 +51,87 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputPass"
+        android:id="@+id/tiPass"
         style="@style/TextInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password"
         android:theme="@style/InputTheme"
-        app:layout_constraintTop_toBottomOf="@+id/textInputEmail">
+        app:layout_constraintTop_toBottomOf="@+id/tiEmail">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextPass"
+            android:id="@+id/etPass"
             style="@style/InputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox
-        android:id="@+id/checkBoxRememberMe"
+        android:id="@+id/cbRememberMe"
         style="@style/WrapContent.Gray"
         android:buttonTint="@color/white"
         android:text="@string/auth_remember_me"
-        app:layout_constraintBottom_toTopOf="@+id/buttonRegister"
-        app:layout_constraintStart_toStartOf="@+id/textInputPass"
-        app:layout_constraintTop_toBottomOf="@+id/textInputPass"
+        app:layout_constraintBottom_toTopOf="@+id/btnRegister"
+        app:layout_constraintStart_toStartOf="@+id/tiPass"
+        app:layout_constraintTop_toBottomOf="@+id/tiPass"
         app:layout_constraintVertical_chainStyle="spread_inside" />
 
     <com.example.myprofile.ui.customButtonVIew.LoginViaButton
-        android:id="@+id/buttonLoginViaSocial"
+        android:id="@+id/btnLoginViaSocial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_margin"
-        app:layout_constraintBottom_toTopOf="@+id/buttonRegister"
+        android:text="@string/custom_login_view_text_google"
+        app:layout_constraintBottom_toTopOf="@+id/btnRegister"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/custom_login_view_text_google" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonRegister"
-        style="@style/outlineBigButton"
+        android:id="@+id/btnRegister"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:paddingVertical="@dimen/default_padding"
         android:text="@string/button_register"
+        android:textColor="@color/white"
         android:textSize="@dimen/text_size"
-        app:layout_constraintBottom_toTopOf="@+id/textViewTerms"
+        app:layout_constraintBottom_toTopOf="@+id/tvTerms"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxRememberMe" />
+        app:layout_constraintTop_toBottomOf="@+id/cbRememberMe"
+        app:strokeColor="?attr/colorPrimary"
+        app:strokeWidth="@dimen/default_btn_stroke" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewTerms"
+        android:id="@+id/tvTerms"
         style="@style/WrapContent.Bordered.Gray"
         android:text="@string/terms__and_conditions"
         android:textAlignment="center"
         android:textSize="@dimen/small_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/textViewSignInTitle"
-        app:layout_constraintEnd_toEndOf="@+id/buttonRegister"
-        app:layout_constraintStart_toStartOf="@+id/buttonRegister" />
+        app:layout_constraintBottom_toTopOf="@+id/tvSignInTitle"
+        app:layout_constraintEnd_toEndOf="@+id/btnRegister"
+        app:layout_constraintStart_toStartOf="@+id/btnRegister" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewSignInTitle"
+        android:id="@+id/tvSignInTitle"
         style="@style/WrapContent.Bordered.Gray"
         android:text="@string/already_have_an_account"
         android:textSize="@dimen/small_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textViewSignIn"
+        app:layout_constraintEnd_toStartOf="@+id/tvSignIn"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewSignIn"
+        android:id="@+id/tvSignIn"
         style="@style/WrapContent.Bordered.White"
         android:text="@string/register_sign_in"
         android:textSize="@dimen/small_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewSignInTitle" />
+        app:layout_constraintStart_toEndOf="@+id/tvSignInTitle" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,13 +28,13 @@ class LoginViaButton @JvmOverloads constructor(
         ).use {
             isEnabled = it.getBoolean(R.styleable.LoginViaButton_android_enabled, isEnabled)
             binding.apply {
-                imageViewIconSocial.setImageResource(
+                ivIconSocial.setImageResource(
                     it.getResourceId(
                         R.styleable.LoginViaButton_icon,
                         R.drawable.icon_google
                     )
                 )
-                textViewNameSocial.text = it.getString(R.styleable.LoginViaButton_android_text)
+                tvNameSocial.text = it.getString(R.styleable.LoginViaButton_android_text)
             }
         }
         background = AppCompatResources.getDrawable(context, R.drawable.login_via_button_selector)

@@ -12,9 +12,15 @@
         <entry key="..\:/AndroidStudioProjects/MyProfile/app/src/main/res/layout/activity_contacts.xml" value="0.20833333333333334" />
         <entry key="..\:/AndroidStudioProjects/MyProfile/app/src/main/res/layout/activity_login.xml" value="0.11041666666666666" />
         <entry key="..\:/AndroidStudioProjects/MyProfile/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/AndroidStudioProjects/MyProfile/app/src/main/res/layout/fragment_contact_add_dialog.xml" value="0.2" />
+        <entry key="..\:/AndroidStudioProjects/MyProfile/app/src/main/res/layout/fragment_auth.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/MyProfile/app/src/main/res/layout/fragment_contact_add_dialog.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/MyProfile/app/src/main/res/layout/fragment_contacts.xml" value="0.225" />
+        <entry key="..\:/AndroidStudioProjects/MyProfile/app/src/main/res/layout/fragment_detail.xml" value="0.225" />
+        <entry key="..\:/AndroidStudioProjects/MyProfile/app/src/main/res/layout/fragment_profile.xml" value="0.225" />
         <entry key="..\:/AndroidStudioProjects/MyProfile/app/src/main/res/layout/item_contact.xml" value="0.225" />
         <entry key="..\:/AndroidStudioProjects/MyProfile/app/src/main/res/layout/layout_login_via_button.xml" value="0.225" />
+        <entry key="..\:/AndroidStudioProjects/MyProfile/app/src/main/res/layout/profile_detail_layout.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/MyProfile/app/src/main/res/menu/contact_toolbar_menu.xml" value="0.22153846153846155" />
       </map>
     </option>
   </component>

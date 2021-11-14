@@ -6,12 +6,12 @@
     android:layout_height="50dp">
 
     <ImageView
-        android:id="@+id/imageViewIconSocial"
+        android:id="@+id/ivIconSocial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/default_margin"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textViewNameSocial"
+        app:layout_constraintEnd_toStartOf="@+id/tvNameSocial"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,14 +19,14 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/textViewNameSocial"
+        android:id="@+id/tvNameSocial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/custom_login_view_text_google"
         android:textColor="?attr/colorOnSecondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageViewIconSocial"
+        app:layout_constraintStart_toEndOf="@+id/ivIconSocial"
         app:layout_constraintTop_toTopOf="parent"
         android:textAppearance="@style/TextAppearance.App.Button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

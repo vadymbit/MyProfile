@@ -1,6 +1,11 @@
 package com.example.myprofile.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class ContactModel(
+    val id: Int,
     val name: String,
     val career: String,
     val phoneNumber: Long,
@@ -8,4 +13,4 @@ data class ContactModel(
     val address: String,
     val birthDate: String,
     val urlPhoto: String?
-)
+) : Parcelable

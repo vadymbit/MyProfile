@@ -35,29 +35,11 @@ class ContactAddDialogFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             if (savedInstanceState != null) {
-                imageContactPhoto.loadCircledImage(savedInstanceState.getString(PHOTO_URI))
+                ivContactPhoto.loadCircledImage(savedInstanceState.getString(PHOTO_URI))
             }
             setUpToolbar()
-            editTextBirthDate.transformIntoDatePicker(requireContext(), "MM/dd/yyyy")
-            buttonSave.setOnClickListener {
-                if (isInputValid()) {
-                    (activity as ContactsActivity).saveNewContact(
-                        editTextUsername.text.toString(),
-                        editTextCareer.text.toString(),
-                        editTextPhone.text.toString().toLong(),
-                        editTextEmail.text.toString(),
-                        editTextAddress.text.toString(),
-                        editTextBirthDate.text.toString(),
-                        contactPhoto
-                    )
-                    dismiss()
-                }
-            }
-            buttonAddPhoto.setOnClickListener {
-                val intent = Intent(Intent.ACTION_PICK)
-                intent.type = "image/*"
-                openGalleryForPhoto.launch(intent)
-            }
+            setUpListeners()
+            etBirthDate.transformIntoDatePicker(requireContext(), "MM/dd/yyyy")
         }
     }
 
@@ -75,40 +57,64 @@ class ContactAddDialogFragment : DialogFragment() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 contactPhoto = result.data!!.dataString!!
-                binding.imageContactPhoto.loadCircledImage(contactPhoto)
+                binding.ivContactPhoto.loadCircledImage(contactPhoto)
             }
         }
 
     private fun isInputValid(): Boolean {
         binding.apply {
             when {
-                editTextUsername.text.isNullOrBlank() -> {
-                    editTextUsername.error = getString(R.string.contact_add_required)
+                etUsername.text.isNullOrBlank() -> {
+                    etUsername.error = getString(R.string.contact_add_required)
                     return false
                 }
-                editTextCareer.text.isNullOrBlank() -> {
-                    editTextCareer.error = getString(R.string.contact_add_required)
+                etCareer.text.isNullOrBlank() -> {
+                    etCareer.error = getString(R.string.contact_add_required)
                     return false
                 }
-                editTextPhone.text.isNullOrBlank() -> {
-                    editTextPhone.error = getString(R.string.contact_add_required)
+                etPhone.text.isNullOrBlank() -> {
+                    etPhone.error = getString(R.string.contact_add_required)
                     return false
                 }
-                editTextEmail.text.isNullOrBlank() -> {
-                    editTextEmail.error = getString(R.string.contact_add_required)
+                etEmail.text.isNullOrBlank() -> {
+                    etEmail.error = getString(R.string.contact_add_required)
                     return false
                 }
-                editTextAddress.text.isNullOrBlank() -> {
-                    editTextAddress.error = getString(R.string.contact_add_required)
+                etAddress.text.isNullOrBlank() -> {
+                    etAddress.error = getString(R.string.contact_add_required)
                     return false
                 }
-                editTextBirthDate.text.isNullOrBlank() -> {
-                    editTextBirthDate.error = getString(R.string.contact_add_required)
+                etBirthDate.text.isNullOrBlank() -> {
+                    etBirthDate.error = getString(R.string.contact_add_required)
                     return false
                 }
             }
         }
         return true
+    }
+
+    private fun setUpListeners() {
+        binding.apply {
+            btnSave.setOnClickListener {
+                if (isInputValid()) {
+                    (parentFragment as ContactsFragment).saveNewContact(
+                        etUsername.text.toString(),
+                        etCareer.text.toString(),
+                        etPhone.text.toString().toLong(),
+                        etEmail.text.toString(),
+                        etAddress.text.toString(),
+                        etBirthDate.text.toString(),
+                        contactPhoto
+                    )
+                    dismiss()
+                }
+            }
+            btnAddPhoto.setOnClickListener {
+                val intent = Intent(Intent.ACTION_PICK)
+                intent.type = "image/*"
+                openGalleryForPhoto.launch(intent)
+            }
+        }
     }
 
     private fun setUpToolbar() {
