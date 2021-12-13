@@ -10,9 +10,9 @@ class ContactViewModel : ViewModel() {
     /**
      * The live data list in which will be stored all user contacts
      */
-    private val _contacts = MutableLiveData<MutableList<ContactModel>>()
-    val contacts: LiveData<MutableList<ContactModel>>
-        get() = _contacts
+    private val _contactsLiveData = MutableLiveData<MutableList<ContactModel>>()
+    val contactsLiveData: LiveData<MutableList<ContactModel>>
+        get() = _contactsLiveData
 
     /**
      * Remove existing contact from contact live data list and notify it observers of changes
@@ -20,8 +20,8 @@ class ContactViewModel : ViewModel() {
      * @param contact The contact which will be removed from contact live data list
      */
     fun removeContact(contact: ContactModel) {
-        _contacts.value?.remove(contact)
-        _contacts.notifyObserver()
+        _contactsLiveData.value?.remove(contact)
+        _contactsLiveData.notifyObserver()
     }
 
     /**
@@ -29,15 +29,15 @@ class ContactViewModel : ViewModel() {
      */
     fun addContact(
         username: String,
-        career: String,
+        career: String?,
         phone: Long,
         email: String,
-        address: String,
-        birthDate: String,
+        address: String?,
+        birthDate: String?,
         uriPhoto: String?
     ) {
         val contact = ContactModel(
-            _contacts.value!!.size,
+            _contactsLiveData.value?.size ?: 0,
             username,
             career,
             phone,
@@ -46,8 +46,8 @@ class ContactViewModel : ViewModel() {
             birthDate,
             uriPhoto
         )
-        _contacts.value?.add(contact)
-        _contacts.notifyObserver()
+        _contactsLiveData.value?.add(contact)
+        _contactsLiveData.notifyObserver()
     }
 
     /**
@@ -60,7 +60,7 @@ class ContactViewModel : ViewModel() {
     }
 
     init {
-        _contacts.value = mutableListOf(
+        _contactsLiveData.value = mutableListOf(
             ContactModel(0, "Alex", "Teacher", 12345678910, "empty", "", "", ""),
             ContactModel(1, "John", "Researcher", 3212346234, "empty", "", "", ""),
             ContactModel(2, "Gaben", "Designer", 648555555555, "empty", "", "", ""),

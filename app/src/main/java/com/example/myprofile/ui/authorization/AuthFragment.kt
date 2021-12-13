@@ -2,21 +2,16 @@ package com.example.myprofile.ui.authorization
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Patterns
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.commit
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.myprofile.R
 import com.example.myprofile.base.BaseFragment
 import com.example.myprofile.databinding.FragmentAuthBinding
-import com.example.myprofile.ui.ProfileFragment
-import com.example.myprofile.ui.ProfileFragmentDirections
-import com.example.myprofile.utils.EMAIL
-import com.example.myprofile.utils.MAX_PASS_LENGTH
-import com.example.myprofile.utils.MIN_PASS_LENGTH
-import com.example.myprofile.utils.featureNavigationEnabled
+import com.example.myprofile.ui.profile.ProfileFragment
+import com.example.myprofile.utils.*
+import com.example.myprofile.utils.ext.validateEmail
+import com.example.myprofile.utils.ext.validatePassword
 
 class AuthFragment : BaseFragment<FragmentAuthBinding>(FragmentAuthBinding::inflate) {
 
@@ -26,8 +21,8 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>(FragmentAuthBinding::infl
 
     override fun setUpListeners() {
         binding.apply {
-            etEmail.addTextChangedListener { validateEmail() }
-            etPass.addTextChangedListener { isPasswordValid() }
+            tiPass.validatePassword()
+            tiEmail.validateEmail()
             btnRegister.setOnClickListener { goToMyProfile() }
             tvSignIn.setOnClickListener { goToLoginFragment() }
             btnLoginViaSocial.setOnClickListener {
@@ -66,71 +61,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>(FragmentAuthBinding::infl
      * @return True if they valid
      */
     private fun isInputValidate(): Boolean {
-        return validateEmail() && isPasswordValid()
-    }
-
-    /**
-     * Validate input email address
-     *
-     * @return True if email correct or is not empty
-     */
-    private fun validateEmail(): Boolean {
-        binding.apply {
-            if (etEmail.text.isNullOrBlank()) {
-                tiEmail.error = getString(R.string.auth_error_required)
-                etEmail.requestFocus()
-                return false
-            } else if (!isEmailValid(etEmail.text.toString())) {
-                tiEmail.error = getString(R.string.auth_error_incorrect_email)
-                etEmail.requestFocus()
-                return false
-            } else {
-                tiEmail.isErrorEnabled = false
-            }
-        }
-        return true
-    }
-
-    /**
-     * Check if the email matches the pattern
-     *
-     * @return True if the email matches the pattern
-     */
-    private fun isEmailValid(email: String): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
-
-    /**
-     * Validate input password
-     *
-     * @return True if length of password more than [MIN_PASS_LENGTH] and less than [MAX_PASS_LENGTH]
-     */
-    private fun isPasswordValid(): Boolean {
-        binding.apply {
-            when {
-                etPass.text.isNullOrBlank() -> {
-                    tiPass.error = getString(R.string.auth_error_required)
-                    etPass.requestFocus()
-                    return false
-                }
-                etPass.text.toString().length < MIN_PASS_LENGTH -> {
-                    tiPass.error =
-                        getString(R.string.auth_error_short_password, MIN_PASS_LENGTH)
-                    etPass.requestFocus()
-                    return false
-                }
-                etPass.text.toString().length > MAX_PASS_LENGTH -> {
-                    tiPass.error =
-                        getString(R.string.auth_error_big_password, MAX_PASS_LENGTH)
-                    etPass.requestFocus()
-                    return false
-                }
-                else -> {
-                    tiPass.isErrorEnabled = false
-                }
-            }
-        }
-        return true
+        return !binding.tiEmail.isErrorEnabled && !binding.tiPass.isErrorEnabled
     }
 
     /**
@@ -165,7 +96,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>(FragmentAuthBinding::infl
         binding.apply {
             etEmail.setText(sharedPref.getString(email, ""))
             etPass.setText(sharedPref.getString(pass, ""))
-            btnRegister.performClick()
+            //btnRegister.performClick()
         }
     }
 }

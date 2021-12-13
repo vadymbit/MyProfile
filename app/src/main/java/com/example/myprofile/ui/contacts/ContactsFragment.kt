@@ -1,7 +1,8 @@
 package com.example.myprofile.ui.contacts
 
 import android.os.Bundle
-import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
@@ -11,12 +12,11 @@ import com.example.myprofile.R
 import com.example.myprofile.base.BaseFragment
 import com.example.myprofile.databinding.FragmentContactsBinding
 import com.example.myprofile.model.ContactModel
-import com.example.myprofile.ui.DetailFragment
+import com.example.myprofile.ui.contactDetail.DetailFragment
 import com.example.myprofile.ui.contacts.adapter.ContactAdapter
 import com.example.myprofile.ui.contacts.adapter.ContactItemDecoration
 import com.example.myprofile.ui.contacts.adapter.IContactClickListener
 import com.example.myprofile.utils.featureNavigationEnabled
-import com.example.myprofile.utils.waitForTransition
 
 class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsBinding::inflate),
     IContactClickListener {
@@ -28,7 +28,6 @@ class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsB
         setUpToolbar()
         postponeEnterTransition()
         initContactRecyclerView()
-        waitForTransition(binding.rvContactList)
     }
 
     /**
@@ -44,9 +43,6 @@ class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsB
                     )
                 )
             )
-            rvContactList.viewTreeObserver.addOnDrawListener {
-                startPostponedEnterTransition()
-            }
         }
     }
 
@@ -55,13 +51,18 @@ class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsB
     }
 
     override fun setUpListeners() {
-        binding.tvAddContact.setOnClickListener {
-            ContactAddDialogFragment().show(childFragmentManager, null)
+        binding.apply {
+            tvAddContact.setOnClickListener {
+                ContactAddDialogFragment().show(childFragmentManager, null)
+            }
+            rvContactList.viewTreeObserver.addOnDrawListener {
+                startPostponedEnterTransition()
+            }
         }
     }
 
     override fun setUpObservers() {
-        viewModel.contacts.observe(this, {
+        viewModel.contactsLiveData.observe(this, {
             contactAdapter.submitList(it.toMutableList())
         })
     }
@@ -80,49 +81,37 @@ class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsB
     }
 
     override fun navigateToContactDetail(
-        item: ContactModel,
-        photoView: View,
-        career: View,
-        name: View
+        contact: ContactModel,
+        contactPhoto: ImageView,
+        contactCareer: TextView,
+        contactName: TextView
     ) {
-        setSharedTransitionsName(item, photoView, career, name)
         if (featureNavigationEnabled) {
-            val action = ContactsFragmentDirections.actionContactsFragmentToDetailFragment(item)
+            val action = ContactsFragmentDirections.actionContactsFragmentToDetailFragment(contact)
             findNavController()
                 .navigate(
                     action,
                     FragmentNavigator.Extras.Builder()
                         .addSharedElements(
                             mapOf(
-                                photoView to photoView.transitionName,
-                                career to career.transitionName,
-                                name to name.transitionName
+                                contactPhoto to contactPhoto.transitionName,
+                                contactCareer to contactCareer.transitionName,
+                                contactName to contactName.transitionName
                             )
                         ).build()
                 )
         } else {
             val bundle = Bundle()
-            bundle.putParcelable("Contact", item)
+            bundle.putParcelable("Contact", contact)
             parentFragmentManager.commit {
                 setReorderingAllowed(true)
-                addSharedElement(photoView, photoView.transitionName)
-                addSharedElement(career, career.transitionName)
-                addSharedElement(name, name.transitionName)
+                addSharedElement(contactPhoto, contactPhoto.transitionName)
+                addSharedElement(contactCareer, contactCareer.transitionName)
+                addSharedElement(contactName, contactName.transitionName)
                 replace<DetailFragment>(R.id.fragmentContainerView, null, bundle)
                 addToBackStack(null)
             }
         }
-    }
-
-    private fun setSharedTransitionsName(
-        item: ContactModel,
-        photoView: View,
-        career: View,
-        name: View
-    ) {
-        photoView.transitionName = getString(R.string.detail_transition_photo, item.id.toString())
-        career.transitionName = getString(R.string.detail_transition_career, item.id.toString())
-        name.transitionName = getString(R.string.detail_transition_name, item.id.toString())
     }
 
     /**
@@ -131,11 +120,11 @@ class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsB
      */
     fun saveNewContact(
         username: String,
-        career: String,
+        career: String?,
         phone: Long,
         email: String,
-        address: String,
-        birthDate: String,
+        address: String?,
+        birthDate: String?,
         uriPhoto: String?
     ) {
         viewModel.addContact(

@@ -22,10 +22,10 @@
     <string name="main_home_address" translatable="false">Домашня адреса</string>
     <string name="main_career">Професія</string>
     <string name="auth_remember_me">Автологін</string>
-    <string name="auth_error_required">Обов\'язкове поле</string>
-    <string name="auth_error_incorrect_email">Некоректний E-mail</string>
-    <string name="auth_error_short_password">Пароль мусить бути не менше %1$d символів</string>
-    <string name="auth_error_big_password">Пароль не може бути більше %1$d символів</string>
+    <string name="error_required">Обов\'язкове поле</string>
+    <string name="error_incorrect_email">Некоректний E-mail</string>
+    <string name="error_short_password">Пароль мусить бути не менше %1$d символів</string>
+    <string name="error_big_password">Пароль не може бути більше %1$d символів</string>
     <string name="toolbar_contact_search">Пошук…</string>
     <string name="contacts_add_contacts">Додати контакт</string>
     <string name="contacts_title">Контакти</string>
@@ -36,6 +36,6 @@
     <string name="contact_add_hint_address">Домашня адреса</string>
     <string name="contact_add_hint_date_of_birth">Дата народження</string>
     <string name="register_sign_in">Увійти</string>
-    <string name="contact_add_required">Обов\'язкове поле</string>
     <string name="detail_message">Повідомлення</string>
+    <string name="error_incorrect_phone_number">Не коректний номер</string>
 </resources>

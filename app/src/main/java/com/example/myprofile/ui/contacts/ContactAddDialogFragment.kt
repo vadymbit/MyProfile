@@ -10,16 +10,17 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import com.example.myprofile.R
 import com.example.myprofile.databinding.FragmentContactAddDialogBinding
+import com.example.myprofile.utils.PHOTO_URI
 import com.example.myprofile.utils.imagepreprocessing.loadCircledImage
-import com.example.myprofile.utils.transformIntoDatePicker
-
-private const val PHOTO_URI = "PHOTO_URI"
+import com.example.myprofile.utils.ext.transformIntoDatePicker
+import com.example.myprofile.utils.ext.validateEmail
+import com.example.myprofile.utils.ext.validatePhoneNumber
+import com.example.myprofile.utils.ext.validateRequiredField
 
 class ContactAddDialogFragment : DialogFragment() {
     private var _binding: FragmentContactAddDialogBinding? = null
     private val binding get() = _binding!!
     private var contactPhoto: String? = null
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,44 +51,13 @@ class ContactAddDialogFragment : DialogFragment() {
         }
     }
 
-    /**
-     * Open gallery to select the photo for new contact
-     */
-    private val openGalleryForPhoto =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                contactPhoto = result.data!!.dataString!!
-                binding.ivContactPhoto.loadCircledImage(contactPhoto)
-            }
-        }
-
     private fun isInputValid(): Boolean {
         binding.apply {
             when {
-                etUsername.text.isNullOrBlank() -> {
-                    etUsername.error = getString(R.string.contact_add_required)
-                    return false
-                }
-                etCareer.text.isNullOrBlank() -> {
-                    etCareer.error = getString(R.string.contact_add_required)
-                    return false
-                }
-                etPhone.text.isNullOrBlank() -> {
-                    etPhone.error = getString(R.string.contact_add_required)
-                    return false
-                }
-                etEmail.text.isNullOrBlank() -> {
-                    etEmail.error = getString(R.string.contact_add_required)
-                    return false
-                }
-                etAddress.text.isNullOrBlank() -> {
-                    etAddress.error = getString(R.string.contact_add_required)
-                    return false
-                }
-                etBirthDate.text.isNullOrBlank() -> {
-                    etBirthDate.error = getString(R.string.contact_add_required)
-                    return false
-                }
+                tiAddress.isErrorEnabled -> return false
+                tiUsername.isErrorEnabled -> return false
+                tiEmail.isErrorEnabled -> return false
+                tiPhone.isErrorEnabled -> return false
             }
         }
         return true
@@ -99,11 +69,11 @@ class ContactAddDialogFragment : DialogFragment() {
                 if (isInputValid()) {
                     (parentFragment as ContactsFragment).saveNewContact(
                         etUsername.text.toString(),
-                        etCareer.text.toString(),
+                        etCareer.text?.toString(),
                         etPhone.text.toString().toLong(),
                         etEmail.text.toString(),
-                        etAddress.text.toString(),
-                        etBirthDate.text.toString(),
+                        etAddress.text?.toString(),
+                        etBirthDate.text?.toString(),
                         contactPhoto
                     )
                     dismiss()
@@ -114,8 +84,29 @@ class ContactAddDialogFragment : DialogFragment() {
                 intent.type = "image/*"
                 openGalleryForPhoto.launch(intent)
             }
+            setUpInputFields()
         }
     }
+
+    private fun setUpInputFields() {
+        binding.apply {
+            tiEmail.validateEmail()
+            tiPhone.validatePhoneNumber()
+            tiUsername.validateRequiredField()
+            tiAddress.validateRequiredField()
+        }
+    }
+
+    /**
+     * Open gallery to select the photo for new contact
+     */
+    private val openGalleryForPhoto =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                contactPhoto = result.data!!.dataString!!
+                binding.ivContactPhoto.loadCircledImage(contactPhoto)
+            }
+        }
 
     private fun setUpToolbar() {
         binding.toolbar.apply {

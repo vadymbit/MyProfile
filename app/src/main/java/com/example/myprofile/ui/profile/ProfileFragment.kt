@@ -1,4 +1,4 @@
-package com.example.myprofile.ui
+package com.example.myprofile.ui.profile
 
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace

@@ -1,11 +1,8 @@
-package com.example.myprofile.utils
+package com.example.myprofile.utils.ext
 
 import android.app.DatePickerDialog
 import android.content.Context
-import android.view.View
 import android.widget.EditText
-import androidx.core.view.doOnPreDraw
-import androidx.fragment.app.Fragment
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -34,9 +31,4 @@ fun EditText.transformIntoDatePicker(context: Context, format: String, maxDate: 
             show()
         }
     }
-}
-
-fun Fragment.waitForTransition(targetView: View) {
-    postponeEnterTransition()
-    targetView.doOnPreDraw { startPostponedEnterTransition() }
 }

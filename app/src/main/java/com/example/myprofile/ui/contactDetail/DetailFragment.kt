@@ -1,5 +1,7 @@
-package com.example.myprofile.ui
+package com.example.myprofile.ui.contactDetail
 
+import android.os.Bundle
+import android.util.Log
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.transition.TransitionInflater
@@ -19,21 +21,21 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
         setUpToolbar()
         sharedElementEnterTransition =
             TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        val contact: Bundle = initContactFromArgs()
         binding.apply {
-            if (featureNavigationEnabled) {
-                setSharedTransitionsName(args.contactModel!!)
-                tvProfileName.text = args.contactModel!!.name
-                tvProfileCareer.text = args.contactModel!!.career
-                tvProfileAddress.text = args.contactModel!!.address
-                ivProfilePhoto.loadCircledImage(args.contactModel!!.urlPhoto)
-            } else {
-                setSharedTransitionsName(arguments?.getParcelable(CONTACT_DATA)!!)
-                tvProfileName.text = arguments?.getParcelable<ContactModel>(CONTACT_DATA)?.name
-                tvProfileCareer.text = arguments?.getParcelable<ContactModel>(CONTACT_DATA)?.career
-                tvProfileAddress.text = arguments?.getParcelable<ContactModel>(CONTACT_DATA)?.address
-                ivProfilePhoto.loadCircledImage(args.contactModel?.urlPhoto)
-            }
+            setSharedTransitionsName(contact.getParcelable(CONTACT_DATA)!!)
+            tvProfileName.text = contact.getParcelable<ContactModel>(CONTACT_DATA)?.name
+            tvProfileCareer.text = contact.getParcelable<ContactModel>(CONTACT_DATA)?.career
+            tvProfileAddress.text = contact.getParcelable<ContactModel>(CONTACT_DATA)?.address
+            ivProfilePhoto.loadCircledImage(contact.getParcelable<ContactModel>(CONTACT_DATA)?.urlPhoto)
         }
+    }
+
+    private fun initContactFromArgs(): Bundle {
+        if (featureNavigationEnabled) {
+            return args.toBundle()
+        }
+        return requireArguments()
     }
 
     private fun setSharedTransitionsName(contact: ContactModel) {
