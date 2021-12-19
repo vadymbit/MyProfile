@@ -1,4 +1,4 @@
-package com.example.myprofile.ui.contacts.adapter
+package com.example.myprofile.ui.contacts.contactsList.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

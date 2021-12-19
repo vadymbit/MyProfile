@@ -1,4 +1,4 @@
-package com.example.myprofile.ui.contacts
+package com.example.myprofile.ui.contacts.contactsList
 
 import android.app.Activity
 import android.content.Intent
@@ -11,11 +11,11 @@ import androidx.fragment.app.DialogFragment
 import com.example.myprofile.R
 import com.example.myprofile.databinding.FragmentContactAddDialogBinding
 import com.example.myprofile.utils.PHOTO_URI
-import com.example.myprofile.utils.imagepreprocessing.loadCircledImage
 import com.example.myprofile.utils.ext.transformIntoDatePicker
 import com.example.myprofile.utils.ext.validateEmail
 import com.example.myprofile.utils.ext.validatePhoneNumber
 import com.example.myprofile.utils.ext.validateRequiredField
+import com.example.myprofile.utils.imagepreprocessing.loadCircledImage
 
 class ContactAddDialogFragment : DialogFragment() {
     private var _binding: FragmentContactAddDialogBinding? = null

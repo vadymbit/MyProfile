@@ -8,8 +8,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.myprofile.R
 import com.example.myprofile.base.BaseFragment
 import com.example.myprofile.databinding.FragmentAuthBinding
+import com.example.myprofile.ui.main.MainFragment
 import com.example.myprofile.ui.profile.ProfileFragment
 import com.example.myprofile.utils.*
+import com.example.myprofile.utils.ext.safeNavigation
 import com.example.myprofile.utils.ext.validateEmail
 import com.example.myprofile.utils.ext.validatePassword
 
@@ -23,7 +25,14 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>(FragmentAuthBinding::infl
         binding.apply {
             tiPass.validatePassword()
             tiEmail.validateEmail()
-            btnRegister.setOnClickListener { goToMyProfile() }
+            btnRegister.setOnClickListener {
+                if (isInputValidate()) {
+                    if (cbRememberMe.isChecked) {
+                        rememberUser()
+                    }
+                    goToMyProfile(binding.etEmail.text.toString())
+                }
+            }
             tvSignIn.setOnClickListener { goToLoginFragment() }
             btnLoginViaSocial.setOnClickListener {
                 Toast.makeText(
@@ -35,24 +44,20 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>(FragmentAuthBinding::infl
         }
     }
 
-    private fun goToMyProfile() {
-        if (isInputValidate()) {
-            if (binding.cbRememberMe.isChecked) {
-                rememberUser()
-            }
-            if (featureNavigationEnabled) {
-                val action =
-                    AuthFragmentDirections.actionAuthFragmentToProfileFragment(binding.etEmail.text.toString())
-                findNavController().navigate(action)
-            } else {
-                val bundle = Bundle()
-                bundle.putString(EMAIL, binding.etEmail.text.toString())
-                parentFragmentManager.commit {
-                    setReorderingAllowed(true)
-                    replace(R.id.fragmentContainerView, ProfileFragment::class.java, bundle)
-                }
+    private fun goToMyProfile(email: String) {
+        if (featureNavigationEnabled) {
+            val action =
+                AuthFragmentDirections.actionAuthFragmentToMainFragment(email)
+            findNavController().safeNavigation(action)
+        } else {
+            val bundle = Bundle()
+            bundle.putString(EMAIL, email)
+            parentFragmentManager.commit {
+                setReorderingAllowed(true)
+                replace(R.id.fragmentContainerView, MainFragment::class.java, bundle)
             }
         }
+
     }
 
     /**
@@ -90,13 +95,8 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>(FragmentAuthBinding::infl
         val pass = getString(R.string.user_pass)
         val email = getString(R.string.user_email)
         val sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE)
-        if (!sharedPref.contains(pass) || !sharedPref.contains(email)) {
-            return
-        }
-        binding.apply {
-            etEmail.setText(sharedPref.getString(email, ""))
-            etPass.setText(sharedPref.getString(pass, ""))
-            //btnRegister.performClick()
+        if (sharedPref.contains(pass) && sharedPref.contains(email)) {
+            goToMyProfile(sharedPref.getString(email, "")!!)
         }
     }
 }

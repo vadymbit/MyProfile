@@ -2,19 +2,16 @@ package com.example.myprofile.ui.profile
 
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.myprofile.R
 import com.example.myprofile.base.BaseFragment
 import com.example.myprofile.databinding.FragmentProfileBinding
-import com.example.myprofile.ui.contacts.ContactsFragment
+import com.example.myprofile.ui.contacts.contactsList.ContactsFragment
 import com.example.myprofile.utils.EMAIL
 import com.example.myprofile.utils.featureNavigationEnabled
 import com.example.myprofile.utils.imagepreprocessing.loadCircledImage
 
-class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
-
-    private val args: ProfileFragmentArgs by navArgs()
+class ProfileFragment(private val userEmail: String) : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
 
     override fun initialize() {
         setName()
@@ -31,22 +28,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
      * Parse name of user from input email and set it in profile
      */
     private fun setName() {
-        val email: String? = if (featureNavigationEnabled) {
-            args.email.substringBeforeLast("@")
-        } else {
-            arguments?.getString(EMAIL)?.substringBeforeLast("@")
-        }
-        if (!email.isNullOrEmpty()) {
-            binding.tvProfileName.text = getString(
+        val email: String = userEmail.substringBeforeLast("@")
+        binding.tvProfileName.text = getString(
                 R.string.profile_name,
                 email.substringBefore(".").replaceFirstChar { it.uppercase() },
                 email.substringAfter(".").replaceFirstChar { it.uppercase() })
-        }
     }
 
     private fun navigateToContactFragment() {
         if (featureNavigationEnabled) {
-            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToContactsFragment())
+            //findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToContactsFragment())
         } else {
             parentFragmentManager.commit {
                 setReorderingAllowed(true)

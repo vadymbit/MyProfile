@@ -1,7 +1,6 @@
-package com.example.myprofile.ui.contactDetail
+package com.example.myprofile.ui.contacts.contactDetail
 
 import android.os.Bundle
-import android.util.Log
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.transition.TransitionInflater
@@ -54,6 +53,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
             toolbar.setNavigationIcon(R.drawable.ic_back)
             toolbar.setNavigationOnClickListener {
                 if (featureNavigationEnabled) {
+                    val a = findNavController()
                     findNavController().popBackStack()
                 } else {
                     parentFragmentManager.popBackStack()

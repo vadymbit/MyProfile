@@ -9,3 +9,8 @@ const val MAX_PASS_LENGTH = 16
 const val CONTACT_DATA = "contactModel"
 
 const val PHOTO_URI = "PHOTO_URI"
+
+/**
+ * ViewPagerAdapter
+ */
+const val NUM_TABS = 2

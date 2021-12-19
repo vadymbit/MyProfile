@@ -1,4 +1,4 @@
-package com.example.myprofile.ui.contacts
+package com.example.myprofile.ui.contacts.contactsList
 
 import android.os.Bundle
 import android.widget.ImageView
@@ -12,10 +12,11 @@ import com.example.myprofile.R
 import com.example.myprofile.base.BaseFragment
 import com.example.myprofile.databinding.FragmentContactsBinding
 import com.example.myprofile.model.ContactModel
-import com.example.myprofile.ui.contactDetail.DetailFragment
-import com.example.myprofile.ui.contacts.adapter.ContactAdapter
-import com.example.myprofile.ui.contacts.adapter.ContactItemDecoration
-import com.example.myprofile.ui.contacts.adapter.IContactClickListener
+import com.example.myprofile.ui.contacts.contactDetail.DetailFragment
+import com.example.myprofile.ui.contacts.contactsList.adapter.ContactAdapter
+import com.example.myprofile.ui.contacts.contactsList.adapter.ContactItemDecoration
+import com.example.myprofile.ui.contacts.contactsList.adapter.IContactClickListener
+import com.example.myprofile.ui.main.MainFragmentDirections
 import com.example.myprofile.utils.featureNavigationEnabled
 
 class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsBinding::inflate),
@@ -87,7 +88,7 @@ class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsB
         contactName: TextView
     ) {
         if (featureNavigationEnabled) {
-            val action = ContactsFragmentDirections.actionContactsFragmentToDetailFragment(contact)
+            val action = MainFragmentDirections.actionMainFragmentToDetailFragment(contact)
             findNavController()
                 .navigate(
                     action,
@@ -114,10 +115,6 @@ class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsB
         }
     }
 
-    /**
-     * Create new contact from input fields in dialog fragment
-     * and save it to the live data list of contacts
-     */
     fun saveNewContact(
         username: String,
         career: String?,

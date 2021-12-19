@@ -1,4 +1,4 @@
-package com.example.myprofile.ui.contacts
+package com.example.myprofile.ui.contacts.contactsList
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

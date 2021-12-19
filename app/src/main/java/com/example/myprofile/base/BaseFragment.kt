@@ -1,6 +1,7 @@
 package com.example.myprofile.base
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,11 @@ abstract class BaseFragment<VBinding : ViewBinding>(
 ) :
     Fragment() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("Debuging", "${this.javaClass.simpleName}  Created")
+    }
+
     private var _binding: VBinding? = null
     val binding get() = _binding!!
 
@@ -21,6 +27,7 @@ abstract class BaseFragment<VBinding : ViewBinding>(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("Debuging", "${this.javaClass.simpleName} onCreateView")
         _binding = inflaterMethod.invoke(inflater, container, false)
         return binding.root
     }
@@ -30,6 +37,11 @@ abstract class BaseFragment<VBinding : ViewBinding>(
         setUpListeners()
         setUpObservers()
         initialize()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("Debuging", "${this.javaClass.simpleName}  Destroyed")
     }
 
     override fun onDestroyView() {
