@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/authFragment"
-        android:name="com.example.myprofile.ui.authorization.AuthFragment"
+        android:name="com.vadym.myprofile.ui.authorization.AuthFragment"
         android:label="fragment_auth"
         tools:layout="@layout/fragment_auth">
         <action
@@ -18,32 +18,18 @@
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/contactsFragment"
-        android:name="com.example.myprofile.ui.contacts.contactsList.ContactsFragment"
-        android:label="fragment_contacts"
-        tools:layout="@layout/fragment_contacts" >
-        <action
-            android:id="@+id/action_contactsFragment_to_detailFragment"
-            app:destination="@id/detailFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left" />
-    </fragment>
-    <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.myprofile.ui.contacts.contactDetail.DetailFragment"
+        android:name="com.vadym.myprofile.ui.contacts.contactDetail.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="contactModel"
-            app:argType="com.example.myprofile.model.ContactModel"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:argType="com.vadym.myprofile.model.ContactModel"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.myprofile.ui.main.MainFragment"
+        android:name="com.vadym.myprofile.ui.main.MainFragment"
         android:label="MainFragment" >
         <argument
             android:name="email"

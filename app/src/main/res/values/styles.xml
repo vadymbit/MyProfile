@@ -98,4 +98,8 @@
     <style name="Bordered.ContactAddDialogEditText">
         <item name="android:backgroundTint">@android:color/transparent</item>
     </style>
+
+    <style name="ActionModeToolbar" parent="Widget.AppCompat.ActionMode">
+        <item name="actionModeBackground">?attr/background</item>
+    </style>
 </resources>

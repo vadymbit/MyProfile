@@ -6,6 +6,7 @@
     <color name="blue_900">#00000f</color>
     <color name="orange_700">#FB5E06</color>
     <color name="orange_800">#c02900</color>
+    <color name="gray_300">#E7E7E7</color>
     <color name="gray_500">#B2B2B3</color>
     <color name="gray_600">#828282</color>
 </resources>

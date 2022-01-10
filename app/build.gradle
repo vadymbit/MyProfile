@@ -10,7 +10,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.myprofile"
+        applicationId "com.vadym.myprofile"
         minSdk 23
         targetSdk 31
         versionCode 1
@@ -49,6 +49,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
     implementation 'androidx.fragment:fragment-ktx:1.4.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview-selection:1.1.0'
 
     //ViewPager2
     implementation 'androidx.viewpager2:viewpager2:1.0.0'

@@ -6,15 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.contacts.contactsList.ContactsFragment">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:theme="@style/ToolBarTheme"
-        app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/contact_toolbar_menu"
-        app:title="@string/contacts_title" />
-
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvAddContact"
         android:layout_width="match_parent"
@@ -24,17 +15,28 @@
         android:text="@string/contacts_add_contacts"
         android:textAlignment="gravity"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvContactList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvAddContact"
-        tools:listitem="@layout/item_contact"/>
+        tools:listitem="@layout/item_contact" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabDeleteContacts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_delete_button"
+        app:tint="@color/white"
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
