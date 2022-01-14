@@ -10,7 +10,7 @@ import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.widget.RecyclerView
 import com.vadym.myprofile.R
 import com.vadym.myprofile.databinding.ItemContactBinding
-import com.vadym.myprofile.model.ContactModel
+import com.vadym.myprofile.domain.model.ContactModel
 import com.vadym.myprofile.utils.imagepreprocessing.loadCircledImage
 
 class ContactViewHolder private constructor(

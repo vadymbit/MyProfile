@@ -2,7 +2,7 @@ package com.vadym.myprofile.ui.contacts.contactsList.adapter
 
 import android.widget.ImageView
 import android.widget.TextView
-import com.vadym.myprofile.model.ContactModel
+import com.vadym.myprofile.domain.model.ContactModel
 
 interface IContactClickListener {
     fun removeUser(contact: ContactModel)

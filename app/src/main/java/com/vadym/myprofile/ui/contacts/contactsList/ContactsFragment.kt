@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.vadym.myprofile.R
 import com.vadym.myprofile.base.BaseFragment
 import com.vadym.myprofile.databinding.FragmentContactsBinding
-import com.vadym.myprofile.model.ContactModel
+import com.vadym.myprofile.domain.model.ContactModel
 import com.vadym.myprofile.ui.contacts.ContactAddDialogFragment
 import com.vadym.myprofile.ui.contacts.contactsList.adapter.ContactAdapter
 import com.vadym.myprofile.ui.contacts.contactsList.adapter.ContactItemDecoration

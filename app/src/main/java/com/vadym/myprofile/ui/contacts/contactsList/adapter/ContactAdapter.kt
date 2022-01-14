@@ -3,7 +3,7 @@ package com.vadym.myprofile.ui.contacts.contactsList.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.widget.ListAdapter
-import com.vadym.myprofile.model.ContactModel
+import com.vadym.myprofile.domain.model.ContactModel
 
 class ContactAdapter(
     private val contactClickListener: IContactClickListener

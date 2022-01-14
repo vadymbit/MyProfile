@@ -3,7 +3,8 @@ package com.vadym.myprofile.ui.contacts.contactsList
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.vadym.myprofile.model.ContactModel
+import com.vadym.myprofile.domain.model.ContactModel
+import com.vadym.myprofile.domain.useCase.AddContactUseCase
 
 class ContactViewModel : ViewModel() {
 

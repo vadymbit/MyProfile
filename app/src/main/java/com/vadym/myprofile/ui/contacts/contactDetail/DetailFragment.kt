@@ -6,7 +6,7 @@ import androidx.transition.TransitionInflater
 import com.vadym.myprofile.R
 import com.vadym.myprofile.base.BaseFragment
 import com.vadym.myprofile.databinding.FragmentDetailBinding
-import com.vadym.myprofile.model.ContactModel
+import com.vadym.myprofile.domain.model.ContactModel
 import com.vadym.myprofile.utils.imagepreprocessing.loadCircledImage
 
 class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding::inflate) {

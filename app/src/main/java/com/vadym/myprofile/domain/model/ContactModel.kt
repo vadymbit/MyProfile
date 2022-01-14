@@ -1,4 +1,4 @@
-package com.vadym.myprofile.model
+package com.vadym.myprofile.domain.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
