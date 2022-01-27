@@ -1,33 +1,15 @@
 package com.vadym.myprofile.app.utils.ext
 
-import android.util.Patterns
 import androidx.core.widget.addTextChangedListener
 import com.vadym.myprofile.R
 import com.google.android.material.textfield.TextInputLayout
-import com.vadym.myprofile.app.utils.Constants.MAX_PASS_LENGTH
-import com.vadym.myprofile.app.utils.Constants.MIN_PASS_LENGTH
+import com.vadym.myprofile.app.utils.Validator
 
 fun TextInputLayout.addValidatePasswordListener() {
     isErrorEnabled = true
     editText?.addTextChangedListener {
-        when {
-            it.isNullOrBlank() -> {
-                error = context.getString(R.string.error_required)
-                requestFocus()
-            }
-            it.length < MIN_PASS_LENGTH -> {
-                error = context.getString(R.string.error_short_password, MIN_PASS_LENGTH)
-                requestFocus()
-            }
-            it.length > MAX_PASS_LENGTH -> {
-                boxStrokeErrorColor
-                error = context.getString(R.string.error_big_password, MAX_PASS_LENGTH)
-                requestFocus()
-            }
-            else -> {
-                isErrorEnabled = false
-            }
-        }
+        error = Validator.validatePassword(it.toString(), context)
+        isErrorEnabled = !error.isNullOrBlank()
     }
 }
 
@@ -39,7 +21,7 @@ fun TextInputLayout.addValidateEmailListener() {
 }
 
 fun TextInputLayout.validateEmail() {
-    if (Patterns.EMAIL_ADDRESS.matcher(editText?.text.toString()).matches()) {
+    if (Validator.validateEmail(editText?.text.toString())) {
         isErrorEnabled = false
     } else {
         error = context.getString(R.string.error_incorrect_email)
@@ -48,7 +30,7 @@ fun TextInputLayout.validateEmail() {
 }
 
 fun TextInputLayout.validatePhoneNumber() {
-    if (Patterns.PHONE.matcher(editText?.text.toString()).matches()) {
+    if (Validator.validatePhoneNumber(editText?.text.toString())) {
         isErrorEnabled = false
     } else {
         error = context.getString(R.string.error_incorrect_phone_number)
@@ -57,7 +39,7 @@ fun TextInputLayout.validatePhoneNumber() {
 }
 
 fun TextInputLayout.validateRequiredField() {
-    if (editText?.text.isNullOrBlank()) {
+    if (Validator.validateRequiredField(editText?.text.toString())) {
         error = context.getString(R.string.error_required)
         requestFocus()
     } else {

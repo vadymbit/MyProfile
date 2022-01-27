@@ -6,17 +6,21 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.vadym.myprofile.R
 import com.vadym.myprofile.app.base.BaseDialogFragment
 import com.vadym.myprofile.databinding.FragmentContactAddDialogBinding
-import com.vadym.myprofile.presentation.ui.contacts.list.ContactsFragment
 import com.vadym.myprofile.app.utils.Constants.PHOTO_URI
 import com.vadym.myprofile.app.utils.ext.*
-import com.vadym.myprofile.app.utils.imagepreprocessing.loadCircledImage
+import com.vadym.myprofile.app.utils.ext.loadCircledImage
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ContactAddDialogFragment :
     BaseDialogFragment<FragmentContactAddDialogBinding>(FragmentContactAddDialogBinding::inflate) {
     private val viewModel: ContactAddViewModel by viewModels()
+    private val args by navArgs<ContactAddDialogFragmentArgs>()
     private var contactPhoto: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,7 +59,8 @@ class ContactAddDialogFragment :
         binding.apply {
             btnSave.setOnClickListener {
                 if (isInputValid()) {
-                    (parentFragment as ContactsFragment).saveNewContact(
+                    viewModel.saveNewContact(
+                        args.contactsListSize.toLong(),
                         etUsername.text.toString(),
                         etCareer.text?.toString(),
                         etPhone.text.toString().toLong(),

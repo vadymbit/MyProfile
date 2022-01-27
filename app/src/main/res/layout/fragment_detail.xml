@@ -57,6 +57,8 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvProfileAddress"
         style="@style/WrapContent.Bordered.Gray"
+        android:paddingHorizontal="@dimen/default_padding"
+        android:textAlignment="center"
         android:text="@string/main_home_address"
         android:textSize="@dimen/small_text_size"
         app:layout_constraintBottom_toBottomOf="@id/topBackground"

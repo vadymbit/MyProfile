@@ -7,7 +7,7 @@ import com.vadym.myprofile.R
 import com.vadym.myprofile.app.base.BaseFragment
 import com.vadym.myprofile.databinding.FragmentProfileBinding
 import com.vadym.myprofile.presentation.ui.main.MainFragment
-import com.vadym.myprofile.app.utils.imagepreprocessing.loadCircledImage
+import com.vadym.myprofile.app.utils.ext.loadCircledImage
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

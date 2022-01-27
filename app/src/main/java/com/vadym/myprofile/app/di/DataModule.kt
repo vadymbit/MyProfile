@@ -2,9 +2,13 @@ package com.vadym.myprofile.app.di
 
 import android.content.Context
 import com.vadym.myprofile.data.repository.AuthRepositoryImpl
+import com.vadym.myprofile.data.repository.ContactRepositoryImpl
 import com.vadym.myprofile.data.repository.UserRepositoryImpl
 import com.vadym.myprofile.data.storage.LocalPrefsStore
+import com.vadym.myprofile.data.storage.contact.ContactStorage
+import com.vadym.myprofile.data.storage.contact.FakeContactStorage
 import com.vadym.myprofile.domain.repository.AuthRepository
+import com.vadym.myprofile.domain.repository.ContactRepository
 import com.vadym.myprofile.domain.repository.UserRepository
 import dagger.Module
 import dagger.Provides
@@ -27,6 +31,18 @@ class DataModule {
     @Singleton
     fun provideUserRepository(storage: LocalPrefsStore): UserRepository {
         return UserRepositoryImpl(storage = storage)
+    }
+
+    @Provides
+    @Singleton
+    fun provideContactRepository(storage: ContactStorage): ContactRepository {
+        return ContactRepositoryImpl(storage = storage)
+    }
+
+    @Provides
+    @Singleton
+    fun provideContactStorage(): ContactStorage {
+        return FakeContactStorage()
     }
 
     @Provides

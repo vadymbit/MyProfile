@@ -1,4 +1,4 @@
-package com.vadym.myprofile.app.utils.imagepreprocessing
+package com.vadym.myprofile.app.utils.ext
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide

@@ -9,7 +9,7 @@ import com.vadym.myprofile.R
 import com.vadym.myprofile.app.base.BaseFragment
 import com.vadym.myprofile.databinding.FragmentDetailBinding
 import com.vadym.myprofile.domain.model.ContactModel
-import com.vadym.myprofile.app.utils.imagepreprocessing.loadCircledImage
+import com.vadym.myprofile.app.utils.ext.loadCircledImage
 
 class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding::inflate) {
 
@@ -19,7 +19,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
         super.onViewCreated(view, savedInstanceState)
         setToolbar()
         sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+            TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
         binding.apply {
             setSharedTransitionsName(args.contactModel)
             tvProfileName.text = args.contactModel?.name

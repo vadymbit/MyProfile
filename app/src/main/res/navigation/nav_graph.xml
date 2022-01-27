@@ -22,5 +22,17 @@
         <action
             android:id="@+id/action_mainFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_contactAddDialogFragment"
+            app:destination="@id/contactAddDialogFragment"
+            app:popUpTo="@id/mainFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/contactAddDialogFragment"
+        android:name="com.vadym.myprofile.presentation.ui.contacts.addContactDialog.ContactAddDialogFragment"
+        android:label="ContactAddDialogFragment" >
+        <argument
+            android:name="contactsListSize"
+            app:argType="integer" />
+    </dialog>
 </navigation>

@@ -2,7 +2,6 @@ package com.vadym.myprofile.presentation.ui.contacts.list
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.ActionMode
 import android.view.Menu
 import android.view.MenuItem
@@ -18,6 +17,7 @@ import androidx.recyclerview.selection.StorageStrategy
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vadym.myprofile.R
 import com.vadym.myprofile.app.base.BaseFragment
+import com.vadym.myprofile.app.utils.ext.safeNavigation
 import com.vadym.myprofile.databinding.FragmentContactsBinding
 import com.vadym.myprofile.domain.model.ContactModel
 import com.vadym.myprofile.presentation.ui.contacts.addContactDialog.ContactAddDialogFragment
@@ -26,7 +26,9 @@ import com.vadym.myprofile.presentation.ui.contacts.list.adapter.ContactItemDeco
 import com.vadym.myprofile.presentation.ui.contacts.list.adapter.multiselect.ContactDetailsLookup
 import com.vadym.myprofile.presentation.ui.contacts.list.adapter.multiselect.ContactKeyProvider
 import com.vadym.myprofile.presentation.ui.main.MainFragmentDirections
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsBinding::inflate),
     ContactAdapter.IContactClickListener {
 
@@ -89,7 +91,12 @@ class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsB
     private fun setListeners() {
         binding.apply {
             tvAddContact.setOnClickListener {
-                ContactAddDialogFragment().show(childFragmentManager, null)
+                val contactsListSize = viewModel.contactsLiveData.value?.size ?: 0
+                findNavController().safeNavigation(
+                    MainFragmentDirections.actionMainFragmentToContactAddDialogFragment(
+                        contactsListSize
+                    )
+                )
             }
             rvContactList.viewTreeObserver.addOnDrawListener {
                 parentFragment?.startPostponedEnterTransition()
@@ -103,9 +110,9 @@ class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsB
     }
 
     override fun setObservers() {
-        viewModel.contactsLiveData.observe(this, {
-            contactAdapter.submitList(it.toMutableList())
-        })
+        viewModel.contactsLiveData.observe(this) {
+            contactAdapter.submitList(it)
+        }
     }
 
     private fun addSelectionTrackerObserver() {
@@ -173,10 +180,7 @@ class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsB
 
                 override fun onDestroyActionMode(mode: ActionMode?) {
                     selectionTracker.clearSelection()
-                    binding.rvContactList.itemAnimator?.isRunning {
-                        Log.d("Contact", "Animation end")
-                        contactAdapter.notifyDataSetChanged()
-                    }
+                    contactAdapter.notifyDataSetChanged()
                 }
             }
         )
@@ -185,25 +189,5 @@ class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsB
 
     private fun setSelectedTitle(selected: Int) {
         actionMode?.title = "Selected: $selected"
-    }
-
-    fun saveNewContact(
-        username: String,
-        career: String?,
-        phone: Long,
-        email: String,
-        address: String?,
-        birthDate: String?,
-        uriPhoto: String?
-    ) {
-        viewModel.addContact(
-            username,
-            career,
-            phone,
-            email,
-            address,
-            birthDate,
-            uriPhoto
-        )
     }
 }

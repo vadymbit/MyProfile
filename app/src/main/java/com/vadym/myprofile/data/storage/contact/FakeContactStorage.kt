@@ -1,21 +1,32 @@
 package com.vadym.myprofile.data.storage.contact
 
 import com.vadym.myprofile.domain.model.ContactModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 
 class FakeContactStorage : ContactStorage {
 
+    //Simulate database
+    private val flowList = MutableSharedFlow<List<ContactModel>>(1)
+
     override suspend fun addContact(contact: ContactModel): Boolean {
-        return contactList.add(contact)
+        contactList = contactList.plusElement(contact)
+        flowList.emit(contactList)
+        return true
     }
+
     override suspend fun removeContact(contact: ContactModel): Boolean {
-        return contactList.remove(contact)
+        contactList = contactList.minusElement(contact)
+        flowList.emit(contactList)
+        return true
     }
 
-    override suspend fun getUserContacts() {
-        TODO("Not yet implemented")
+    override suspend fun getUserContacts(): Flow<List<ContactModel>> {
+        flowList.emit(contactList)
+        return flowList
     }
 
-    private val contactList = mutableListOf(
+    private var contactList = listOf(
         ContactModel(0, "Alex", "Teacher", 12345678910, "empty", "", "", ""),
         ContactModel(1, "John", "Researcher", 3212346234, "empty", "", "", ""),
         ContactModel(2, "Gaben", "Designer", 648555555555, "empty", "", "", ""),
