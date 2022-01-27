@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/background"
-    tools:context=".ui.authorization.AuthFragment">
+    tools:context=".presentation.ui.authorization.register.AuthFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineTop"
@@ -78,7 +78,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tiPass"
         app:layout_constraintVertical_chainStyle="spread_inside" />
 
-    <com.vadym.myprofile.ui.customButtonVIew.LoginViaButton
+    <com.vadym.myprofile.presentation.ui.customButtonVIew.LoginViaButton
         android:id="@+id/btnLoginViaSocial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

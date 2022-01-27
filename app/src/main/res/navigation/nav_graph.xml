@@ -3,37 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/authFragment">
+    app:startDestination="@id/mainFragment">
 
     <fragment
-        android:id="@+id/authFragment"
-        android:name="com.vadym.myprofile.ui.authorization.AuthFragment"
-        android:label="fragment_auth"
-        tools:layout="@layout/fragment_auth">
-        <action
-            android:id="@+id/action_authFragment_to_mainFragment"
-            app:destination="@id/mainFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:popUpTo="@id/authFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
         android:id="@+id/detailFragment"
-        android:name="com.vadym.myprofile.ui.contacts.contactDetail.DetailFragment"
+        android:name="com.vadym.myprofile.presentation.ui.contacts.detail.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="contactModel"
-            app:argType="com.vadym.myprofile.model.ContactModel"
+            app:argType="com.vadym.myprofile.domain.model.ContactModel"
             app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.vadym.myprofile.ui.main.MainFragment"
+        android:name="com.vadym.myprofile.presentation.ui.main.MainFragment"
         android:label="MainFragment" >
-        <argument
-            android:name="email"
-            app:argType="string" />
         <action
             android:id="@+id/action_mainFragment_to_detailFragment"
             app:destination="@id/detailFragment" />

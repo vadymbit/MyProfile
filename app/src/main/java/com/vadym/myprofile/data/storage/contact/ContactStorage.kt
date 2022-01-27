@@ -1,12 +1,13 @@
-package com.vadym.myprofile.domain.repository
+package com.vadym.myprofile.data.storage.contact
 
 import com.vadym.myprofile.domain.model.ContactModel
 
-interface ContactRepository {
+interface ContactStorage {
 
     suspend fun addContact(contact: ContactModel): Boolean
 
     suspend fun removeContact(contact: ContactModel): Boolean
 
     suspend fun getUserContacts()
+
 }

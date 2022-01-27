@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.contacts.contactDetail.DetailFragment">
+    tools:context=".presentation.ui.contacts.detail.DetailFragment">
 
     <View
         android:id="@+id/topBackground"
