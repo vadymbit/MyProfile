@@ -1,19 +1,19 @@
-package com.vadym.myprofile.presentation.ui.contacts.addContactDialog
+package com.vadym.myprofile.presentation.ui.contacts.dialog
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.vadym.myprofile.R
 import com.vadym.myprofile.app.base.BaseDialogFragment
 import com.vadym.myprofile.databinding.FragmentContactAddDialogBinding
 import com.vadym.myprofile.app.utils.Constants.PHOTO_URI
 import com.vadym.myprofile.app.utils.ext.*
-import com.vadym.myprofile.app.utils.ext.loadCircledImage
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -73,9 +73,7 @@ class ContactAddDialogFragment :
                 }
             }
             btnAddPhoto.setOnClickListener {
-                val intent = Intent(Intent.ACTION_PICK)
-                intent.type = "image/*"
-                openGalleryForPhoto.launch(intent)
+                requestPermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
             }
         }
     }
@@ -88,6 +86,24 @@ class ContactAddDialogFragment :
             tiAddress.validateRequiredField()
         }
     }
+
+    private val requestPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            when {
+                granted -> {
+                    val intent = Intent(Intent.ACTION_PICK)
+                    intent.type = "image/*"
+                    openGalleryForPhoto.launch(intent)
+                }
+                else -> {
+                    Toast.makeText(
+                        context,
+                        getString(R.string.contact_add_denied_camera_permissions),
+                        Toast.LENGTH_SHORT
+                    )
+                }
+            }
+        }
 
     /**
      * Open gallery to select the photo for new contact

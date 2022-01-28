@@ -7,6 +7,7 @@ import com.vadym.myprofile.app.base.BaseFragment
 import com.vadym.myprofile.databinding.FragmentMainBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.vadym.myprofile.R
 
 class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate) {
 
@@ -23,8 +24,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         viewPager.adapter = pagerAdapter
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {
-                0 -> tab.text = "Profile"
-                1 -> tab.text = "Contacts"
+                0 -> tab.text = getString(R.string.pager_profile)
+                1 -> tab.text = getString(R.string.pager_contacts)
             }
         }.attach()
     }

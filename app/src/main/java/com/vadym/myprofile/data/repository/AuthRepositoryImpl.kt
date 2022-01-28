@@ -12,9 +12,7 @@ class AuthRepositoryImpl @Inject constructor(val storage: LocalPrefsStore) : Aut
         return true
     }
 
-    override suspend fun refreshToken() {
-
-    }
+    override suspend fun refreshToken() {}
 
     override suspend fun rememberUser(isLogged: Boolean, email: String) {
         storage.rememberUser(isLogged, email)

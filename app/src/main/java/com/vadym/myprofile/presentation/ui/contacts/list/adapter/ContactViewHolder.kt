@@ -53,8 +53,11 @@ class ContactViewHolder private constructor(
         binding.apply {
             btnDeleteContact.setOnClickListener {
                 iContactClickListener.removeUser(currentContact)
-                Toast.makeText(itemView.context, "Contact has been removed", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(
+                    itemView.context,
+                    itemView.context.getString(R.string.toast_contact_removed),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
             root.setOnClickListener {
                 iContactClickListener.onContactClick(

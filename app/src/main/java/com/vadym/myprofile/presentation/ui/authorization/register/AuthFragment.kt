@@ -46,7 +46,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>(FragmentAuthBinding::infl
     }
 
     override fun setObservers() {
-        viewModel.isLogged.observe(this) {
+        viewModel.isLogged.observe(viewLifecycleOwner) {
             if (it) {
                 goToMyProfile()
             }

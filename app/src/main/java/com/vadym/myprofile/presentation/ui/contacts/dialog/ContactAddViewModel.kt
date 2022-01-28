@@ -1,4 +1,4 @@
-package com.vadym.myprofile.presentation.ui.contacts.addContactDialog
+package com.vadym.myprofile.presentation.ui.contacts.dialog
 
 import com.vadym.myprofile.app.base.BaseViewModel
 import com.vadym.myprofile.domain.model.ContactModel

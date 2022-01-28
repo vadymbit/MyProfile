@@ -8,14 +8,6 @@ import javax.inject.Inject
 class UserRepositoryImpl @Inject constructor(private val storage: LocalPrefsStore) :
     UserRepository {
 
-    override suspend fun getUserProfile() {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun editUserProfile() {
-        TODO("Not yet implemented")
-    }
-
     override fun getUserEmail(): Flow<String> {
         return storage.getUserEmail()
     }

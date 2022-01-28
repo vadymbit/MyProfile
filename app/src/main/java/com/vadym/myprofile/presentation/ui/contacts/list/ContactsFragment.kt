@@ -20,7 +20,6 @@ import com.vadym.myprofile.app.base.BaseFragment
 import com.vadym.myprofile.app.utils.ext.safeNavigation
 import com.vadym.myprofile.databinding.FragmentContactsBinding
 import com.vadym.myprofile.domain.model.ContactModel
-import com.vadym.myprofile.presentation.ui.contacts.addContactDialog.ContactAddDialogFragment
 import com.vadym.myprofile.presentation.ui.contacts.list.adapter.ContactAdapter
 import com.vadym.myprofile.presentation.ui.contacts.list.adapter.ContactItemDecoration
 import com.vadym.myprofile.presentation.ui.contacts.list.adapter.multiselect.ContactDetailsLookup
@@ -71,10 +70,10 @@ class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsB
      */
     private fun initContactRecyclerView() {
         parentFragment?.postponeEnterTransition()
-        binding.apply {
-            rvContactList.adapter = contactAdapter
-            rvContactList.layoutManager = LinearLayoutManager(context)
-            rvContactList.addItemDecoration(
+        binding.rvContactList.apply {
+            adapter = contactAdapter
+            layoutManager = LinearLayoutManager(context)
+            addItemDecoration(
                 ContactItemDecoration(
                     resources.getDimensionPixelSize(
                         R.dimen.item_contact_margin
@@ -110,7 +109,7 @@ class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsB
     }
 
     override fun setObservers() {
-        viewModel.contactsLiveData.observe(this) {
+        viewModel.contactsLiveData.observe(viewLifecycleOwner) {
             contactAdapter.submitList(it)
         }
     }
@@ -188,6 +187,6 @@ class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsB
     }
 
     private fun setSelectedTitle(selected: Int) {
-        actionMode?.title = "Selected: $selected"
+        actionMode?.title = getString(R.string.contact_selection, selected)
     }
 }

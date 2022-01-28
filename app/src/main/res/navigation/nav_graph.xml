@@ -29,7 +29,7 @@
     </fragment>
     <dialog
         android:id="@+id/contactAddDialogFragment"
-        android:name="com.vadym.myprofile.presentation.ui.contacts.addContactDialog.ContactAddDialogFragment"
+        android:name="com.vadym.myprofile.presentation.ui.contacts.dialog.ContactAddDialogFragment"
         android:label="ContactAddDialogFragment" >
         <argument
             android:name="contactsListSize"

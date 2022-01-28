@@ -38,4 +38,9 @@
     <string name="register_sign_in">Увійти</string>
     <string name="detail_message">Повідомлення</string>
     <string name="error_incorrect_phone_number">Не коректний номер</string>
+    <string name="toast_contact_removed">Контакт видалено</string>
+    <string name="contact_selection">Вибрано: %1$d</string>
+    <string name="pager_contacts">Контакти</string>
+    <string name="pager_profile">Профіль</string>
+    <string name="contact_add_denied_camera_permissions">Доступ до камери заборонено</string>
 </resources>
