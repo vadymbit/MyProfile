@@ -1,7 +1,6 @@
 package com.vadym.myprofile.presentation.ui.contacts.list
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import com.vadym.myprofile.app.base.BaseViewModel
@@ -9,7 +8,6 @@ import com.vadym.myprofile.domain.model.ContactModel
 import com.vadym.myprofile.domain.useCase.contact.GetUserContactUseCase
 import com.vadym.myprofile.domain.useCase.contact.RemoveContactUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,7 +17,7 @@ class ContactViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     val contactsLiveData: LiveData<List<ContactModel>> = liveData {
-        emitSource(getUserContactUseCase.invoke().asLiveData())
+        emitSource(getUserContactUseCase().asLiveData())
     }
 
     /**
@@ -29,7 +27,7 @@ class ContactViewModel @Inject constructor(
      */
     fun removeContact(contact: ContactModel) {
         launch {
-            removeContactUseCase.invoke(contact)
+            removeContactUseCase(contact)
         }
     }
 

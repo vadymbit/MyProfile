@@ -40,7 +40,7 @@ class ContactAddViewModel @Inject constructor(private val addContactUseCase: Add
             contactPhoto
         )
         launch {
-            addContactUseCase.invoke(contact)
+            addContactUseCase(contact)
         }
     }
 }

@@ -5,15 +5,15 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.vadym.myprofile.R
 import com.vadym.myprofile.app.base.BaseDialogFragment
-import com.vadym.myprofile.databinding.FragmentContactAddDialogBinding
 import com.vadym.myprofile.app.utils.Constants.PHOTO_URI
 import com.vadym.myprofile.app.utils.ext.*
+import com.vadym.myprofile.databinding.FragmentContactAddDialogBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -88,19 +88,19 @@ class ContactAddDialogFragment :
     }
 
     private val requestPermission =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             when {
-                granted -> {
+                isGranted -> {
                     val intent = Intent(Intent.ACTION_PICK)
                     intent.type = "image/*"
                     openGalleryForPhoto.launch(intent)
                 }
                 else -> {
-                    Toast.makeText(
-                        context,
-                        getString(R.string.contact_add_denied_camera_permissions),
-                        Toast.LENGTH_SHORT
-                    )
+                    Snackbar.make(
+                        binding.root,
+                        R.string.contact_add_denied_camera_permissions,
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
             }
         }

@@ -1,9 +1,12 @@
 package com.vadym.myprofile.presentation.ui.authorization.register
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import com.vadym.myprofile.app.base.BaseViewModel
-import com.vadym.myprofile.domain.useCase.auth.RegisterUseCase
 import com.vadym.myprofile.domain.useCase.auth.IsLoggedUserUseCase
+import com.vadym.myprofile.domain.useCase.auth.RegisterUseCase
 import com.vadym.myprofile.domain.useCase.auth.RememberUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -15,7 +18,7 @@ class AuthViewModel @Inject constructor(
     private val rememberUserUseCase: RememberUserUseCase
 ) : BaseViewModel() {
 
-    private val isRemembered: LiveData<Boolean> = isLoggedUserUseCase.invoke().asLiveData()
+    private val isRemembered: LiveData<Boolean> = isLoggedUserUseCase().asLiveData()
     private val isRegistered = MutableLiveData<Boolean>()
     val isLogged = MediatorLiveData<Boolean>()
 
@@ -47,7 +50,7 @@ class AuthViewModel @Inject constructor(
 
     fun rememberUser(isLogged: Boolean, email: String) {
         launch {
-            rememberUserUseCase.invoke(isLogged, email)
+            rememberUserUseCase(isLogged, email)
         }
     }
 }
