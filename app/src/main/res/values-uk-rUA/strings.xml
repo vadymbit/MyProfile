@@ -43,4 +43,11 @@
     <string name="pager_contacts">Контакти</string>
     <string name="pager_profile">Профіль</string>
     <string name="contact_add_denied_camera_permissions">Доступ до камери заборонено</string>
+    <string name="login_label">Привіт!</string>
+    <string name="login_button">Увійти</string>
+    <string name="login_sign_up">Зареєструватися</string>
+    <string name="login_subtitle">Введіть ваші пошту та пароль нижче</string>
+    <string name="login_forgot_pass">Забули пароль?</string>
+    <string name="login_no_account">Не маєте аккаунту?</string>
+    <string name="main_toolbar_logout">Вийти</string>
 </resources>

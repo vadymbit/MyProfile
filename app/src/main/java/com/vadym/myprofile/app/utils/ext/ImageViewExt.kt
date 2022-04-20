@@ -1,5 +1,6 @@
 package com.vadym.myprofile.app.utils.ext
 
+import android.net.Uri
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.vadym.myprofile.R
@@ -18,6 +19,14 @@ fun ImageView.loadCircledImage(src: String?) {
 }
 
 fun ImageView.loadCircledImage(src: Int) {
+    Glide.with(this)
+        .load(src)
+        .circleCrop()
+        .error(R.drawable.ic_person)
+        .into(this)
+}
+
+fun ImageView.loadCircledImage(src: Uri) {
     Glide.with(this)
         .load(src)
         .circleCrop()

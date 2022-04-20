@@ -6,13 +6,20 @@
     app:startDestination="@id/mainFragment">
 
     <fragment
+        android:id="@+id/editFragment"
+        android:name="com.vadym.myprofile.presentation.ui.profile.edit.EditFragment"
+        android:label="fragment_edit"
+        tools:layout="@layout/fragment_edit" >
+
+    </fragment>
+    <fragment
         android:id="@+id/detailFragment"
         android:name="com.vadym.myprofile.presentation.ui.contacts.detail.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="contactModel"
-            app:argType="com.vadym.myprofile.domain.model.ContactModel"
+            app:argType="com.vadym.myprofile.presentation.model.ContactModel"
             app:nullable="true" />
     </fragment>
     <fragment
@@ -26,13 +33,22 @@
             android:id="@+id/action_mainFragment_to_contactAddDialogFragment"
             app:destination="@id/contactAddDialogFragment"
             app:popUpTo="@id/mainFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_editFragment"
+            app:destination="@id/editFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_authActivity"
+            app:destination="@id/authActivity" />
     </fragment>
     <dialog
         android:id="@+id/contactAddDialogFragment"
         android:name="com.vadym.myprofile.presentation.ui.contacts.dialog.ContactAddDialogFragment"
-        android:label="ContactAddDialogFragment" >
-        <argument
-            android:name="contactsListSize"
-            app:argType="integer" />
+        android:label="ContactAddDialogFragment"
+        tools:layout="@layout/fragment_contact_add_dialog">
     </dialog>
+    <activity
+        android:id="@+id/authActivity"
+        android:name="com.vadym.myprofile.presentation.ui.authorization.AuthActivity"
+        android:label="activity_auth"
+        tools:layout="@layout/activity_auth" />
 </navigation>

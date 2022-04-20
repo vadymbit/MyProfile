@@ -16,17 +16,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--    <com.google.android.material.appbar.MaterialToolbar-->
-    <!--        android:id="@+id/toolbar"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="?attr/actionBarSize"-->
-    <!--        android:theme="@style/ToolBarTheme"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:title="@string/setting"-->
-    <!--        app:titleCentered="false" />-->
-
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivProfilePhoto"
+        android:id="@+id/ivUserPhoto"
         android:layout_width="@dimen/profile_image_size"
         android:layout_height="@dimen/profile_image_size"
         android:layout_marginTop="@dimen/default_margin"
@@ -43,7 +34,7 @@
         android:textSize="@dimen/text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivProfilePhoto"
+        app:layout_constraintTop_toBottomOf="@id/ivUserPhoto"
         tools:text="Lucile Alvarado" />
 
     <androidx.appcompat.widget.AppCompatTextView

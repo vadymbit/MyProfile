@@ -1,25 +1,89 @@
 package com.vadym.myprofile.presentation.ui.main
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import com.vadym.myprofile.app.base.BaseFragment
-import com.vadym.myprofile.databinding.FragmentMainBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vadym.myprofile.R
+import com.vadym.myprofile.app.base.BaseFragment
+import com.vadym.myprofile.databinding.FragmentMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate) {
 
+    private val viewModel: MainViewModel by viewModels()
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
     private lateinit var pagerAdapter: MainViewPagerAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initMenu()
+        setViews()
+        setPagerAdapter()
+    }
+
+    private fun initMenu() {
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(
+            object : MenuProvider {
+                override fun onPrepareMenu(menu: Menu) {
+                    super.onPrepareMenu(menu)
+                    val searchButton = menu.findItem(R.id.action_search)
+                    when (tabLayout.selectedTabPosition) {
+                        0 -> searchButton.isVisible = false
+                        1 -> searchButton.isVisible = true
+                    }
+                }
+
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.main_toolbar_menu, menu)
+                }
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    return when (menuItem.itemId) {
+                        R.id.action_search -> {
+                            true
+                        }
+                        R.id.action_logout -> {
+                            viewModel.logout()
+                            findNavController().navigate(MainFragmentDirections.actionMainFragmentToAuthActivity())
+                            activity?.finish()
+                            true
+                        }
+                        else -> false
+                    }
+                }
+            },
+            viewLifecycleOwner
+        )
+    }
+
+//    override fun setObservers() {
+//        viewModel.isLogged.observe(viewLifecycleOwner) {
+//            if (!it) {
+//                findNavController().navigate(MainFragmentDirections.actionMainFragmentToAuthActivity())
+//                activity?.finish()
+//            }
+//        }
+//    }
+
+    private fun setViews() {
         binding.apply {
             viewPager = mainPager
             tabLayout = mainTabs
         }
+    }
+
+    private fun setPagerAdapter() {
         pagerAdapter = MainViewPagerAdapter(this)
         viewPager.adapter = pagerAdapter
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->

@@ -7,5 +7,4 @@
         app:showAsAction="always"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         android:icon="@drawable/ic_toolbar_search"/>
-
 </menu>

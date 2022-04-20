@@ -1,120 +1,81 @@
 package com.vadym.myprofile.presentation.ui.contacts.dialog
 
-import android.Manifest
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.navArgs
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.vadym.myprofile.R
 import com.vadym.myprofile.app.base.BaseDialogFragment
-import com.vadym.myprofile.app.utils.Constants.PHOTO_URI
-import com.vadym.myprofile.app.utils.ext.*
 import com.vadym.myprofile.databinding.FragmentContactAddDialogBinding
+import com.vadym.myprofile.presentation.model.ContactModel
+import com.vadym.myprofile.presentation.ui.contacts.dialog.adapter.ContactAddAdapter
+import com.vadym.myprofile.presentation.ui.contacts.list.adapter.ContactItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ContactAddDialogFragment :
-    BaseDialogFragment<FragmentContactAddDialogBinding>(FragmentContactAddDialogBinding::inflate) {
+    BaseDialogFragment<FragmentContactAddDialogBinding>(FragmentContactAddDialogBinding::inflate),
+    ContactAddAdapter.IContactAddClickListener {
+
     private val viewModel: ContactAddViewModel by viewModels()
-    private val args by navArgs<ContactAddDialogFragmentArgs>()
-    private var contactPhoto: String? = null
+    private val addContactAdapter by lazy { ContactAddAdapter(contactAddClickListener = this) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.apply {
-            isCancelable = false
-            if (savedInstanceState != null) {
-                ivContactPhoto.loadCircledImage(savedInstanceState.getString(PHOTO_URI))
+        isCancelable = false
+        setToolbar()
+        initRecyclerView()
+    }
+
+    override fun getTheme(): Int {
+        return R.style.DialogTheme
+    }
+
+    override fun addContact(contact: ContactModel) {
+        viewModel.addContact(contact)
+    }
+
+    override fun setObservers() {
+        viewModel.apply {
+            usersLiveData.observe(viewLifecycleOwner) {
+                addContactAdapter.submitList(it)
             }
-            setToolbar()
-            setListeners()
-            etBirthDate.transformIntoDatePicker(requireContext(), "MM/dd/yyyy")
+            lifecycleScope.launch {
+                eventsFlow.flowWithLifecycle(
+                    viewLifecycleOwner.lifecycle,
+                    Lifecycle.State.RESUMED
+                ).collect {
+                    Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show()
+                }
+            }
+            isLoading.observe(viewLifecycleOwner) {
+                if (it) {
+                    binding.lpiLoading.show()
+                } else {
+                    binding.lpiLoading.hide()
+                }
+            }
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        contactPhoto?.let {
-            outState.putString(PHOTO_URI, it)
-        }
-    }
-
-    private fun isInputValid(): Boolean {
-        binding.apply {
-            validateInputFields()
-            return viewModel.isInputValid(
-                tiAddress.isErrorEnabled,
-                tiUsername.isErrorEnabled,
-                tiEmail.isErrorEnabled,
-                tiPhone.isErrorEnabled
+    private fun initRecyclerView() {
+        binding.rvUserList.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = addContactAdapter
+            addItemDecoration(
+                ContactItemDecoration(
+                    resources.getDimensionPixelSize(
+                        R.dimen.item_contact_margin
+                    )
+                )
             )
         }
     }
-
-    private fun setListeners() {
-        binding.apply {
-            btnSave.setOnClickListener {
-                if (isInputValid()) {
-                    viewModel.saveNewContact(
-                        args.contactsListSize.toLong(),
-                        etUsername.text.toString(),
-                        etCareer.text?.toString(),
-                        etPhone.text.toString().toLong(),
-                        etEmail.text.toString(),
-                        etAddress.text?.toString(),
-                        etBirthDate.text?.toString(),
-                        contactPhoto
-                    )
-                    dismiss()
-                }
-            }
-            btnAddPhoto.setOnClickListener {
-                requestPermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-            }
-        }
-    }
-
-    private fun validateInputFields() {
-        binding.apply {
-            tiEmail.validateEmail()
-            tiPhone.validatePhoneNumber()
-            tiUsername.validateRequiredField()
-            tiAddress.validateRequiredField()
-        }
-    }
-
-    private val requestPermission =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-            when {
-                isGranted -> {
-                    val intent = Intent(Intent.ACTION_PICK)
-                    intent.type = "image/*"
-                    openGalleryForPhoto.launch(intent)
-                }
-                else -> {
-                    Snackbar.make(
-                        binding.root,
-                        R.string.contact_add_denied_camera_permissions,
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        }
-
-    /**
-     * Open gallery to select the photo for new contact
-     */
-    private val openGalleryForPhoto =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                contactPhoto = result.data?.dataString
-                binding.ivContactPhoto.loadCircledImage(contactPhoto)
-            }
-        }
 
     private fun setToolbar() {
         binding.toolbar.apply {
@@ -123,9 +84,5 @@ class ContactAddDialogFragment :
                 dismiss()
             }
         }
-    }
-
-    override fun getTheme(): Int {
-        return R.style.DialogTheme
     }
 }

@@ -2,14 +2,15 @@ package com.vadym.myprofile.app.di
 
 import com.vadym.myprofile.domain.repository.AuthRepository
 import com.vadym.myprofile.domain.repository.ContactRepository
-import com.vadym.myprofile.domain.repository.UserRepository
-import com.vadym.myprofile.domain.useCase.GetUserEmailUseCase
-import com.vadym.myprofile.domain.useCase.auth.IsLoggedUserUseCase
-import com.vadym.myprofile.domain.useCase.auth.RegisterUseCase
-import com.vadym.myprofile.domain.useCase.auth.RememberUserUseCase
+import com.vadym.myprofile.domain.repository.ProfileRepository
+import com.vadym.myprofile.domain.useCase.auth.*
 import com.vadym.myprofile.domain.useCase.contact.AddContactUseCase
+import com.vadym.myprofile.domain.useCase.contact.GetAllUsersUseCase
 import com.vadym.myprofile.domain.useCase.contact.GetUserContactUseCase
 import com.vadym.myprofile.domain.useCase.contact.RemoveContactUseCase
+import com.vadym.myprofile.domain.useCase.profile.EditProfileUseCase
+import com.vadym.myprofile.domain.useCase.profile.GetProfileIdUseCase
+import com.vadym.myprofile.domain.useCase.profile.GetUserProfileUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,6 +26,16 @@ class DomainModule {
     }
 
     @Provides
+    fun provideLoginUseCase(authRepository: AuthRepository): LoginUseCase {
+        return LoginUseCase(authRepository)
+    }
+
+    @Provides
+    fun provideLogoutUseCase(authRepository: AuthRepository): LogoutUseCase {
+        return LogoutUseCase(authRepository)
+    }
+
+    @Provides
     fun provideRememberUserUseCase(authRepository: AuthRepository): RememberUserUseCase {
         return RememberUserUseCase(authRepository)
     }
@@ -35,8 +46,8 @@ class DomainModule {
     }
 
     @Provides
-    fun provideGetUserEmailUseCase(userRepository: UserRepository): GetUserEmailUseCase {
-        return GetUserEmailUseCase(userRepository)
+    fun provideAddContactUseCase(contactRepository: ContactRepository): AddContactUseCase {
+        return AddContactUseCase(contactRepository)
     }
 
     @Provides
@@ -50,7 +61,22 @@ class DomainModule {
     }
 
     @Provides
-    fun provideAddContactUseCase(contactRepository: ContactRepository): AddContactUseCase {
-        return AddContactUseCase(contactRepository)
+    fun provideGetAllUsersUseCase(contactRepository: ContactRepository): GetAllUsersUseCase {
+        return GetAllUsersUseCase(contactRepository)
+    }
+
+    @Provides
+    fun provideEditProfileUseCase(userRepository: ProfileRepository): EditProfileUseCase {
+        return EditProfileUseCase(userRepository)
+    }
+
+    @Provides
+    fun provideGetUserProfileUseCase(userRepository: ProfileRepository): GetUserProfileUseCase {
+        return GetUserProfileUseCase(userRepository)
+    }
+
+    @Provides
+    fun provideProfileIdUseCase(userRepository: ProfileRepository): GetProfileIdUseCase {
+        return GetProfileIdUseCase(userRepository)
     }
 }

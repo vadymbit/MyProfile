@@ -1,17 +1,21 @@
 package com.vadym.myprofile.presentation.ui.profile
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.liveData
+import androidx.lifecycle.map
 import com.vadym.myprofile.app.base.BaseViewModel
-import com.vadym.myprofile.domain.useCase.GetUserEmailUseCase
+import com.vadym.myprofile.domain.useCase.profile.GetUserProfileUseCase
+import com.vadym.myprofile.presentation.model.ProfileModel
+import com.vadym.myprofile.presentation.model.mapper.ProfileMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    getUserEmailUseCase: GetUserEmailUseCase
+    private val getUserProfileUseCase: GetUserProfileUseCase
 ) : BaseViewModel() {
 
-    val email: LiveData<String> = getUserEmailUseCase().asLiveData()
-
+    val profile: LiveData<ProfileModel> = liveData {
+        emitSource(onFlowResult(getUserProfileUseCase()))
+    }.map { ProfileMapper.toPresentation(it) }
 }

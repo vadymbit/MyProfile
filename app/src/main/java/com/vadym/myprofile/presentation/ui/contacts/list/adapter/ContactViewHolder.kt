@@ -1,16 +1,17 @@
 package com.vadym.myprofile.presentation.ui.contacts.list.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.selection.ItemDetailsLookup
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.widget.RecyclerView
 import com.vadym.myprofile.R
+import com.vadym.myprofile.app.utils.ext.hide
 import com.vadym.myprofile.app.utils.ext.loadCircledImage
+import com.vadym.myprofile.app.utils.ext.show
 import com.vadym.myprofile.databinding.ItemContactBinding
-import com.vadym.myprofile.domain.model.ContactModel
+import com.vadym.myprofile.presentation.model.ContactModel
 
 class ContactViewHolder private constructor(
     private val binding: ItemContactBinding,
@@ -28,16 +29,16 @@ class ContactViewHolder private constructor(
         itemView.isActivated = selectionTracker.hasSelection()
         binding.apply {
             if (selectionTracker.hasSelection()) {
-                cbSelect.visibility = View.VISIBLE
-                btnDeleteContact.visibility = View.INVISIBLE
+                cbSelect.show()
+                btnDeleteContact.hide()
             } else {
-                cbSelect.visibility = View.INVISIBLE
-                btnDeleteContact.visibility = View.VISIBLE
+                cbSelect.hide()
+                btnDeleteContact.show()
             }
             cbSelect.isChecked = selectionTracker.isSelected(contact)
             tvContactCareer.text = contact.career
             tvContactName.text = contact.name
-            ivProfilePhoto.loadCircledImage(contact.urlPhoto)
+            ivUserPhoto.loadCircledImage(contact.urlPhoto)
             setSharedTransitionsName()
             bindListeners()
         }
@@ -62,7 +63,7 @@ class ContactViewHolder private constructor(
             root.setOnClickListener {
                 iContactClickListener.onContactClick(
                     currentContact,
-                    ivProfilePhoto,
+                    ivUserPhoto,
                     tvContactCareer,
                     tvContactName
                 )
@@ -83,7 +84,7 @@ class ContactViewHolder private constructor(
                     R.string.detail_transition_name,
                     currentContact.id.toString()
                 )
-            ivProfilePhoto.transitionName =
+            ivUserPhoto.transitionName =
                 itemView.context.getString(
                     R.string.detail_transition_photo,
                     currentContact.id.toString()

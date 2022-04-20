@@ -78,7 +78,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tiPass"
         app:layout_constraintVertical_chainStyle="spread_inside" />
 
-    <com.vadym.myprofile.presentation.ui.customButtonVIew.LoginViaButton
+    <com.vadym.myprofile.presentation.custombuttonvIew.LoginViaButton
         android:id="@+id/btnLoginViaSocial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -90,20 +90,14 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRegister"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        style="@style/BigOutlineButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
-        android:paddingVertical="@dimen/default_padding"
         android:text="@string/button_register"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size"
         app:layout_constraintBottom_toTopOf="@+id/tvTerms"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbRememberMe"
-        app:strokeColor="?attr/colorPrimary"
-        app:strokeWidth="@dimen/default_btn_stroke" />
+        app:layout_constraintTop_toBottomOf="@+id/cbRememberMe" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvTerms"

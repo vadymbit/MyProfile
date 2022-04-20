@@ -1,46 +1,43 @@
 package com.vadym.myprofile.presentation.ui.contacts.dialog
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.vadym.myprofile.app.base.BaseViewModel
-import com.vadym.myprofile.domain.model.ContactModel
 import com.vadym.myprofile.domain.useCase.contact.AddContactUseCase
+import com.vadym.myprofile.domain.useCase.contact.GetAllUsersUseCase
+import com.vadym.myprofile.presentation.model.ContactModel
+import com.vadym.myprofile.presentation.model.mapper.ContactMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class ContactAddViewModel @Inject constructor(private val addContactUseCase: AddContactUseCase) :
+class ContactAddViewModel @Inject constructor(
+    private val addContactUseCase: AddContactUseCase,
+    private val getAllUsersUseCase: GetAllUsersUseCase,
+) :
     BaseViewModel() {
 
-    fun isInputValid(
-        addressErrorEnabled: Boolean,
-        userNameErrorEnabled: Boolean,
-        emailErrorEnabled: Boolean,
-        phoneErrorEnabled: Boolean
-    ): Boolean {
-        return !addressErrorEnabled && !userNameErrorEnabled && !emailErrorEnabled && !phoneErrorEnabled
+    init {
+        loadUsers()
+    }
+    private val _usersLiveData = MutableLiveData<List<ContactModel>>()
+    val usersLiveData: LiveData<List<ContactModel>>
+        get() = _usersLiveData
+
+    fun addContact(contact: ContactModel) {
+        launch {
+            onResult(addContactUseCase(ContactMapper.toUserModel(contact)))
+        }
     }
 
-    fun saveNewContact(
-        id: Long,
-        username: String,
-        career: String?,
-        phone: Long,
-        email: String,
-        address: String?,
-        birthDate: String?,
-        contactPhoto: String?
-    ) {
-        val contact = ContactModel(
-            id,
-            username,
-            career,
-            phone,
-            email,
-            address,
-            birthDate,
-            contactPhoto
-        )
+    private fun loadUsers() {
         launch {
-            addContactUseCase(contact)
+            isLoading.value = true
+            val userList = onResult(getAllUsersUseCase())?.map { ContactMapper.toContactModel(it) }
+            userList?.let {
+                _usersLiveData.value = it
+            }
+            isLoading.value = false
         }
     }
 }

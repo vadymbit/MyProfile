@@ -3,12 +3,19 @@ package com.vadym.myprofile.presentation.ui.profile
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.vadym.myprofile.R
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.vadym.myprofile.app.base.BaseFragment
-import com.vadym.myprofile.databinding.FragmentProfileBinding
-import com.vadym.myprofile.presentation.ui.main.MainFragment
 import com.vadym.myprofile.app.utils.ext.loadCircledImage
+import com.vadym.myprofile.app.utils.ext.safeNavigation
+import com.vadym.myprofile.databinding.FragmentProfileBinding
+import com.vadym.myprofile.presentation.model.ProfileModel
+import com.vadym.myprofile.presentation.ui.main.MainFragment
+import com.vadym.myprofile.presentation.ui.main.MainFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
@@ -18,26 +25,47 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
-        binding.ivProfilePhoto.loadCircledImage(R.drawable.ic_person)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requireActivity().invalidateMenu()
+    }
+
+    override fun setObservers() {
+        viewModel.profile.observe(viewLifecycleOwner) {
+            setViews(it)
+        }
+        lifecycleScope.launch {
+            viewModel.eventsFlow.flowWithLifecycle(
+                viewLifecycleOwner.lifecycle,
+                Lifecycle.State.RESUMED
+            ).collect {
+                showToast(it)
+            }
+        }
+    }
+
+    private fun setViews(profile: ProfileModel) {
+        binding.apply {
+            ivUserPhoto.loadCircledImage(profile.urlPhoto)
+            tvProfileName.text = profile.name
+            tvProfileCareer.text = profile.career
+        }
     }
 
     private fun setListeners() {
-        binding.btnViewContacts.setOnClickListener {
-            navigateToContactFragment()
+        binding.apply {
+            btnViewContacts.setOnClickListener {
+                navigateToContactFragment()
+            }
+            btnEditProfile.setOnClickListener {
+                findNavController().safeNavigation(MainFragmentDirections.actionMainFragmentToEditFragment())
+            }
         }
     }
 
     private fun navigateToContactFragment() {
         (parentFragment as MainFragment).swipeToContactsList()
-    }
-
-    override fun setObservers() {
-        viewModel.email.observe(this) { email ->
-            val name: String = email.substringBeforeLast("@")
-            binding.tvProfileName.text = getString(
-                R.string.profile_name,
-                name.substringBefore(".").replaceFirstChar { it.uppercase() },
-                name.substringAfter(".").replaceFirstChar { it.uppercase() })
-        }
     }
 }

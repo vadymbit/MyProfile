@@ -1,164 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/ToolBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Add contacts" />
 
-        <View
-            android:id="@+id/photoAreaBackground"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="?attr/background"
-            app:layout_constraintBottom_toTopOf="@+id/guidelineEndPhotoArea"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:layout_constraintVertical_chainStyle="spread" />
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/lpiLoading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivContactPhoto"
-            android:layout_width="@dimen/add_contact_photo_size"
-            android:layout_height="@dimen/add_contact_photo_size"
-            android:src="@drawable/ic_person"
-            app:layout_constraintBottom_toTopOf="@+id/guidelineEndPhotoArea"
-            app:layout_constraintEnd_toEndOf="@+id/photoAreaBackground"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/photoAreaBackground" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btnAddPhoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/ic_add_photo"
-            app:layout_constraintBottom_toBottomOf="@+id/ivContactPhoto"
-            app:layout_constraintEnd_toEndOf="@+id/photoAreaBackground"
-            app:layout_constraintStart_toEndOf="@+id/ivContactPhoto"
-            app:layout_constraintTop_toTopOf="@+id/ivContactPhoto" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineEndPhotoArea"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintGuide_percent="0.25"
-            app:layout_constraintTop_toBottomOf="@+id/photoAreaBackground" />
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:theme="@style/ToolBarTheme"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="Add contact" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tiUsername"
-            style="@style/TextInputAddContacts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/contact_add_hint_username"
-            app:layout_constraintTop_toBottomOf="@+id/guidelineEndPhotoArea">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etUsername"
-                style="@style/Bordered.ContactAddDialogEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tiCareer"
-            style="@style/TextInputAddContacts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/contact_add_hint_career"
-            app:layout_constraintTop_toBottomOf="@+id/tiUsername">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etCareer"
-                style="@style/Bordered.ContactAddDialogEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tiEmail"
-            style="@style/TextInputAddContacts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/contact_add_hint_email"
-            app:layout_constraintTop_toBottomOf="@+id/tiCareer">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etEmail"
-                style="@style/Bordered.ContactAddDialogEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/contact_add_email_hint" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tiPhone"
-            style="@style/TextInputAddContacts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/contact_add_hint_phone"
-            app:layout_constraintTop_toBottomOf="@+id/tiEmail">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etPhone"
-                style="@style/Bordered.ContactAddDialogEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="phone"
-                android:hint="@string/add_contact_hint_phone_number" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tiAddress"
-            style="@style/TextInputAddContacts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/contact_add_hint_address"
-            app:layout_constraintTop_toBottomOf="@+id/tiPhone">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etAddress"
-                style="@style/Bordered.ContactAddDialogEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tiBirthDate"
-            style="@style/TextInputAddContacts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/contact_add_hint_date_of_birth"
-            app:layout_constraintBottom_toTopOf="@+id/btnSave"
-            app:layout_constraintTop_toBottomOf="@+id/tiAddress">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etBirthDate"
-                style="@style/Bordered.ContactAddDialogEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSave"
-            style="@style/BigButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="?attr/colorPrimary"
-            android:text="@string/add_contact_save"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvUserList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_user"/>
+</LinearLayout>

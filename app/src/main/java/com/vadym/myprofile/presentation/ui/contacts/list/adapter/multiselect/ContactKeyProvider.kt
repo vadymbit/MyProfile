@@ -1,7 +1,7 @@
 package com.vadym.myprofile.presentation.ui.contacts.list.adapter.multiselect
 
 import androidx.recyclerview.selection.ItemKeyProvider
-import com.vadym.myprofile.domain.model.ContactModel
+import com.vadym.myprofile.presentation.model.ContactModel
 import com.vadym.myprofile.presentation.ui.contacts.list.adapter.ContactAdapter
 
 class ContactKeyProvider(private val contactAdapter: ContactAdapter) :

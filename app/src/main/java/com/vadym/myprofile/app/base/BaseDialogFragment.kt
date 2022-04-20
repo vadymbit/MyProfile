@@ -21,6 +21,7 @@ abstract class BaseDialogFragment<VBinding : ViewBinding>(
         savedInstanceState: Bundle?
     ): View {
         _binding = inflaterMethod.invoke(inflater, container, false)
+        setObservers()
         return binding.root
     }
 
@@ -28,4 +29,6 @@ abstract class BaseDialogFragment<VBinding : ViewBinding>(
         super.onDestroyView()
         _binding = null
     }
+
+    protected open fun setObservers() {}
 }

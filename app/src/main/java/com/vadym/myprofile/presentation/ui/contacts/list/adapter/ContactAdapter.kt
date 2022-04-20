@@ -5,7 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.widget.ListAdapter
-import com.vadym.myprofile.domain.model.ContactModel
+import com.vadym.myprofile.presentation.model.ContactModel
 
 class ContactAdapter(
     private val contactClickListener: IContactClickListener

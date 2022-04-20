@@ -1,7 +1,7 @@
 package com.vadym.myprofile.presentation.ui.contacts.list.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.vadym.myprofile.domain.model.ContactModel
+import com.vadym.myprofile.presentation.model.ContactModel
 
 class ContactDiffCallback : DiffUtil.ItemCallback<ContactModel>() {
     override fun areItemsTheSame(oldItem: ContactModel, newItem: ContactModel): Boolean {
