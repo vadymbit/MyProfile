@@ -49,7 +49,7 @@ class DataModule {
     @Singleton
     fun provideAuthRepository(
         storage: AuthLocalStorage,
-        userStorage: UsersLocalStorage,
+        userStorage: ContactLocalStorage,
         apiService: ApiService
     ): AuthRepository {
         return AuthRepositoryImpl(storage, userStorage, apiService)
@@ -58,7 +58,7 @@ class DataModule {
     @Provides
     @Singleton
     fun provideContactRepository(
-        storage: UsersLocalStorage,
+        storage: ContactLocalStorage,
         apiService: ApiService,
         authStorage: AuthLocalStorage
     ): ContactRepository {
@@ -77,14 +77,14 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideUserLocalStorage(usersDao: UsersDao): UsersLocalStorage {
-        return UsersLocalStorageImpl(usersDao)
+    fun provideUserLocalStorage(usersDao: UsersDao): ContactLocalStorage {
+        return ContactLocalStorageImpl(usersDao)
     }
 
     @Provides
     @Singleton
     fun provideAuthLocalStorage(@ApplicationContext context: Context): AuthLocalStorage {
-        return AuthLocalStorage(context)
+        return AuthLocalStorageImpl(context)
     }
 
     @Provides

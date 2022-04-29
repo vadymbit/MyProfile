@@ -6,11 +6,15 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "users")
 data class UserDB(
     @PrimaryKey val uid: Int,
-    val name: String = "",
-    val email: String = "",
-    val phone: String = "",
-    val career: String = "",
-    val address: String = "",
-    val birthday: String = "",
-    val image: String = ""
+    val name: String,
+    val email: String,
+    val phone: String,
+    val career: String,
+    val address: String,
+    val birthday: String,
+    val image: String,
+    val facebook: String,
+    val instagram: String,
+    val twitter: String,
+    val linkedin: String
 )

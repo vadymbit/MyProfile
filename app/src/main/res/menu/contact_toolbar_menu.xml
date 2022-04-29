@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_search"
+        android:icon="@drawable/ic_toolbar_search"
         android:title="@string/toolbar_contact_search"
-        app:showAsAction="always"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
-        android:icon="@drawable/ic_toolbar_search"/>
+        app:showAsAction="ifRoom"
+        android:orderInCategory="1"/>
 </menu>

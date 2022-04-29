@@ -60,6 +60,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btnSocialFacebook"
         style="@style/WrapContent.Bordered"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_facebook_button"
         app:layout_constraintBottom_toBottomOf="@+id/btnSocialLinkedin"
         app:layout_constraintEnd_toStartOf="@id/btnSocialLinkedin"
@@ -69,6 +70,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btnSocialLinkedin"
         style="@style/WrapContent.Bordered"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_linkedin_button"
         app:layout_constraintBottom_toTopOf="@+id/tvEmptyProfile"
         app:layout_constraintEnd_toStartOf="@+id/btnSocialVkontakte"
@@ -78,6 +80,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btnSocialVkontakte"
         style="@style/WrapContent.Bordered"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_vkontakte_button"
         app:layout_constraintBottom_toBottomOf="@+id/btnSocialLinkedin"
         app:layout_constraintEnd_toEndOf="parent"

@@ -27,11 +27,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         setListeners()
     }
 
-    override fun onResume() {
-        super.onResume()
-        requireActivity().invalidateMenu()
-    }
-
     override fun setObservers() {
         viewModel.profile.observe(viewLifecycleOwner) {
             setViews(it)

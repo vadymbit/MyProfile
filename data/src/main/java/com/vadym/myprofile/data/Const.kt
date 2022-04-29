@@ -11,6 +11,10 @@ object Const {
     const val PROFILE_ADDRESS = "address"
     const val PROFILE_BIRTHDAY = "birthday"
     const val PROFILE_PHOTO = "image"
+    const val INSTAGRAM = "instagram"
+    const val FACEBOOK = "facebook"
+    const val TWITTER = "twitter"
+    const val LINKEDIN = "linkedin"
 
     /**
      * DataStore and preferences fields

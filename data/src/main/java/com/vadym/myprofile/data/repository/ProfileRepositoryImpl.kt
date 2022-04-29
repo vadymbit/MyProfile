@@ -1,14 +1,18 @@
 package com.vadym.myprofile.data.repository
 
+import com.vadym.myprofile.data.Const.FACEBOOK
+import com.vadym.myprofile.data.Const.INSTAGRAM
+import com.vadym.myprofile.data.Const.LINKEDIN
 import com.vadym.myprofile.data.Const.PROFILE_ADDRESS
 import com.vadym.myprofile.data.Const.PROFILE_BIRTHDAY
 import com.vadym.myprofile.data.Const.PROFILE_CAREER
 import com.vadym.myprofile.data.Const.PROFILE_NAME
 import com.vadym.myprofile.data.Const.PROFILE_PHONE
 import com.vadym.myprofile.data.Const.PROFILE_PHOTO
+import com.vadym.myprofile.data.Const.TWITTER
 import com.vadym.myprofile.data.model.ApiResult
 import com.vadym.myprofile.data.model.UserDTO
-import com.vadym.myprofile.data.model.mapper.UserDataMapper
+import com.vadym.myprofile.data.model.mapper.UserDTOMapper
 import com.vadym.myprofile.data.model.mapper.UserDomainMapper
 import com.vadym.myprofile.data.source.local.AuthLocalStorage
 import com.vadym.myprofile.data.source.local.ProfileLocalStorage
@@ -31,7 +35,7 @@ class ProfileRepositoryImpl @Inject constructor(
     private val apiService: ApiService
 ) : ProfileRepository, BaseRepository() {
 
-    override suspend fun getUserProfile(): Result<Flow<UserModel>, Exception> {
+    override suspend fun getUserProfile(): Result<Flow<UserModel>, Throwable> {
         val apiResult = getRequestResult { apiService.getUserProfile() }
         return getFlowResult(
             apiResult = apiResult,
@@ -47,12 +51,12 @@ class ProfileRepositoryImpl @Inject constructor(
         return authStorage.getProfileId()
     }
 
-    override suspend fun editUserProfile(userModel: UserModel): Result<Boolean, Exception> {
+    override suspend fun editUserProfile(userModel: UserModel): Result<Boolean, Throwable> {
         val multipartBody = buildMultipartUserBody(userModel)
         val response = getRequestResult { apiService.editUser(multipartBody) }
         return getResult(response) {
             storage.insertUserProfile(
-                UserDataMapper.toUserDB((response as ApiResult.Success).data.user)
+                UserDTOMapper.toUserDB((response as ApiResult.Success).data.user)
             )
         }
     }
@@ -65,6 +69,10 @@ class ProfileRepositoryImpl @Inject constructor(
         addFieldIfNotBlank(PROFILE_CAREER, userModel.career, multipartUser)
         addFieldIfNotBlank(PROFILE_ADDRESS, userModel.address, multipartUser)
         addFieldIfNotBlank(PROFILE_BIRTHDAY, userModel.birthDate, multipartUser)
+        addFieldIfNotBlank(FACEBOOK, userModel.facebook, multipartUser)
+        addFieldIfNotBlank(INSTAGRAM, userModel.instagram, multipartUser)
+        addFieldIfNotBlank(TWITTER, userModel.twitter, multipartUser)
+        addFieldIfNotBlank(LINKEDIN, userModel.linkedin, multipartUser)
         if (image.exists()) {
             multipartUser.addFormDataPart(
                 PROFILE_PHOTO,
@@ -86,6 +94,6 @@ class ProfileRepositoryImpl @Inject constructor(
     }
 
     private suspend fun saveProfileToCache(profile: UserDTO) {
-        storage.insertUserProfile(UserDataMapper.toUserDB(profile))
+        storage.insertUserProfile(UserDTOMapper.toUserDB(profile))
     }
 }

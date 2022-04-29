@@ -23,23 +23,25 @@ class AuthSharedViewModel @Inject constructor(
     private val isRemembered: LiveData<Boolean> = isLoggedUserUseCase().asLiveData()
     private val isRegistered: MutableLiveData<Boolean> = MutableLiveData()
     private val isLogged: MutableLiveData<Boolean> = MutableLiveData()
-    val navigateToProfile = MediatorLiveData<Boolean>()
+    private val _navigateToProfile = MediatorLiveData<Boolean>()
+    val navigateToProfile: LiveData<Boolean>
+        get() = _navigateToProfile
 
     init {
-        navigateToProfile.value = false
-        navigateToProfile.addSource(isRemembered) { value ->
+        _navigateToProfile.value = false
+        _navigateToProfile.addSource(isRemembered) { value ->
             if (navigateToProfile.value == false && value) {
-                navigateToProfile.value = value
+                _navigateToProfile.value = value
             }
         }
-        navigateToProfile.addSource(isRegistered) { value ->
+        _navigateToProfile.addSource(isRegistered) { value ->
             if (navigateToProfile.value == false && value) {
-                navigateToProfile.value = value
+                _navigateToProfile.value = value
             }
         }
-        navigateToProfile.addSource(isLogged) { value ->
+        _navigateToProfile.addSource(isLogged) { value ->
             if (navigateToProfile.value == false && value) {
-                navigateToProfile.value = value
+                _navigateToProfile.value = value
             }
         }
     }

@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/transparent"
             android:clickable="false"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_add_photo"
             app:layout_constraintBottom_toBottomOf="@+id/ivUserPhoto"
             app:layout_constraintEnd_toEndOf="@+id/photoAreaBackground"
@@ -60,7 +61,7 @@
             style="@style/TextInputEditProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/contact_add_hint_username"
+            android:hint="@string/edit_hint_username"
             app:layout_constraintTop_toBottomOf="@+id/glEndPhotoArea">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -75,7 +76,7 @@
             style="@style/TextInputEditProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/contact_add_hint_career"
+            android:hint="@string/edit_hint_career"
             app:layout_constraintTop_toBottomOf="@+id/tiUsername">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -90,7 +91,7 @@
             style="@style/TextInputEditProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/contact_add_hint_phone"
+            android:hint="@string/edit_hint_phone"
             app:layout_constraintTop_toBottomOf="@+id/tiCareer">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -107,7 +108,7 @@
             style="@style/TextInputEditProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/contact_add_hint_address"
+            android:hint="@string/edit_hint_address"
             app:layout_constraintTop_toBottomOf="@+id/tiPhone">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -122,12 +123,76 @@
             style="@style/TextInputEditProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/contact_add_hint_date_of_birth"
-            app:layout_constraintBottom_toTopOf="@+id/btnSave"
+            android:hint="@string/edit_hint_date_of_birth"
+            app:layout_constraintBottom_toTopOf="@+id/tiInstagram"
             app:layout_constraintTop_toBottomOf="@+id/tiAddress">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etBirthDate"
+                style="@style/Bordered.TransparentBackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiInstagram"
+            style="@style/TextInputEditProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_hint_instagram"
+            app:layout_constraintBottom_toTopOf="@+id/tiLinkedin"
+            app:layout_constraintTop_toBottomOf="@+id/tiBirthDate">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etInstagram"
+                style="@style/Bordered.TransparentBackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiLinkedin"
+            style="@style/TextInputEditProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_hint_linkedin"
+            app:layout_constraintBottom_toTopOf="@+id/tiTwitter"
+            app:layout_constraintTop_toBottomOf="@+id/tiInstagram">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etLinkedin"
+                style="@style/Bordered.TransparentBackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiTwitter"
+            style="@style/TextInputEditProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_hint_twitter"
+            app:layout_constraintBottom_toTopOf="@+id/tiFacebook"
+            app:layout_constraintTop_toBottomOf="@+id/tiLinkedin">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etTwitter"
+                style="@style/Bordered.TransparentBackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiFacebook"
+            style="@style/TextInputEditProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_hint_facebook"
+            app:layout_constraintBottom_toTopOf="@+id/btnSave"
+            app:layout_constraintTop_toBottomOf="@+id/tiTwitter">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etFacebook"
                 style="@style/Bordered.TransparentBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

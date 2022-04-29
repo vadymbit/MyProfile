@@ -2,12 +2,12 @@ package com.vadym.myprofile.presentation.ui.contacts.list
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.ActionMode
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -33,7 +33,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsBinding::inflate),
-    ContactAdapter.IContactClickListener {
+    ContactAdapter.IContactClickListener, ActionMode.Callback, MenuProvider {
 
     private val contactAdapter: ContactAdapter by lazy { ContactAdapter(contactClickListener = this) }
     private val viewModel: ContactViewModel by viewModels()
@@ -42,21 +42,45 @@ class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        menuInit()
         initContactRecyclerView()
         initSelectionTracker()
         selectionTracker.onRestoreInstanceState(savedInstanceState)
         setListeners()
     }
 
-    override fun onResume() {
-        super.onResume()
-        requireActivity().invalidateMenu()
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        if (::selectionTracker.isInitialized) {
+            selectionTracker.onSaveInstanceState(outState)
+        }
+    }
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.contact_toolbar_menu, menu)
+        val searchButton = menu.findItem(R.id.action_search).actionView as SearchView
+        searchButton.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    viewModel.searchContact(it)
+                }
+                return true
+            }
+        })
+    }
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return menuItem.itemId == R.id.action_search
     }
 
     override fun setObservers() {
         viewModel.apply {
             contactsLiveData.observe(viewLifecycleOwner) {
-                contactAdapter.submitList(it.filter { it.name.contains("s") })
+                contactAdapter.submitList(it)
             }
             isLoading.observe(viewLifecycleOwner) {
                 if (it) {
@@ -94,34 +118,31 @@ class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsB
         )
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        if (::selectionTracker.isInitialized) {
-            selectionTracker.onSaveInstanceState(outState)
-        }
+    @SuppressLint("NotifyDataSetChanged")
+    override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+        binding.fabDeleteContacts.show()
+        contactAdapter.notifyDataSetChanged()
+        return true
     }
 
+    override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean = true
+
+    override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean = true
+
     @SuppressLint("NotifyDataSetChanged")
+    override fun onDestroyActionMode(mode: ActionMode?) {
+        selectionTracker.clearSelection()
+        contactAdapter.notifyDataSetChanged()
+    }
+
     override fun onContactLongClick(): Boolean {
-        actionMode = requireActivity().startActionMode(
-            object : ActionMode.Callback {
-                override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-                    binding.fabDeleteContacts.show()
-                    contactAdapter.notifyDataSetChanged()
-                    return true
-                }
-
-                override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean = true
-
-                override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean = true
-
-                override fun onDestroyActionMode(mode: ActionMode?) {
-                    selectionTracker.clearSelection()
-                    contactAdapter.notifyDataSetChanged()
-                }
-            }
-        )
+        actionMode = requireActivity().startActionMode(this)
         return true
+    }
+
+    private fun menuInit() {
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     private fun setListeners() {

@@ -7,7 +7,7 @@ import javax.inject.Inject
 class RemoveContactUseCase @Inject constructor(
     private val contactRepository: ContactRepository
 ) {
-    suspend operator fun invoke(contactId: Int): Result<Boolean, Exception> {
+    suspend operator fun invoke(contactId: Int): Result<Boolean, Throwable> {
         return contactRepository.removeContact(contactId)
     }
 }

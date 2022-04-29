@@ -38,6 +38,8 @@ class ContactViewHolder private constructor(
             cbSelect.isChecked = selectionTracker.isSelected(contact)
             tvContactCareer.text = contact.career
             tvContactName.text = contact.name
+            tvContactName.setSingleLine()
+            tvContactName.isActivated = true
             ivUserPhoto.loadCircledImage(contact.urlPhoto)
             setSharedTransitionsName()
             bindListeners()

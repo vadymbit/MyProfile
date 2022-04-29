@@ -4,10 +4,7 @@ import com.vadym.myprofile.domain.repository.AuthRepository
 import com.vadym.myprofile.domain.repository.ContactRepository
 import com.vadym.myprofile.domain.repository.ProfileRepository
 import com.vadym.myprofile.domain.useCase.auth.*
-import com.vadym.myprofile.domain.useCase.contact.AddContactUseCase
-import com.vadym.myprofile.domain.useCase.contact.GetAllUsersUseCase
-import com.vadym.myprofile.domain.useCase.contact.GetUserContactUseCase
-import com.vadym.myprofile.domain.useCase.contact.RemoveContactUseCase
+import com.vadym.myprofile.domain.useCase.contact.*
 import com.vadym.myprofile.domain.useCase.profile.EditProfileUseCase
 import com.vadym.myprofile.domain.useCase.profile.GetProfileIdUseCase
 import com.vadym.myprofile.domain.useCase.profile.GetUserProfileUseCase
@@ -53,6 +50,11 @@ class DomainModule {
     @Provides
     fun provideGetUserContactUseCase(contactRepository: ContactRepository): GetUserContactUseCase {
         return GetUserContactUseCase(contactRepository)
+    }
+
+    @Provides
+    fun provideSearchByNameUseCase(contactRepository: ContactRepository): SearchByNameUseCase {
+        return SearchByNameUseCase(contactRepository)
     }
 
     @Provides

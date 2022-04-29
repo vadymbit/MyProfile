@@ -16,5 +16,9 @@ data class UserDTO(
     val updatedAt: String,
     @Json(name = "created_at")
     val createdAt: String,
-    val id: Int
+    val id: Int,
+    val facebook: String?,
+    val instagram: String?,
+    val twitter: String?,
+    val linkedin: String?
 )

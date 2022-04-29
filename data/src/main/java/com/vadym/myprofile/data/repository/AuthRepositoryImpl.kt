@@ -3,7 +3,7 @@ package com.vadym.myprofile.data.repository
 import com.vadym.myprofile.data.model.ApiResult
 import com.vadym.myprofile.data.model.mapper.AuthMapper
 import com.vadym.myprofile.data.source.local.AuthLocalStorage
-import com.vadym.myprofile.data.source.local.UsersLocalStorage
+import com.vadym.myprofile.data.source.local.ContactLocalStorage
 import com.vadym.myprofile.data.source.remote.ApiService
 import com.vadym.myprofile.domain.model.AuthModel
 import com.vadym.myprofile.domain.model.Result
@@ -15,11 +15,11 @@ import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
     private val authLocalSource: AuthLocalStorage,
-    private val usersLocalStorage: UsersLocalStorage,
+    private val usersLocalStorage: ContactLocalStorage,
     private val apiService: ApiService
 ) : AuthRepository, BaseRepository() {
 
-    override suspend fun register(authModel: AuthModel): Result<Boolean, Exception> {
+    override suspend fun register(authModel: AuthModel): Result<Boolean, Throwable> {
         val apiResult = getRequestResult { apiService.register(AuthMapper.toAuthRequest(authModel)) }
         return getResult(apiResult) {
             authLocalSource.saveProfileData(
@@ -30,7 +30,7 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun login(authModel: AuthModel): Result<Boolean, Exception> {
+    override suspend fun login(authModel: AuthModel): Result<Boolean, Throwable> {
         val apiResult = getRequestResult { apiService.login(AuthMapper.toAuthRequest(authModel)) }
         return getResult(apiResult) {
             authLocalSource.saveProfileData(

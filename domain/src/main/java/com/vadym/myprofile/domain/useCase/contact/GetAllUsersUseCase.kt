@@ -6,7 +6,7 @@ import com.vadym.myprofile.domain.repository.ContactRepository
 import javax.inject.Inject
 
 class GetAllUsersUseCase @Inject constructor(private val contactRepository: ContactRepository) {
-    suspend operator fun invoke(): Result<List<UserModel>, Exception> {
+    suspend operator fun invoke(): Result<List<UserModel>, Throwable> {
         return contactRepository.getAllUsers()
     }
 }

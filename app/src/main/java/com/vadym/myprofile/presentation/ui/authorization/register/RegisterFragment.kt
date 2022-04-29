@@ -11,13 +11,13 @@ import com.vadym.myprofile.app.base.BaseFragment
 import com.vadym.myprofile.app.utils.ext.addValidateEmailListener
 import com.vadym.myprofile.app.utils.ext.addValidatePasswordListener
 import com.vadym.myprofile.app.utils.ext.safeNavigation
-import com.vadym.myprofile.databinding.FragmentAuthBinding
+import com.vadym.myprofile.databinding.FragmentRegisterBinding
 import com.vadym.myprofile.presentation.ui.authorization.AuthSharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class AuthFragment : BaseFragment<FragmentAuthBinding>(FragmentAuthBinding::inflate) {
+class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
 
     private val authSharedViewModel by activityViewModels<AuthSharedViewModel>()
 
@@ -65,7 +65,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>(FragmentAuthBinding::infl
     }
 
     private fun goToEditProfile() {
-        findNavController().safeNavigation(AuthFragmentDirections.actionAuthFragmentToEditFragment())
+        findNavController().safeNavigation(RegisterFragmentDirections.actionAuthFragmentToEditFragment())
     }
 
     private fun goToLogin() {
@@ -73,7 +73,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>(FragmentAuthBinding::infl
             if (previousBackStackEntry != null) {
                 navigateUp()
             } else {
-                safeNavigation(AuthFragmentDirections.actionAuthFragmentToLoginFragment())
+                safeNavigation(RegisterFragmentDirections.actionAuthFragmentToLoginFragment())
             }
         }
     }

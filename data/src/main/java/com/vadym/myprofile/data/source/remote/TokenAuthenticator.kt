@@ -1,6 +1,5 @@
 package com.vadym.myprofile.data.source.remote
 
-import android.util.Log
 import com.vadym.myprofile.data.source.local.AuthLocalStorage
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
@@ -18,9 +17,8 @@ class TokenAuthenticator(
             val tokenResponse = refreshToken()
             when {
                  !tokenResponse.isNullOrEmpty() -> {
-                     Log.d("Debuging", "Refresh token $tokenResponse")
                      response.request().newBuilder()
-                         .header("Authorization", tokenResponse)
+                         .header("Authorization", "Bearer $tokenResponse")
                          .build()
                  } else -> null
             }
@@ -35,10 +33,10 @@ class TokenAuthenticator(
                 val data = response.body()?.data
                 if (data != null) {
                     storage.saveProfileData(data.accessToken, data.refreshToken)
-                    return data.refreshToken
+                    return data.accessToken
                 }
             } else {
-                //storage.logOut()
+                storage.clearProfileData()
             }
         }
         return null

@@ -5,7 +5,7 @@ import com.vadym.myprofile.data.source.local.db.UsersDao
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class UsersLocalStorageImpl @Inject constructor(private val db: UsersDao) : UsersLocalStorage {
+class ContactLocalStorageImpl @Inject constructor(private val db: UsersDao) : ContactLocalStorage {
     override suspend fun addContact(contact: UserDB): Boolean {
         db.addContact(contact)
         return true
@@ -21,6 +21,10 @@ class UsersLocalStorageImpl @Inject constructor(private val db: UsersDao) : User
 
     override fun getUserContacts(profileId: Int): Flow<List<UserDB>> {
         return db.getAllUserContact(profileId)
+    }
+
+    override fun searchContactsByName(contactName: String): Flow<List<UserDB>> {
+        return db.searchContactsByName(contactName)
     }
 
     override suspend fun addContacts(usersList: List<UserDB>) {

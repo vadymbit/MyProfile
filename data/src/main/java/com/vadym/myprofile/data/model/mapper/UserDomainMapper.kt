@@ -4,28 +4,38 @@ import com.vadym.myprofile.data.model.UserDB
 import com.vadym.myprofile.domain.model.UserModel
 
 object UserDomainMapper {
-    fun toUserDB(e: UserModel) =
+    fun toUserDB(userModel: UserModel) = userModel.run {
         UserDB(
-            e.id,
-            e.name,
-            e.email,
-            e.phoneNumber,
-            e.career,
-            e.address,
-            e.birthDate,
-            e.urlPhoto
+            uid = id,
+            name = name,
+            email = email,
+            phone = phoneNumber,
+            career = career,
+            address = address,
+            birthday = birthDate,
+            image = urlPhoto,
+            facebook = facebook,
+            instagram = instagram,
+            twitter = twitter,
+            linkedin = linkedin
         )
+    }
 
-    fun toUserModel(t: UserDB): UserModel {
-        return UserModel(
-            t.uid,
-            t.name,
-            t.email,
-            t.phone,
-            t.career,
-            t.address,
-            t.birthday,
-            t.image
+
+    fun toUserModel(userDB: UserDB) = userDB.run {
+        UserModel(
+            id = uid,
+            name = name,
+            email = email,
+            phoneNumber = phone,
+            career = career,
+            address = address,
+            birthDate = birthday,
+            urlPhoto = image,
+            facebook = facebook,
+            instagram = instagram,
+            twitter = twitter,
+            linkedin = linkedin
         )
     }
 }

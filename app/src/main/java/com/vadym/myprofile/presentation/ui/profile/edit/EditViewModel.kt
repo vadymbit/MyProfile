@@ -1,6 +1,7 @@
 package com.vadym.myprofile.presentation.ui.profile.edit
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
 import com.vadym.myprofile.app.base.BaseViewModel
@@ -18,15 +19,22 @@ class EditViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     val profile: LiveData<ProfileModel> = liveData {
-        emitSource(onFlowResult(getUserProfileUseCase()))
+        emitSource(source = onFlowResult(result = getUserProfileUseCase()))
     }.map { ProfileMapper.toPresentation(it) }
 
+    private val _profilePhoto = MutableLiveData<String>()
+    val profilePhoto: LiveData<String>
+        get() = _profilePhoto
+
+    fun setProfilePhoto(photoPath: String) {
+        _profilePhoto.value = photoPath
+    }
+
     fun isInputValid(
-        addressErrorEnabled: Boolean,
         userNameErrorEnabled: Boolean,
         phoneErrorEnabled: Boolean
     ): Boolean {
-        return !addressErrorEnabled && !userNameErrorEnabled && !phoneErrorEnabled
+        return !userNameErrorEnabled && !phoneErrorEnabled
     }
 
     fun saveProfile(
@@ -35,18 +43,25 @@ class EditViewModel @Inject constructor(
         phone: String,
         address: String?,
         birthDate: String?,
-        profilePhoto: String?
+        facebook: String?,
+        instagram: String?,
+        twitter: String?,
+        linkedin: String?
     ) {
         launch {
             editProfileUseCase.invoke(
                 ProfileMapper.toDomain(
                     ProfileModel(
-                        username,
-                        phone,
-                        career.orEmpty(),
-                        address.orEmpty(),
-                        birthDate.orEmpty(),
-                        profilePhoto.orEmpty()
+                        name = username,
+                        phoneNumber = phone,
+                        career = career.orEmpty(),
+                        address = address.orEmpty(),
+                        birthDate = birthDate.orEmpty(),
+                        urlPhoto = profilePhoto.value.orEmpty(),
+                        facebook = facebook.orEmpty(),
+                        instagram = instagram.orEmpty(),
+                        twitter = twitter.orEmpty(),
+                        linkedin = linkedin.orEmpty()
                     )
                 )
             )

@@ -87,7 +87,7 @@
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:textColorSecondary">@color/white</item>
         <item name="titleCentered">true</item>
-        <item name="android:textSize">@dimen/label_text_size</item>
+        <item name="android:textSize">@dimen/small_text_size</item>
     </style>
 
     <style name="TextAppearance.App.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">

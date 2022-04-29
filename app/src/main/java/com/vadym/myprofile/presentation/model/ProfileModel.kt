@@ -6,5 +6,9 @@ data class ProfileModel(
     val career: String,
     val address: String,
     val birthDate: String,
-    val urlPhoto: String
+    val urlPhoto: String,
+    val facebook: String,
+    val instagram: String,
+    val twitter: String,
+    val linkedin: String
 )

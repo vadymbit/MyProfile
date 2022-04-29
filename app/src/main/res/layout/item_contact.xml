@@ -30,6 +30,22 @@
         tools:src="@drawable/ic_person" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvContactName"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_margin"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="@dimen/text_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvContactCareer"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@+id/ivUserPhoto"
+        app:layout_constraintTop_toTopOf="@+id/ivUserPhoto"
+        tools:text="Name" />
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvContactCareer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,21 +54,6 @@
         app:layout_constraintStart_toStartOf="@+id/tvContactName"
         app:layout_constraintTop_toBottomOf="@id/tvContactName"
         tools:text="Career" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvContactName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/default_margin"
-        android:textColor="?attr/colorOnPrimary"
-        android:textSize="@dimen/text_size"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvContactCareer"
-        app:layout_constraintEnd_toStartOf="@+id/btnDeleteContact"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toEndOf="@+id/ivUserPhoto"
-        app:layout_constraintTop_toTopOf="@+id/ivUserPhoto"
-        tools:text="Name" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btnDeleteContact"
@@ -64,7 +65,5 @@
         android:tint="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tvContactName"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

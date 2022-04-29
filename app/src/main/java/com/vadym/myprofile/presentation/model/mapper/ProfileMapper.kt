@@ -4,27 +4,35 @@ import com.vadym.myprofile.domain.model.UserModel
 import com.vadym.myprofile.presentation.model.ProfileModel
 
 object ProfileMapper {
-    fun toPresentation(user: UserModel): ProfileModel {
-        return ProfileModel(
-            user.name,
-            user.phoneNumber,
-            user.career,
-            user.address,
-            user.birthDate,
-            user.urlPhoto
+    fun toPresentation(user: UserModel) = user.run {
+        ProfileModel(
+            name = name,
+            phoneNumber = phoneNumber,
+            career = career,
+            address = address,
+            birthDate = birthDate,
+            urlPhoto = urlPhoto,
+            facebook = facebook,
+            instagram = instagram,
+            twitter = twitter,
+            linkedin = linkedin
         )
     }
 
-    fun toDomain(profile: ProfileModel): UserModel {
-        return UserModel(
+    fun toDomain(profile: ProfileModel) = profile.run {
+        UserModel(
             id = 0,
-            name = profile.name,
-            email = String(),
-            phoneNumber = profile.phoneNumber,
-            career = profile.career,
-            address = profile.address,
-            birthDate = profile.birthDate,
-            urlPhoto = profile.urlPhoto
+            name = name,
+            email = "",
+            phoneNumber = phoneNumber,
+            career = career,
+            address = address,
+            birthDate = birthDate,
+            urlPhoto = urlPhoto,
+            facebook = facebook,
+            instagram = instagram,
+            twitter = twitter,
+            linkedin = linkedin
         )
     }
 }

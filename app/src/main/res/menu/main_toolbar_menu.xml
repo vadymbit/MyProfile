@@ -2,14 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_search"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_toolbar_search"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
-        android:title="@string/toolbar_contact_search" />
-    <item
         android:id="@+id/action_logout"
         android:icon="@drawable/ic_toolbar_logout"
         app:showAsAction="always"
-        android:title="@string/main_toolbar_logout"/>
+        android:title="@string/main_toolbar_logout"
+        android:orderInCategory="2"/>
 </menu>

@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class LoginUseCase @Inject constructor(private val authRepository: AuthRepository) {
 
-    suspend operator fun invoke(email: String, password: String): Result<Boolean, Exception> {
+    suspend operator fun invoke(email: String, password: String): Result<Boolean, Throwable> {
         val authModel = AuthModel(email, password)
         return authRepository.login(authModel)
     }

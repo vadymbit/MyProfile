@@ -6,8 +6,8 @@ import com.vadym.myprofile.domain.repository.ContactRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetUserContactUseCase @Inject constructor(private val contactRepository: ContactRepository) {
-    suspend operator fun invoke(): Result<Flow<List<UserModel>>, Throwable> {
-        return contactRepository.getUserContacts()
+class SearchByNameUseCase @Inject constructor(private val contactRepository: ContactRepository) {
+    suspend operator fun invoke(contactName: String): Result<Flow<List<UserModel>>, Throwable> {
+        return contactRepository.searchContactsByName(contactName = contactName)
     }
 }

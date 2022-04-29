@@ -18,6 +18,21 @@
         tools:src="@drawable/ic_person" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvContactName"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_margin"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="@dimen/text_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvContactCareer"
+        app:layout_constraintStart_toEndOf="@+id/ivUserPhoto"
+        app:layout_constraintTop_toTopOf="@+id/ivUserPhoto"
+        tools:text="Name" />
+
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvContactCareer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,30 +42,15 @@
         app:layout_constraintTop_toBottomOf="@id/tvContactName"
         tools:text="Career" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvContactName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/default_margin"
-        android:textColor="?attr/colorOnPrimary"
-        android:textSize="@dimen/text_size"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvContactCareer"
-        app:layout_constraintEnd_toStartOf="@+id/btnAddContact"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toEndOf="@+id/ivUserPhoto"
-        app:layout_constraintTop_toTopOf="@+id/ivUserPhoto"
-        tools:text="Name" />
-
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btnAddContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_margin"
         android:backgroundTint="@android:color/transparent"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_contact_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvContactName"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

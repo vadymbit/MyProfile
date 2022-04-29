@@ -7,6 +7,7 @@ object ParseNetworkError {
             -1 -> "No internet connection"
             204 -> "Bad server response. Try again later"
             400 -> "User already exists"
+            401 -> "Authorization error, please login again"
             403 -> "Not valid email or password"
             404 -> "User not found"
             else -> "Unknown error"

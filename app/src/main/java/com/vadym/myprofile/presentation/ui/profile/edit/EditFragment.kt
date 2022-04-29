@@ -1,8 +1,11 @@
 package com.vadym.myprofile.presentation.ui.profile.edit
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -11,7 +14,6 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.vadym.myprofile.R
 import com.vadym.myprofile.app.base.BaseFragment
-import com.vadym.myprofile.app.utils.Constants
 import com.vadym.myprofile.app.utils.FileHelper.getPathFromURI
 import com.vadym.myprofile.app.utils.ext.*
 import com.vadym.myprofile.databinding.FragmentEditBinding
@@ -20,42 +22,23 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class EditFragment : BaseFragment<FragmentEditBinding>(FragmentEditBinding::inflate) {
     private val viewModel: EditViewModel by viewModels()
-    private var profilePhoto: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.apply {
-            if (savedInstanceState != null) {
-                ivUserPhoto.loadCircledImage(savedInstanceState.getString(Constants.PHOTO_URI))
-            }
-            setListeners()
-            etBirthDate.transformIntoDatePicker(requireContext(), "MM/dd/yyyy")
-            requestPermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-        }
+        setListeners()
+        binding.etBirthDate.transformIntoDatePicker(requireContext(), "MM/dd/yyyy")
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        profilePhoto?.let {
-            outState.putString(Constants.PHOTO_URI, it)
+    override fun setObservers() {
+        viewModel.profilePhoto.observe(viewLifecycleOwner) {
+            binding.ivUserPhoto.loadCircledImage(it)
         }
     }
 
     private fun setListeners() {
         binding.apply {
             btnAddPhoto.setOnClickListener {
-                when {
-                    ContextCompat.checkSelfPermission(
-                        requireContext(),
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                    ) == PackageManager.PERMISSION_GRANTED -> {
-                        openGalleryForPhoto.launch("image/*")
-                    }
-                    shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE) -> {
-
-                    }
-                    else -> requestPermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-                }
+                checkPermissions()
             }
             btnSave.setOnClickListener {
                 if (isInputValid()) {
@@ -65,21 +48,18 @@ class EditFragment : BaseFragment<FragmentEditBinding>(FragmentEditBinding::infl
                         etPhone.text.toString(),
                         etAddress.text?.toString(),
                         etBirthDate.text?.toString(),
-                        profilePhoto
+                        etFacebook.text?.toString(),
+                        etInstagram.text?.toString(),
+                        etTwitter.text?.toString(),
+                        etLinkedin.text?.toString()
                     )
-                    if (findNavController().previousBackStackEntry?.destination?.id == R.id.authFragment) {
+                    if (findNavController().previousBackStackEntry?.destination?.id == R.id.registerFragment) {
                         goToMyProfile()
                     } else {
                         findNavController().navigateUp()
                     }
                 }
             }
-        }
-    }
-
-    private fun setFields() {
-        binding.apply {
-
         }
     }
 
@@ -92,7 +72,6 @@ class EditFragment : BaseFragment<FragmentEditBinding>(FragmentEditBinding::infl
         binding.apply {
             validateInputFields()
             return viewModel.isInputValid(
-                tiAddress.isErrorEnabled,
                 tiUsername.isErrorEnabled,
                 tiPhone.isErrorEnabled
             )
@@ -103,34 +82,52 @@ class EditFragment : BaseFragment<FragmentEditBinding>(FragmentEditBinding::infl
         binding.apply {
             tiPhone.validatePhoneNumber()
             tiUsername.validateRequiredField()
-            tiAddress.validateRequiredField()
         }
     }
 
-    private val requestPermission =
+    private fun checkPermissions() {
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                openGalleryForPhoto.launch("image/*")
+            }
+            shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE) -> {
+                Snackbar.make(
+                    binding.root,
+                    R.string.contact_add_denied_camera_permissions,
+                    Snackbar.LENGTH_SHORT
+                ).setAction("Settings") { goToAppSettings() }.show()
+            }
+            else -> requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
+    }
+
+    private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             when {
                 isGranted -> {
-                    binding.btnAddPhoto.isClickable = true
+                    openGalleryForPhoto.launch("image/*")
                 }
                 else -> {
-                    Snackbar.make(
-                        binding.root,
-                        R.string.contact_add_denied_camera_permissions,
-                        Snackbar.LENGTH_SHORT
-                    ).show()
+                    showToast("Need media permissions for loading photo")
                 }
             }
         }
 
-    /**
-     * Open gallery to select the photo for new contact
-     */
     private val openGalleryForPhoto =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
             if (uri != null) {
-                profilePhoto = getPathFromURI(requireContext(), uri)
+                viewModel.setProfilePhoto(photoPath = getPathFromURI(requireContext(), uri))
                 binding.ivUserPhoto.loadCircledImage(uri)
             }
         }
+
+    private fun goToAppSettings() {
+        val appSettingsIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+            data = Uri.fromParts("package", requireContext().packageName, null)
+        }
+        startActivity(appSettingsIntent)
+    }
 }

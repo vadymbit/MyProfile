@@ -6,9 +6,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
 
-    suspend fun register(authModel: AuthModel): Result<Boolean, Exception>
+    suspend fun register(authModel: AuthModel): Result<Boolean, Throwable>
 
-    suspend fun login(authModel: AuthModel): Result<Boolean, Exception>
+    suspend fun login(authModel: AuthModel): Result<Boolean, Throwable>
 
     suspend fun logout()
 

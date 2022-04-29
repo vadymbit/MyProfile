@@ -20,7 +20,8 @@
         <argument
             android:name="contactModel"
             app:argType="com.vadym.myprofile.presentation.model.ContactModel"
-            app:nullable="true" />
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"

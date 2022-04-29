@@ -18,8 +18,12 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
         super.onViewCreated(view, savedInstanceState)
         sharedElementEnterTransition =
             TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+        setSharedTransitionsName(args.contactModel)
+        setViews()
+    }
+
+    private fun setViews() {
         binding.apply {
-            setSharedTransitionsName(args.contactModel)
             tvProfileName.text = args.contactModel?.name
             tvProfileCareer.text = args.contactModel?.career
             tvProfileAddress.text = args.contactModel?.address

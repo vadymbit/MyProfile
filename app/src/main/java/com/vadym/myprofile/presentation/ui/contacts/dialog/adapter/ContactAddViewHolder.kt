@@ -17,6 +17,8 @@ class ContactAddViewHolder private constructor(
         binding.apply {
             ivUserPhoto.loadCircledImage(contact.urlPhoto)
             tvContactName.text = contact.name
+            tvContactName.setSingleLine()
+            tvContactName.isSelected = true
             tvContactCareer.text = contact.career
             bindListeners(contact)
         }

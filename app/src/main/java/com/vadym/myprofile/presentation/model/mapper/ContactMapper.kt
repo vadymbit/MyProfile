@@ -4,15 +4,37 @@ import com.vadym.myprofile.domain.model.UserModel
 import com.vadym.myprofile.presentation.model.ContactModel
 
 object ContactMapper {
-    fun toUserModel(e: ContactModel): UserModel {
-        return UserModel(
-            e.id,  e.name, e.email, e.phoneNumber, e.career, e.address, e.birthDate, e.urlPhoto
+    fun toUserModel(contactModel: ContactModel) = contactModel.run {
+        UserModel(
+            id = id,
+            name = name,
+            email = email,
+            phoneNumber = phoneNumber,
+            career = career,
+            address = address,
+            birthDate = birthDate,
+            urlPhoto = urlPhoto,
+            facebook = facebook,
+            instagram = instagram,
+            twitter = twitter,
+            linkedin = linkedin
         )
     }
 
-    fun toContactModel(t: UserModel): ContactModel {
-        return ContactModel(
-            t.id, t.name, t.career, "", "", t.address, t.birthDate, t.urlPhoto
+    fun toContactModel(t: UserModel) = t.run {
+        ContactModel(
+            id = id,
+            name = name,
+            career = career,
+            phoneNumber = phoneNumber,
+            email = email,
+            address = address,
+            birthDate = birthDate,
+            urlPhoto = urlPhoto,
+            facebook = facebook,
+            instagram = instagram,
+            twitter = twitter,
+            linkedin = linkedin
         )
     }
 }

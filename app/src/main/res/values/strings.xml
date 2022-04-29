@@ -36,20 +36,23 @@
     <string name="contacts_add_contacts">Add Contacts</string>
     <string name="contacts_title">Contacts</string>
     <string name="add_contact_save">SAVE</string>
-    <string name="contact_add_hint_username">Username</string>
-    <string name="contact_add_hint_career">Career</string>
-    <string name="contact_add_hint_email" translatable="false">Email</string>
-    <string name="contact_add_hint_phone">Phone</string>
-    <string name="contact_add_hint_address">Address</string>
-    <string name="contact_add_hint_date_of_birth">Date of birth</string>
-    <string name="contact_add_email_hint" translatable="false">name@gmail.com</string>
+    <string name="edit_hint_username">Username</string>
+    <string name="edit_hint_career">Career</string>
+    <string name="edit_hint_email" translatable="false">Email</string>
+    <string name="edit_hint_phone">Phone</string>
+    <string name="edit_hint_address">Address</string>
+    <string name="edit_hint_date_of_birth">Date of birth</string>
+    <string name="edit_email_hint" translatable="false">name@gmail.com</string>
+    <string name="edit_hint_instagram" translatable="false">Instagram</string>
+    <string name="edit_hint_facebook" translatable="false">Facebook</string>
+    <string name="edit_hint_twitter" translatable="false">Twitter</string>
+    <string name="edit_hint_linkedin" translatable="false">Linkedin</string>
     <string name="custom_login_view_text_google" translatable="false">Google</string>
     <string name="add_contact_hint_phone_number" translatable="false">(264)-654-3762</string>
     <string name="detail_message">Message</string>
     <string name="detail_transition_photo" translatable="false">image %1$s</string>
     <string name="detail_transition_name" translatable="false">name %1$s</string>
     <string name="detail_transition_career" translatable="false">career %1$s</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="toast_contact_removed">Contact has been removed</string>
     <string name="contact_selection">Selected: %1$d</string>
     <string name="pager_contacts">Contacts</string>
@@ -61,9 +64,6 @@
     <string name="login_subtitle">Enter your email and password below</string>
     <string name="login_forgot_pass">Forgot your password?</string>
     <string name="login_no_account">Don\'t have account?</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="main_toolbar_logout">log out</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="main_toolbar_logout">Logout</string>
 
 </resources>

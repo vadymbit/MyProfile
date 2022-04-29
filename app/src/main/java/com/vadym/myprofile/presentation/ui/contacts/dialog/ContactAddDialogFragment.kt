@@ -27,7 +27,6 @@ class ContactAddDialogFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        isCancelable = false
         setToolbar()
         initRecyclerView()
     }

@@ -32,7 +32,7 @@ abstract class BaseViewModel : ViewModel() {
         }
     }
 
-    suspend fun <T> onResult(result: Result<T, Exception>): T?{
+    suspend fun <T> onResult(result: Result<T, Throwable>): T?{
         return when (result) {
             is Result.Success -> result.data
             is Result.Failure -> {
@@ -42,7 +42,7 @@ abstract class BaseViewModel : ViewModel() {
         }
     }
 
-    suspend fun <T> onResult(result: Result<T, Exception>, liveData: MutableLiveData<T>) {
+    suspend fun <T> onResult(result: Result<T, Throwable>, liveData: MutableLiveData<T>) {
         when (result) {
             is Result.Success -> liveData.value = result.data
             is Result.Failure -> {
@@ -54,7 +54,7 @@ abstract class BaseViewModel : ViewModel() {
         }
     }
 
-    fun <T> onFlowResult(result: Result<Flow<T>, Exception>): LiveData<T> {
+    fun <T> onFlowResult(result: Result<Flow<T>, Throwable>): LiveData<T> {
         return liveData {
             when (result) {
                 is Result.Success -> {

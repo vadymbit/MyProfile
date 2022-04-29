@@ -6,11 +6,13 @@ import kotlinx.coroutines.flow.Flow
 
 interface ContactRepository {
 
-    suspend fun addContact(contact: UserModel): Result<Boolean, Exception>
+    suspend fun addContact(contact: UserModel): Result<Boolean, Throwable>
 
-    suspend fun removeContact(contactId: Int): Result<Boolean, Exception>
+    suspend fun removeContact(contactId: Int): Result<Boolean, Throwable>
 
-    suspend fun getUserContacts(): Result<Flow<List<UserModel>>, Exception>
+    suspend fun getUserContacts(): Result<Flow<List<UserModel>>, Throwable>
 
-    suspend fun getAllUsers(): Result<List<UserModel>, Exception>
+    suspend fun getAllUsers(): Result<List<UserModel>, Throwable>
+
+    suspend fun searchContactsByName(contactName: String): Result<Flow<List<UserModel>>, Throwable>
 }

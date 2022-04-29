@@ -8,8 +8,8 @@ import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 abstract class BaseRepository {
-    suspend fun <T> getRequestResult(request: suspend () -> Response<ServerResponse<T>>): ApiResult<T, Exception> {
-        return try {
+    suspend fun <T> getRequestResult(request: suspend () -> Response<ServerResponse<T>>): ApiResult<T, Throwable> {
+        return runCatching {
             withContext(Dispatchers.IO) {
                 val response = request()
                 if (response.isSuccessful) {
@@ -20,15 +20,15 @@ abstract class BaseRepository {
                     ApiResult.Error(response.code())
                 }
             }
-        } catch (e: Exception) {
-            ApiResult.Exception(e)
+        }.getOrElse {
+            ApiResult.Exception(it)
         }
     }
 
     suspend fun <T, D> getResult(
-        apiResult: ApiResult<T, Exception>,
+        apiResult: ApiResult<T, Throwable>,
         onResult: suspend () -> D,
-    ): Result<D, Exception> {
+    ): Result<D, Throwable> {
         return when (apiResult) {
             is ApiResult.Exception -> {
                 Result.Failure(null, -1)
@@ -45,10 +45,10 @@ abstract class BaseRepository {
     }
 
     suspend fun <T, D> getFlowResult(
-        apiResult: ApiResult<T, Exception>,
+        apiResult: ApiResult<T, Throwable>,
         saveNewData: suspend () -> Unit,
         getCachedData: () -> D
-    ): Result<D, Exception> {
+    ): Result<D, Throwable> {
         return when (apiResult) {
             is ApiResult.Exception -> Result.Failure(getCachedData(), -1)
             is ApiResult.Error -> Result.Failure(getCachedData(), apiResult.error)

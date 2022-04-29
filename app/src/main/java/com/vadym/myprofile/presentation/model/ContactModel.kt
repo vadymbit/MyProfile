@@ -12,5 +12,9 @@ data class ContactModel(
     val email: String,
     val address: String,
     val birthDate: String,
-    val urlPhoto: String
+    val urlPhoto: String,
+    val facebook: String,
+    val instagram: String,
+    val twitter: String,
+    val linkedin: String
 ) : Parcelable
