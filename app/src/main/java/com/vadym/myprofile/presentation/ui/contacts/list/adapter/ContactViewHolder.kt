@@ -39,7 +39,7 @@ class ContactViewHolder private constructor(
             tvContactCareer.text = contact.career
             tvContactName.text = contact.name
             tvContactName.setSingleLine()
-            tvContactName.isActivated = true
+            tvContactName.isSelected = true
             ivUserPhoto.loadCircledImage(contact.urlPhoto)
             setSharedTransitionsName()
             bindListeners()

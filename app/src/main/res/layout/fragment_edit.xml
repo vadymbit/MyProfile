@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp">
+
         <View
             android:id="@+id/photoAreaBackground"
             android:layout_width="match_parent"
@@ -68,7 +70,8 @@
                 android:id="@+id/etUsername"
                 style="@style/Bordered.TransparentBackground"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="@string/edit_hint_username_example" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -83,7 +86,8 @@
                 android:id="@+id/etCareer"
                 style="@style/Bordered.TransparentBackground"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="@string/edit_hint_career_example" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -99,8 +103,8 @@
                 style="@style/Bordered.TransparentBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="phone"
-                android:hint="@string/add_contact_hint_phone_number" />
+                android:hint="@string/edit_hint_phone_example"
+                android:inputType="phone" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -141,13 +145,15 @@
             android:layout_height="wrap_content"
             android:hint="@string/edit_hint_instagram"
             app:layout_constraintBottom_toTopOf="@+id/tiLinkedin"
-            app:layout_constraintTop_toBottomOf="@+id/tiBirthDate">
+            app:layout_constraintTop_toBottomOf="@+id/tiBirthDate"
+            tools:layout_editor_absoluteX="190dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etInstagram"
                 style="@style/Bordered.TransparentBackground"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="@string/edit_hint_socials_username" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -163,7 +169,8 @@
                 android:id="@+id/etLinkedin"
                 style="@style/Bordered.TransparentBackground"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="@string/edit_hint_socials_username" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -179,7 +186,8 @@
                 android:id="@+id/etTwitter"
                 style="@style/Bordered.TransparentBackground"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="@string/edit_hint_socials_username" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -195,7 +203,8 @@
                 android:id="@+id/etFacebook"
                 style="@style/Bordered.TransparentBackground"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="@string/edit_hint_socials_username" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton

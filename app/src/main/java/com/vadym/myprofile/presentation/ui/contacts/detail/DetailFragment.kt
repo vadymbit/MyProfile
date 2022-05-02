@@ -6,6 +6,9 @@ import androidx.navigation.fragment.navArgs
 import androidx.transition.TransitionInflater
 import com.vadym.myprofile.R
 import com.vadym.myprofile.app.base.BaseFragment
+import com.vadym.myprofile.app.utils.AppIntentHelper
+import com.vadym.myprofile.app.utils.Constants
+import com.vadym.myprofile.app.utils.Constants.PACKAGE_INSTAGRAM
 import com.vadym.myprofile.app.utils.ext.loadCircledImage
 import com.vadym.myprofile.databinding.FragmentDetailBinding
 import com.vadym.myprofile.presentation.model.ContactModel
@@ -20,6 +23,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
             TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
         setSharedTransitionsName(args.contactModel)
         setViews()
+        setListeners()
     }
 
     private fun setViews() {
@@ -28,6 +32,47 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
             tvProfileCareer.text = args.contactModel?.career
             tvProfileAddress.text = args.contactModel?.address
             ivUserPhoto.loadCircledImage(args.contactModel?.urlPhoto)
+        }
+    }
+
+    private fun setListeners() {
+        binding.apply {
+            btnSocialTwitter.setOnClickListener {
+                val intent = AppIntentHelper.getAppIntent(
+                    context = requireContext(),
+                    appPackage = Constants.PACKAGE_TWITTER,
+                    appUri = "twitter://user?screen_name=${args.contactModel?.twitter}",
+                    browserUri = "https://twitter.com/${args.contactModel?.twitter}"
+                )
+                startActivity(intent)
+            }
+            btnSocialFacebook.setOnClickListener {
+                val intent = AppIntentHelper.getAppIntent(
+                    context = requireContext(),
+                    appPackage = Constants.PACKAGE_FACEBOOK,
+                    appUri = "fb://facewebmodal/f?href=${args.contactModel?.facebook}",
+                    browserUri = "https://www.facebook.com/${args.contactModel?.facebook}"
+                )
+                startActivity(intent)
+            }
+            btnSocialLinkedin.setOnClickListener {
+                val intent = AppIntentHelper.getAppIntent(
+                    context = requireContext(),
+                    appPackage = Constants.PACKAGE_LINKEDIN,
+                    appUri = "linkedin://${args.contactModel?.linkedin}",
+                    browserUri = "https://www.linkedin.com/in/${args.contactModel?.linkedin}"
+                )
+                startActivity(intent)
+            }
+            btnSocialInstagram.setOnClickListener {
+                val intent = AppIntentHelper.getAppIntent(
+                    context = requireContext(),
+                    appPackage = PACKAGE_INSTAGRAM,
+                    appUri = "https://instagram.com/_u/${args.contactModel?.instagram}",
+                    browserUri = "https://instagram.com/${args.contactModel?.instagram}"
+                )
+                startActivity(intent)
+            }
         }
     }
 

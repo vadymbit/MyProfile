@@ -30,11 +30,14 @@
     <string name="contacts_add_contacts">Додати контакт</string>
     <string name="contacts_title">Контакти</string>
     <string name="add_contact_save">ЗБЕРЕГТИ</string>
-    <string name="edit_hint_username">Ім\'я користувача</string>
+    <string name="edit_hint_username">Ім\'я користувача*</string>
+    <string name="edit_hint_username_example">Введіть ваше ім\'я та прізвище</string>
     <string name="edit_hint_career">Професія</string>
-    <string name="edit_hint_phone">Телефон</string>
+    <string name="edit_hint_career_example">Ким ви працюєте?</string>
+    <string name="edit_hint_phone">Телефон*</string>
     <string name="edit_hint_address">Домашня адреса</string>
     <string name="edit_hint_date_of_birth">Дата народження</string>
+    <string name="edit_hint_socials_username">Введіть ваш username</string>
     <string name="register_sign_in">Увійти</string>
     <string name="detail_message">Повідомлення</string>
     <string name="error_incorrect_phone_number">Не коректний номер</string>

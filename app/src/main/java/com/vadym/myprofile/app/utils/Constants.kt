@@ -16,4 +16,10 @@ object Constants {
 
     //Database Name
     const val DB_NAME = "CONTACT_DB"
+
+    //Social networks packages
+    const val PACKAGE_INSTAGRAM = "com.instagram.android"
+    const val PACKAGE_TWITTER = "com.twitter.android"
+    const val PACKAGE_FACEBOOK = "com.facebook.katana"
+    const val PACKAGE_LINKEDIN = "com.linkedin.android"
 }

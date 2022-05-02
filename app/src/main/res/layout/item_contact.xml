@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/ic_person" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvContactName"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
@@ -40,12 +40,11 @@
         android:textSize="@dimen/text_size"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvContactCareer"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toEndOf="@+id/ivUserPhoto"
         app:layout_constraintTop_toTopOf="@+id/ivUserPhoto"
         tools:text="Name" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvContactCareer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

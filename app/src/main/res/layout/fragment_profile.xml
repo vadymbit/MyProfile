@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/ic_person" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvProfileName"
         style="@style/WrapContent.Bordered.White"
         android:textSize="@dimen/text_size"
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@id/ivUserPhoto"
         tools:text="Lucile Alvarado" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvProfileCareer"
         style="@style/WrapContent.Bordered.Gray"
         android:text="@string/main_career"
@@ -47,7 +47,7 @@
         app:layout_constraintStart_toStartOf="@+id/tvProfileName"
         app:layout_constraintTop_toBottomOf="@id/tvProfileName" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvProfileAddress"
         style="@style/WrapContent.Bordered.Gray"
         android:text="@string/main_home_address"
@@ -61,7 +61,7 @@
         android:id="@+id/btnSocialFacebook"
         style="@style/WrapContent.Bordered"
         android:foreground="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_facebook_button"
+        android:src="@drawable/ic_social_facebook_button"
         app:layout_constraintBottom_toBottomOf="@+id/btnSocialLinkedin"
         app:layout_constraintEnd_toStartOf="@id/btnSocialLinkedin"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,23 +71,33 @@
         android:id="@+id/btnSocialLinkedin"
         style="@style/WrapContent.Bordered"
         android:foreground="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_linkedin_button"
+        android:src="@drawable/ic_social_linkedin_button"
         app:layout_constraintBottom_toTopOf="@+id/tvEmptyProfile"
-        app:layout_constraintEnd_toStartOf="@+id/btnSocialVkontakte"
+        app:layout_constraintEnd_toStartOf="@+id/btnSocialTwitter"
         app:layout_constraintStart_toEndOf="@+id/btnSocialFacebook"
         app:layout_constraintTop_toBottomOf="@+id/topBackground" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/btnSocialVkontakte"
+        android:id="@+id/btnSocialTwitter"
         style="@style/WrapContent.Bordered"
         android:foreground="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_vkontakte_button"
+        android:src="@drawable/ic_social_twitter_button"
         app:layout_constraintBottom_toBottomOf="@+id/btnSocialLinkedin"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSocialInstagram"
         app:layout_constraintStart_toEndOf="@+id/btnSocialLinkedin"
         app:layout_constraintTop_toTopOf="@+id/btnSocialLinkedin" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnSocialInstagram"
+        style="@style/WrapContent.Bordered"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_social_instagram_button"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSocialLinkedin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnSocialTwitter"
+        app:layout_constraintTop_toTopOf="@+id/btnSocialLinkedin" />
+
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvEmptyProfile"
         style="@style/Bordered"
         android:layout_width="match_parent"
