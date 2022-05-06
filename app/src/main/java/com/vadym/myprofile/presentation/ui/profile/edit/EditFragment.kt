@@ -11,9 +11,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.vadym.myprofile.R
 import com.vadym.myprofile.app.base.BaseFragment
+import com.vadym.myprofile.app.utils.Constants.DATE_FORMAT
+import com.vadym.myprofile.app.utils.Constants.GALLERY_LAUNCH_INPUT
+import com.vadym.myprofile.app.utils.Constants.SCHEME_PACKAGE
 import com.vadym.myprofile.app.utils.FileHelper.getPathFromURI
 import com.vadym.myprofile.app.utils.ext.*
 import com.vadym.myprofile.databinding.FragmentEditBinding
@@ -26,12 +28,25 @@ class EditFragment : BaseFragment<FragmentEditBinding>(FragmentEditBinding::infl
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
-        binding.etBirthDate.transformIntoDatePicker(requireContext(), "MM/dd/yyyy")
+        binding.etBirthDate.transformIntoDatePicker(requireContext(), DATE_FORMAT)
     }
 
     override fun setObservers() {
         viewModel.profilePhoto.observe(viewLifecycleOwner) {
             binding.ivUserPhoto.loadCircledImage(it)
+        }
+        viewModel.profile.observe(viewLifecycleOwner) {
+            binding.apply {
+                etUsername.setText(it.name)
+                etCareer.setText(it.career)
+                etPhone.setText(it.phoneNumber)
+                etAddress.setText(it.address)
+                etBirthDate.setText(it.birthDate)
+                etInstagram.setText(it.instagram)
+                etLinkedin.setText(it.linkedin)
+                etTwitter.setText(it.twitter)
+                etFacebook.setText(it.facebook)
+            }
         }
     }
 
@@ -91,14 +106,14 @@ class EditFragment : BaseFragment<FragmentEditBinding>(FragmentEditBinding::infl
                 requireContext(),
                 Manifest.permission.READ_EXTERNAL_STORAGE
             ) == PackageManager.PERMISSION_GRANTED -> {
-                openGalleryForPhoto.launch("image/*")
+                openGalleryForPhoto.launch(GALLERY_LAUNCH_INPUT)
             }
             shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE) -> {
-                Snackbar.make(
-                    binding.root,
-                    R.string.contact_add_denied_camera_permissions,
-                    Snackbar.LENGTH_SHORT
-                ).setAction("Settings") { goToAppSettings() }.show()
+                requireContext().showSnackbar(
+                    getString(R.string.contact_add_denied_camera_permissions),
+                    binding,
+                    getString(R.string.edit_action_settings)
+                ) { goToAppSettings() }
             }
             else -> requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
@@ -108,10 +123,10 @@ class EditFragment : BaseFragment<FragmentEditBinding>(FragmentEditBinding::infl
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             when {
                 isGranted -> {
-                    openGalleryForPhoto.launch("image/*")
+                    openGalleryForPhoto.launch(GALLERY_LAUNCH_INPUT)
                 }
                 else -> {
-                    showToast("Need media permissions for loading photo")
+                    requireContext().showToast(getString(R.string.edit_why_need_permissions))
                 }
             }
         }
@@ -126,7 +141,7 @@ class EditFragment : BaseFragment<FragmentEditBinding>(FragmentEditBinding::infl
 
     private fun goToAppSettings() {
         val appSettingsIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-            data = Uri.fromParts("package", requireContext().packageName, null)
+            data = Uri.fromParts(SCHEME_PACKAGE, requireContext().packageName, null)
         }
         startActivity(appSettingsIntent)
     }

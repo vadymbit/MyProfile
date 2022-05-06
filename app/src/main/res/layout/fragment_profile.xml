@@ -102,7 +102,7 @@
         style="@style/Bordered"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/go_to_settings_and_fill_out_the_profile"
+        android:text="@string/profile_fill_out_the_profile"
         android:textAlignment="center"
         android:textColor="?attr/colorOnPrimary"
         app:layout_constraintBottom_toTopOf="@+id/btnEditProfile" />
@@ -112,7 +112,7 @@
         style="@style/outlineButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/edit_profile"
+        android:text="@string/profile_edit"
         app:layout_constraintBottom_toTopOf="@+id/btnViewContacts"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -122,7 +122,7 @@
         style="@style/BigButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/view_my_contacts"
+        android:text="@string/profile_view_my_contacts"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

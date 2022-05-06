@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'com.google.devtools.ksp' version "1.6.20-1.0.5"
+    id 'com.google.devtools.ksp' version "1.6.21-1.0.5"
 }
 
 android {
@@ -42,7 +42,7 @@ dependencies {
     ksp "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
 
     //DataStore
-    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    implementation "androidx.datastore:datastore-preferences:$datastore_verison"
 
     //Hilt annotations
     implementation "javax.inject:javax.inject:1"

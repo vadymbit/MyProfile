@@ -9,4 +9,5 @@
     <color name="gray_300">#E7E7E7</color>
     <color name="gray_500">#B2B2B3</color>
     <color name="gray_600">#828282</color>
+    <color name="red_100">#FF0000</color>
 </resources>

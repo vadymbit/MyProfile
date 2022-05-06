@@ -3,6 +3,7 @@ package com.vadym.myprofile.data.repository
 import com.vadym.myprofile.data.Const.FACEBOOK
 import com.vadym.myprofile.data.Const.INSTAGRAM
 import com.vadym.myprofile.data.Const.LINKEDIN
+import com.vadym.myprofile.data.Const.MEDIA_TYPE_IMAGE
 import com.vadym.myprofile.data.Const.PROFILE_ADDRESS
 import com.vadym.myprofile.data.Const.PROFILE_BIRTHDAY
 import com.vadym.myprofile.data.Const.PROFILE_CAREER
@@ -77,7 +78,7 @@ class ProfileRepositoryImpl @Inject constructor(
             multipartUser.addFormDataPart(
                 PROFILE_PHOTO,
                 image.name,
-                RequestBody.create(MediaType.parse("image/*"), image)
+                RequestBody.create(MediaType.parse(MEDIA_TYPE_IMAGE), image)
             )
         }
         return multipartUser.build()

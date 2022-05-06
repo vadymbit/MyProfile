@@ -6,10 +6,10 @@ import android.content.pm.PackageManager
 import android.net.Uri
 
 object AppIntentHelper {
-    private fun isAppAvailable(context: Context, appName: String?): Boolean {
+    private fun isAppAvailable(context: Context, appName: String): Boolean {
         val pm: PackageManager = context.packageManager
         return try {
-            pm.getPackageInfo(appName!!, PackageManager.GET_ACTIVITIES)
+            pm.getPackageInfo(appName, PackageManager.GET_ACTIVITIES)
             true
         } catch (e: Exception) {
             false

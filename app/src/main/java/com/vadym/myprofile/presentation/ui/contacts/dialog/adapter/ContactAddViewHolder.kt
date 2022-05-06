@@ -20,12 +20,8 @@ class ContactAddViewHolder private constructor(
             tvContactName.setSingleLine()
             tvContactName.isSelected = true
             tvContactCareer.text = contact.career
-            bindListeners(contact)
+            btnAddContact.setOnClickListener { userClickListener.addContact(contact) }
         }
-    }
-
-    private fun bindListeners(contact: ContactModel) {
-        binding.btnAddContact.setOnClickListener { userClickListener.addContact(contact) }
     }
 
     companion object {

@@ -1,23 +1,24 @@
 package com.vadym.myprofile.app.utils.ext
 
-import android.text.TextWatcher
-import androidx.core.widget.addTextChangedListener
 import com.google.android.material.textfield.TextInputLayout
 import com.vadym.myprofile.R
 import com.vadym.myprofile.app.utils.Validator
 
-fun TextInputLayout.addValidatePasswordListener(): TextWatcher? {
-    isErrorEnabled = true
-    return editText?.addTextChangedListener {
-        error = Validator.validatePassword(it.toString(), context)
-        isErrorEnabled = !error.isNullOrBlank()
+fun TextInputLayout.removeErrorIfNotFocused() {
+    editText?.setOnFocusChangeListener { _, isFocused ->
+        if (!isFocused) {
+            isErrorEnabled = false
+        }
     }
 }
 
-fun TextInputLayout.addValidateEmailListener(): TextWatcher? {
-    isErrorEnabled = true
-    return editText?.addTextChangedListener {
-        validateEmail()
+fun TextInputLayout.validatePassword() {
+    val result = Validator.validatePassword(editText?.text.toString(), context)
+    if (result == null) {
+        isErrorEnabled = false
+    } else {
+        error = result
+        requestFocus()
     }
 }
 

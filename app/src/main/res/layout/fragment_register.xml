@@ -17,7 +17,7 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvTitle"
         style="@style/WrapContent.Bordered.White"
-        android:text="@string/signup_label"
+        android:text="@string/register_label"
         android:textSize="@dimen/label_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvSubtitle"
         style="@style/WrapContent.Bordered.White"
-        android:text="@string/signup_description"
+        android:text="@string/register_description"
         android:textSize="@dimen/small_text_size"
         app:layout_constraintEnd_toEndOf="@+id/tvTitle"
         app:layout_constraintStart_toStartOf="@+id/tvTitle"
@@ -34,10 +34,10 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiEmail"
-        style="@style/TextInput"
+        style="@style/TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/email"
+        android:hint="@string/auth_hint_email"
         android:theme="@style/InputTheme"
         app:layout_constraintTop_toBottomOf="@+id/tvSubtitle">
 
@@ -52,10 +52,10 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiPass"
-        style="@style/TextInput"
+        style="@style/TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/password"
+        android:hint="@string/auth_hint_password"
         android:theme="@style/InputTheme"
         app:layout_constraintTop_toBottomOf="@+id/tiEmail">
 
@@ -93,7 +93,7 @@
         style="@style/BigOutlineButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_register"
+        android:text="@string/register_button_signup"
         app:layout_constraintBottom_toTopOf="@+id/tvTerms"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +102,7 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvTerms"
         style="@style/WrapContent.Bordered.Gray"
-        android:text="@string/terms__and_conditions"
+        android:text="@string/register_terms_and_conditions"
         android:textAlignment="center"
         android:textSize="@dimen/small_text_size"
         app:layout_constraintBottom_toTopOf="@+id/tvSignInTitle"
@@ -112,7 +112,7 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvSignInTitle"
         style="@style/WrapContent.Bordered.Gray"
-        android:text="@string/already_have_an_account"
+        android:text="@string/register_already_have_an_account"
         android:textSize="@dimen/small_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tvSignIn"

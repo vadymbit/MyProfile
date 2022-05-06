@@ -2,14 +2,15 @@ package com.vadym.myprofile.presentation.ui.contacts.dialog
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.vadym.myprofile.R
 import com.vadym.myprofile.app.base.BaseDialogFragment
+import com.vadym.myprofile.app.utils.ext.showSnackbar
 import com.vadym.myprofile.databinding.FragmentContactAddDialogBinding
 import com.vadym.myprofile.presentation.model.ContactModel
 import com.vadym.myprofile.presentation.ui.contacts.dialog.adapter.ContactAddAdapter
@@ -31,9 +32,7 @@ class ContactAddDialogFragment :
         initRecyclerView()
     }
 
-    override fun getTheme(): Int {
-        return R.style.DialogTheme
-    }
+    override fun getTheme(): Int = R.style.DialogTheme
 
     override fun addContact(contact: ContactModel) {
         viewModel.addContact(contact)
@@ -49,15 +48,11 @@ class ContactAddDialogFragment :
                     viewLifecycleOwner.lifecycle,
                     Lifecycle.State.RESUMED
                 ).collect {
-                    Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show()
+                    requireContext().showSnackbar(it, binding)
                 }
             }
             isLoading.observe(viewLifecycleOwner) {
-                if (it) {
-                    binding.lpiLoading.show()
-                } else {
-                    binding.lpiLoading.hide()
-                }
+                binding.lpiLoading.isVisible = it
             }
         }
     }

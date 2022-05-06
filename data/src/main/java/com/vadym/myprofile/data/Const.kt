@@ -15,6 +15,7 @@ object Const {
     const val FACEBOOK = "facebook"
     const val TWITTER = "twitter"
     const val LINKEDIN = "linkedin"
+    const val MEDIA_TYPE_IMAGE = "image/*"
 
     /**
      * DataStore and preferences fields

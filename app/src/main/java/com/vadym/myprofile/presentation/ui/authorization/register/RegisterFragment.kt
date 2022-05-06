@@ -2,24 +2,22 @@ package com.vadym.myprofile.presentation.ui.authorization.register
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.activityViewModels
+import android.view.inputmethod.EditorInfo
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.vadym.myprofile.app.base.BaseFragment
-import com.vadym.myprofile.app.utils.ext.addValidateEmailListener
-import com.vadym.myprofile.app.utils.ext.addValidatePasswordListener
-import com.vadym.myprofile.app.utils.ext.safeNavigation
+import com.vadym.myprofile.app.utils.ext.*
 import com.vadym.myprofile.databinding.FragmentRegisterBinding
-import com.vadym.myprofile.presentation.ui.authorization.AuthSharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
 
-    private val authSharedViewModel by activityViewModels<AuthSharedViewModel>()
+    private val viewModel: RegisterViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,23 +26,32 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
     private fun setListeners() {
         binding.apply {
-            tiPass.addValidatePasswordListener()
-            tiEmail.addValidateEmailListener()
-            btnRegister.setOnClickListener {
-                if (isInputValid()) {
-                    authSharedViewModel.register(etEmail.text.toString(), etPass.text.toString())
-                    authSharedViewModel.isRememberUser(cbRememberMe.isChecked)
+            tiPass.removeErrorIfNotFocused()
+            tiEmail.removeErrorIfNotFocused()
+            etPass.setOnEditorActionListener { textView, actionId, _ ->
+                return@setOnEditorActionListener when (actionId) {
+                    EditorInfo.IME_ACTION_DONE -> {
+                        textView.clearFocus()
+                        requireActivity().hideKeyboard()
+                        true
+                    }
+                    else -> false
                 }
             }
-            btnLoginViaSocial.setOnClickListener {
-                showToast("Login via Google")
+            btnRegister.setOnClickListener {
+                tiPass.validatePassword()
+                tiEmail.validateEmail()
+                if (isInputValid()) {
+                    viewModel.register(etEmail.text.toString(), etPass.text.toString())
+                    viewModel.isRememberUser(cbRememberMe.isChecked)
+                }
             }
             tvSignIn.setOnClickListener { goToLogin() }
         }
     }
 
     override fun setObservers() {
-        authSharedViewModel.apply {
+        viewModel.apply {
             navigateToProfile.observe(viewLifecycleOwner) { isLogged ->
                 if (isLogged) {
                     goToEditProfile()
@@ -55,7 +62,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                     viewLifecycleOwner.lifecycle,
                     Lifecycle.State.RESUMED
                 ).collect {
-                    showToast(it)
+                    requireContext().showToast(it)
                 }
             }
             isLoading.observe(viewLifecycleOwner) {
@@ -70,11 +77,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
     private fun goToLogin() {
         findNavController().apply {
-            if (previousBackStackEntry != null) {
-                navigateUp()
-            } else {
-                safeNavigation(RegisterFragmentDirections.actionAuthFragmentToLoginFragment())
-            }
+            safeNavigation(RegisterFragmentDirections.actionAuthFragmentToLoginFragment())
         }
     }
 
@@ -84,7 +87,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
      * @return True if they valid
      */
     private fun isInputValid(): Boolean {
-        return authSharedViewModel.isInputValid(
+        return viewModel.isInputValid(
             binding.tiEmail.isErrorEnabled,
             binding.tiPass.isErrorEnabled
         )

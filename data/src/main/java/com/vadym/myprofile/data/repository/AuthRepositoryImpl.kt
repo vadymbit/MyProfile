@@ -20,7 +20,8 @@ class AuthRepositoryImpl @Inject constructor(
 ) : AuthRepository, BaseRepository() {
 
     override suspend fun register(authModel: AuthModel): Result<Boolean, Throwable> {
-        val apiResult = getRequestResult { apiService.register(AuthMapper.toAuthRequest(authModel)) }
+        val apiResult =
+            getRequestResult { apiService.register(AuthMapper.toAuthRequest(authModel)) }
         return getResult(apiResult) {
             authLocalSource.saveProfileData(
                 userAccessToken = (apiResult as ApiResult.Success).data.accessToken,
@@ -41,10 +42,10 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun logout() {
-        withContext(Dispatchers.IO) {
-            usersLocalStorage.removeAll()
-            authLocalSource.clearProfileData()
+    override suspend fun logout(): Result<Boolean, Throwable> {
+        return withContext(Dispatchers.IO) {
+            val result = authLocalSource.clearProfileData() && usersLocalStorage.removeAll()
+            return@withContext if (result) Result.Success(true) else Result.Failure(false, 0)
         }
     }
 

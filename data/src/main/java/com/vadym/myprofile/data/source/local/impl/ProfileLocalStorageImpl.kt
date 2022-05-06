@@ -1,6 +1,7 @@
-package com.vadym.myprofile.data.source.local
+package com.vadym.myprofile.data.source.local.impl
 
 import com.vadym.myprofile.data.model.UserDB
+import com.vadym.myprofile.data.source.local.ProfileLocalStorage
 import com.vadym.myprofile.data.source.local.db.UsersDao
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

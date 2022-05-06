@@ -19,9 +19,6 @@ interface UsersDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertProfile(profile: UserDB)
 
-    @Query("SELECT * FROM users WHERE name LIKE '%' || :contactName || '%'")
-    fun searchContactsByName(contactName: String): Flow<List<UserDB>>
-
     @Query("SELECT * FROM users WHERE uid != :profileId ORDER BY name")
     fun getAllUserContact(profileId: Int): Flow<List<UserDB>>
 

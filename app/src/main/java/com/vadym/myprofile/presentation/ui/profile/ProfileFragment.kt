@@ -7,6 +7,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.vadym.myprofile.R
 import com.vadym.myprofile.app.base.BaseFragment
 import com.vadym.myprofile.app.utils.AppIntentHelper.getAppIntent
 import com.vadym.myprofile.app.utils.Constants.PACKAGE_FACEBOOK
@@ -15,6 +16,7 @@ import com.vadym.myprofile.app.utils.Constants.PACKAGE_LINKEDIN
 import com.vadym.myprofile.app.utils.Constants.PACKAGE_TWITTER
 import com.vadym.myprofile.app.utils.ext.loadCircledImage
 import com.vadym.myprofile.app.utils.ext.safeNavigation
+import com.vadym.myprofile.app.utils.ext.showToast
 import com.vadym.myprofile.databinding.FragmentProfileBinding
 import com.vadym.myprofile.presentation.model.ProfileModel
 import com.vadym.myprofile.presentation.ui.main.MainFragment
@@ -41,7 +43,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 viewLifecycleOwner.lifecycle,
                 Lifecycle.State.RESUMED
             ).collect {
-                showToast(it)
+                requireContext().showToast(it)
             }
         }
     }
@@ -66,8 +68,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 val intent = getAppIntent(
                     context = requireContext(),
                     appPackage = PACKAGE_TWITTER,
-                    appUri = "twitter://user?screen_name=${viewModel.profile.value?.twitter}",
-                    browserUri = "https://twitter.com/${viewModel.profile.value?.twitter}"
+                    appUri = getString(R.string.socials_twitter_app, viewModel.profile.value?.twitter),
+                    browserUri = getString(
+                        R.string.socials_twitter_browser,
+                        viewModel.profile.value?.twitter
+                    )
                 )
                 startActivity(intent)
             }
@@ -75,8 +80,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 val intent = getAppIntent(
                     context = requireContext(),
                     appPackage = PACKAGE_FACEBOOK,
-                    appUri = "fb://facewebmodal/f?href=${viewModel.profile.value?.facebook}",
-                    browserUri = "https://www.facebook.com/${viewModel.profile.value?.facebook}"
+                    appUri = getString(R.string.socials_facebook_app, viewModel.profile.value?.facebook),
+                    browserUri = getString(
+                        R.string.socials_facebook_browser,
+                        viewModel.profile.value?.facebook
+                    )
                 )
                 startActivity(intent)
             }
@@ -84,8 +92,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 val intent = getAppIntent(
                     context = requireContext(),
                     appPackage = PACKAGE_LINKEDIN,
-                    appUri = "linkedin://${viewModel.profile.value?.linkedin}",
-                    browserUri = "https://www.linkedin.com/in/${viewModel.profile.value?.linkedin}"
+                    appUri = getString(R.string.socials_linkedin_app, viewModel.profile.value?.linkedin),
+                    browserUri = getString(
+                        R.string.socials_linkedin_browser,
+                        viewModel.profile.value?.linkedin
+                    )
                 )
                 startActivity(intent)
             }
@@ -93,8 +104,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 val intent = getAppIntent(
                     context = requireContext(),
                     appPackage = PACKAGE_INSTAGRAM,
-                    appUri = "https://instagram.com/_u/${viewModel.profile.value?.instagram}",
-                    browserUri = "https://instagram.com/${viewModel.profile.value?.instagram}"
+                    appUri = getString(
+                        R.string.socials_instagram_app,
+                        viewModel.profile.value?.instagram
+                    ),
+                    browserUri = getString(
+                        R.string.socials_instagram_browser,
+                        viewModel.profile.value?.instagram
+                    )
                 )
                 startActivity(intent)
             }

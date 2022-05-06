@@ -20,7 +20,7 @@ class ContactAdapter(
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, selectionTracker)
+        holder.bind(item, selectionTracker.hasSelection(), selectionTracker.isSelected(item))
     }
 
     interface IContactClickListener {

@@ -17,7 +17,7 @@ interface AuthLocalStorage {
 
     suspend fun rememberUser()
 
-    suspend fun clearProfileData()
+    suspend fun clearProfileData(): Boolean
 
     fun isUserLogged(): Flow<Boolean>
 }

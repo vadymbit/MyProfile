@@ -41,8 +41,11 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                 val intent = AppIntentHelper.getAppIntent(
                     context = requireContext(),
                     appPackage = Constants.PACKAGE_TWITTER,
-                    appUri = "twitter://user?screen_name=${args.contactModel?.twitter}",
-                    browserUri = "https://twitter.com/${args.contactModel?.twitter}"
+                    appUri = getString(R.string.socials_twitter_app, args.contactModel?.twitter),
+                    browserUri = getString(
+                        R.string.socials_twitter_browser,
+                        args.contactModel?.twitter
+                    )
                 )
                 startActivity(intent)
             }
@@ -50,8 +53,11 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                 val intent = AppIntentHelper.getAppIntent(
                     context = requireContext(),
                     appPackage = Constants.PACKAGE_FACEBOOK,
-                    appUri = "fb://facewebmodal/f?href=${args.contactModel?.facebook}",
-                    browserUri = "https://www.facebook.com/${args.contactModel?.facebook}"
+                    appUri = getString(R.string.socials_facebook_app, args.contactModel?.facebook),
+                    browserUri = getString(
+                        R.string.socials_facebook_browser,
+                        args.contactModel?.facebook
+                    )
                 )
                 startActivity(intent)
             }
@@ -59,8 +65,11 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                 val intent = AppIntentHelper.getAppIntent(
                     context = requireContext(),
                     appPackage = Constants.PACKAGE_LINKEDIN,
-                    appUri = "linkedin://${args.contactModel?.linkedin}",
-                    browserUri = "https://www.linkedin.com/in/${args.contactModel?.linkedin}"
+                    appUri = getString(R.string.socials_linkedin_app, args.contactModel?.linkedin),
+                    browserUri = getString(
+                        R.string.socials_linkedin_browser,
+                        args.contactModel?.linkedin
+                    )
                 )
                 startActivity(intent)
             }
@@ -68,8 +77,14 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                 val intent = AppIntentHelper.getAppIntent(
                     context = requireContext(),
                     appPackage = PACKAGE_INSTAGRAM,
-                    appUri = "https://instagram.com/_u/${args.contactModel?.instagram}",
-                    browserUri = "https://instagram.com/${args.contactModel?.instagram}"
+                    appUri = getString(
+                        R.string.socials_instagram_app,
+                        args.contactModel?.instagram
+                    ),
+                    browserUri = getString(
+                        R.string.socials_instagram_browser,
+                        args.contactModel?.instagram
+                    )
                 )
                 startActivity(intent)
             }

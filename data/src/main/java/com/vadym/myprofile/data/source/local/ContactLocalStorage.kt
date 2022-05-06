@@ -13,7 +13,5 @@ interface ContactLocalStorage {
 
     fun getUserContacts(profileId: Int): Flow<List<UserDB>>
 
-    fun searchContactsByName(contactName: String): Flow<List<UserDB>>
-
     suspend fun addContacts(usersList: List<UserDB>)
 }

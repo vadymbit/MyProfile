@@ -1,8 +1,7 @@
 package com.vadym.myprofile.app.base
 
-import android.util.Log
 import androidx.lifecycle.*
-import com.vadym.myprofile.app.utils.ParseNetworkError.parseErrorMessage
+import com.vadym.myprofile.app.utils.NetworkErrorParser
 import com.vadym.myprofile.domain.model.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -11,8 +10,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
+import javax.inject.Inject
 
 abstract class BaseViewModel : ViewModel() {
+    @Inject protected lateinit var errorParser: NetworkErrorParser
     var isLoading = MutableLiveData<Boolean>()
     private val eventChannel = Channel<String>(Channel.BUFFERED)
     val eventsFlow = eventChannel.receiveAsFlow()
@@ -36,7 +37,7 @@ abstract class BaseViewModel : ViewModel() {
         return when (result) {
             is Result.Success -> result.data
             is Result.Failure -> {
-                eventChannel.send(parseErrorMessage(result.errorCode))
+                eventChannel.send(errorParser.parseErrorMessage(result.errorCode))
                 result.data
             }
         }
@@ -49,7 +50,7 @@ abstract class BaseViewModel : ViewModel() {
                 if (result.data != null) {
                     liveData.value = result.data
                 }
-                eventChannel.send(parseErrorMessage(result.errorCode))
+                eventChannel.send(errorParser.parseErrorMessage(result.errorCode))
             }
         }
     }
@@ -64,14 +65,9 @@ abstract class BaseViewModel : ViewModel() {
                     result.data?.let {
                         emitSource(result.data!!.asLiveData())
                     }
-                    eventChannel.send(parseErrorMessage(result.errorCode))
+                    eventChannel.send(errorParser.parseErrorMessage(result.errorCode))
                 }
             }
         }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        Log.d("Debuging", "${this.javaClass.simpleName}  Destroyed")
     }
 }

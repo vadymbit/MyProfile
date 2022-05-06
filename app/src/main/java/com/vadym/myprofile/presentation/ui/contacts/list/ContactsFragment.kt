@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.vadym.myprofile.R
 import com.vadym.myprofile.app.base.BaseFragment
 import com.vadym.myprofile.app.utils.ext.safeNavigation
+import com.vadym.myprofile.app.utils.ext.showSnackbar
 import com.vadym.myprofile.databinding.FragmentContactsBinding
 import com.vadym.myprofile.presentation.model.ContactModel
 import com.vadym.myprofile.presentation.ui.contacts.list.adapter.ContactAdapter
@@ -66,7 +68,7 @@ class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsB
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 newText?.let {
-                    viewModel.searchContact(it)
+                    contactAdapter.submitList(viewModel.searchContact(it))
                 }
                 return true
             }
@@ -79,22 +81,18 @@ class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsB
 
     override fun setObservers() {
         viewModel.apply {
-            contactsLiveData.observe(viewLifecycleOwner) {
+            contacts.observe(viewLifecycleOwner) {
                 contactAdapter.submitList(it)
             }
             isLoading.observe(viewLifecycleOwner) {
-                if (it) {
-                    binding.lpiLoading.show()
-                } else {
-                    binding.lpiLoading.hide()
-                }
+                binding.lpiLoading.isVisible = it
             }
             lifecycleScope.launch {
                 eventsFlow.flowWithLifecycle(
                     viewLifecycleOwner.lifecycle,
                     Lifecycle.State.RESUMED
                 ).collect {
-                    showSnackbar(it)
+                    requireContext().showSnackbar(it, binding)
                 }
             }
         }
@@ -155,12 +153,10 @@ class ContactsFragment : BaseFragment<FragmentContactsBinding>(FragmentContactsB
             rvContactList.viewTreeObserver.addOnDrawListener {
                 parentFragment?.startPostponedEnterTransition()
             }
-            fabDeleteContacts.setOnClickListener { removeSelectedContacts() }
+            fabDeleteContacts.setOnClickListener {
+                viewModel.removeContacts(selectionTracker.selection)
+            }
         }
-    }
-
-    private fun removeSelectedContacts() {
-        viewModel.removeContacts(selectionTracker.selection.map { it })
     }
 
     private fun initContactRecyclerView() {

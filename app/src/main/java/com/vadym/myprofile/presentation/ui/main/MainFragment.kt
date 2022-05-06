@@ -39,8 +39,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         return when (menuItem.itemId) {
             R.id.action_logout -> {
                 viewModel.logout()
-                findNavController().navigate(MainFragmentDirections.actionMainFragmentToAuthActivity())
-                activity?.finish()
                 true
             }
             else -> false
@@ -64,13 +62,22 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         viewPager.adapter = pagerAdapter
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {
-                0 -> tab.text = getString(R.string.pager_profile)
-                1 -> tab.text = getString(R.string.pager_contacts)
+                0 -> tab.text = getString(R.string.main_pager_profile)
+                1 -> tab.text = getString(R.string.main_pager_contacts)
             }
         }.attach()
     }
 
     fun swipeToContactsList() {
         tabLayout.selectTab(tabLayout.getTabAt(1))
+    }
+
+    override fun setObservers() {
+        viewModel.isLogout.observe(viewLifecycleOwner) {
+            if (it) {
+                findNavController().navigate(MainFragmentDirections.actionMainFragmentToAuthActivity())
+                activity?.finish()
+            }
+        }
     }
 }

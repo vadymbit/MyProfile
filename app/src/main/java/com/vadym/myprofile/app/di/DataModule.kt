@@ -7,9 +7,14 @@ import com.vadym.myprofile.app.utils.Constants.DB_NAME
 import com.vadym.myprofile.data.repository.AuthRepositoryImpl
 import com.vadym.myprofile.data.repository.ContactRepositoryImpl
 import com.vadym.myprofile.data.repository.ProfileRepositoryImpl
-import com.vadym.myprofile.data.source.local.*
+import com.vadym.myprofile.data.source.local.AuthLocalStorage
+import com.vadym.myprofile.data.source.local.ContactLocalStorage
+import com.vadym.myprofile.data.source.local.ProfileLocalStorage
 import com.vadym.myprofile.data.source.local.db.AppDatabase
 import com.vadym.myprofile.data.source.local.db.UsersDao
+import com.vadym.myprofile.data.source.local.impl.AuthLocalStorageImpl
+import com.vadym.myprofile.data.source.local.impl.ContactLocalStorageImpl
+import com.vadym.myprofile.data.source.local.impl.ProfileLocalStorageImpl
 import com.vadym.myprofile.data.source.remote.ApiService
 import com.vadym.myprofile.data.source.remote.ApiServiceHolder
 import com.vadym.myprofile.data.source.remote.TokenAuthenticator

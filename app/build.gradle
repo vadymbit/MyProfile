@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "com.vadym.myprofile"
-        minSdk 23
+        minSdk 26
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -48,7 +48,7 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.3.0'
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation 'androidx.fragment:fragment-ktx:1.5.0-beta01'
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
 
     //Recyclerview Selection tracker
     implementation 'androidx.recyclerview:recyclerview-selection:1.1.0'

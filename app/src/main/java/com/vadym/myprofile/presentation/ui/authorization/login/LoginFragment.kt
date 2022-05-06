@@ -2,24 +2,22 @@ package com.vadym.myprofile.presentation.ui.authorization.login
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.activityViewModels
+import android.view.inputmethod.EditorInfo
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.vadym.myprofile.app.base.BaseFragment
-import com.vadym.myprofile.app.utils.ext.addValidateEmailListener
-import com.vadym.myprofile.app.utils.ext.addValidatePasswordListener
-import com.vadym.myprofile.app.utils.ext.safeNavigation
+import com.vadym.myprofile.app.utils.ext.*
 import com.vadym.myprofile.databinding.FragmentLoginBinding
-import com.vadym.myprofile.presentation.ui.authorization.AuthSharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
-    private val authSharedViewModel: AuthSharedViewModel by activityViewModels()
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,7 +25,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     override fun setObservers() {
-        authSharedViewModel.apply {
+        viewModel.apply {
             navigateToProfile.observe(viewLifecycleOwner) { isLogged ->
                 if (isLogged) {
                     goToMyProfile()
@@ -38,7 +36,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                     viewLifecycleOwner.lifecycle,
                     Lifecycle.State.RESUMED
                 ).collect {
-                    showToast(it)
+                    requireContext().showToast(it)
                 }
             }
             isLoading.observe(viewLifecycleOwner) {
@@ -49,12 +47,24 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     private fun setListeners() {
         binding.apply {
-            tiEmail.addValidateEmailListener()
-            tiPass.addValidatePasswordListener()
+            tiPass.removeErrorIfNotFocused()
+            tiEmail.removeErrorIfNotFocused()
+            etPass.setOnEditorActionListener { textView, actionId, _ ->
+                return@setOnEditorActionListener when (actionId) {
+                    EditorInfo.IME_ACTION_DONE -> {
+                        textView.clearFocus()
+                        requireActivity().hideKeyboard()
+                        true
+                    }
+                    else -> false
+                }
+            }
             btnLogin.setOnClickListener {
+                tiPass.validatePassword()
+                tiEmail.validateEmail()
                 if (isInputValid()) {
-                    authSharedViewModel.login(etEmail.text.toString(), etPass.text.toString())
-                    authSharedViewModel.isRememberUser(cbRememberMe.isChecked)
+                    viewModel.login(etEmail.text.toString(), etPass.text.toString())
+                    viewModel.isRememberUser(cbRememberMe.isChecked)
                 }
             }
             tvRegister.setOnClickListener { goToRegister() }
@@ -62,7 +72,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun isInputValid(): Boolean {
-        return authSharedViewModel.isInputValid(
+        return viewModel.isInputValid(
             binding.tiEmail.isErrorEnabled,
             binding.tiPass.isErrorEnabled
         )

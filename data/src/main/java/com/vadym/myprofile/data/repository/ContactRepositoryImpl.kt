@@ -39,15 +39,6 @@ class ContactRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun searchContactsByName(contactName: String): Result<Flow<List<UserModel>>, Throwable> {
-        val searchedContacts = storage.searchContactsByName(contactName).map { usersDbList ->
-            usersDbList.map {
-                UserDomainMapper.toUserModel(it)
-            }
-        }
-        return Result.Success(searchedContacts)
-    }
-
     override suspend fun getUserContacts(): Result<Flow<List<UserModel>>, Throwable> {
         val apiResult = getRequestResult { apiService.getContacts() }
         return getFlowResult(

@@ -11,6 +11,7 @@
         <item name="textAppearanceSubtitle1">@style/TextAppearance.App.Subtitle1</item>
         <item name="textAppearanceCaption">@style/TextAppearance.App.Caption</item>
         <item name="textAppearanceButton">@style/TextAppearance.App.Button</item>
+        <item name="colorError">@color/red_100</item>
     </style>
 
     <style name="Theme.MyProfile" parent="Base.Theme.MyProfile">

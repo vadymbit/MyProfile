@@ -5,9 +5,9 @@ import android.util.Patterns
 import com.vadym.myprofile.R
 
 object Validator {
-    fun validatePassword(pass: String?, context: Context): String? {
+    fun validatePassword(pass: String, context: Context): String? {
         val error: String? = when {
-            pass.isNullOrBlank() -> {
+            pass.isBlank() -> {
                 context.getString(R.string.error_required)
             }
             pass.length < Constants.MIN_PASS_LENGTH -> {

@@ -1,4 +1,4 @@
-package com.vadym.myprofile.data.source.local
+package com.vadym.myprofile.data.source.local.impl
 
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -11,6 +11,7 @@ import com.vadym.myprofile.data.Const.IS_LOGGED
 import com.vadym.myprofile.data.Const.PROFILE_ID
 import com.vadym.myprofile.data.Const.REFRESH_TOKEN
 import com.vadym.myprofile.data.Const.STORE_NAME
+import com.vadym.myprofile.data.source.local.AuthLocalStorage
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
@@ -69,10 +70,10 @@ class AuthLocalStorageImpl(private val context: Context) : AuthLocalStorage {
         }
     }
 
-    override suspend fun clearProfileData() {
-        context.dataStore.edit { preferences ->
+    override suspend fun clearProfileData(): Boolean {
+        return context.dataStore.edit { preferences ->
             preferences.clear()
-        }
+        }.asMap().isEmpty()
     }
 
     override fun isUserLogged(): Flow<Boolean> {

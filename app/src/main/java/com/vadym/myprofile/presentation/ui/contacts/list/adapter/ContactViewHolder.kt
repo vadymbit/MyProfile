@@ -3,13 +3,11 @@ package com.vadym.myprofile.presentation.ui.contacts.list.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.selection.ItemDetailsLookup
-import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.widget.RecyclerView
 import com.vadym.myprofile.R
-import com.vadym.myprofile.app.utils.ext.hide
 import com.vadym.myprofile.app.utils.ext.loadCircledImage
-import com.vadym.myprofile.app.utils.ext.show
 import com.vadym.myprofile.databinding.ItemContactBinding
 import com.vadym.myprofile.presentation.model.ContactModel
 
@@ -21,21 +19,13 @@ class ContactViewHolder private constructor(
 
     private lateinit var currentContact: ContactModel
 
-    /**
-     * Bind contact name, career and photo to the item of recycler view
-     */
-    fun bind(contact: ContactModel, selectionTracker: SelectionTracker<ContactModel>) {
+    fun bind(contact: ContactModel, isSelectionMode: Boolean, isContactSelected: Boolean) {
         currentContact = contact
-        itemView.isActivated = selectionTracker.hasSelection()
+        itemView.isActivated = isSelectionMode
         binding.apply {
-            if (selectionTracker.hasSelection()) {
-                cbSelect.show()
-                btnDeleteContact.hide()
-            } else {
-                cbSelect.hide()
-                btnDeleteContact.show()
-            }
-            cbSelect.isChecked = selectionTracker.isSelected(contact)
+            cbSelect.isVisible = isSelectionMode
+            btnDeleteContact.isVisible = !isSelectionMode
+            cbSelect.isChecked = isContactSelected
             tvContactCareer.text = contact.career
             tvContactName.text = contact.name
             tvContactName.setSingleLine()

@@ -10,7 +10,7 @@ interface AuthRepository {
 
     suspend fun login(authModel: AuthModel): Result<Boolean, Throwable>
 
-    suspend fun logout()
+    suspend fun logout(): Result<Boolean, Throwable>
 
     suspend fun rememberUser()
 

@@ -14,5 +14,4 @@ interface ContactRepository {
 
     suspend fun getAllUsers(): Result<List<UserModel>, Throwable>
 
-    suspend fun searchContactsByName(contactName: String): Result<Flow<List<UserModel>>, Throwable>
 }

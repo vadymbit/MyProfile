@@ -22,4 +22,10 @@ object Constants {
     const val PACKAGE_TWITTER = "com.twitter.android"
     const val PACKAGE_FACEBOOK = "com.facebook.katana"
     const val PACKAGE_LINKEDIN = "com.linkedin.android"
+
+    //DatePicker dialog date format
+    const val DATE_FORMAT = "MM/dd/yyyy"
+
+    const val GALLERY_LAUNCH_INPUT = "image/*"
+    const val SCHEME_PACKAGE = "package"
 }

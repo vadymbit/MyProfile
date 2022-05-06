@@ -34,10 +34,10 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiEmail"
-        style="@style/TextInput"
+        style="@style/TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/email"
+        android:hint="@string/auth_hint_email"
         android:theme="@style/InputTheme"
         app:layout_constraintTop_toBottomOf="@+id/tvSubtitle">
 
@@ -52,10 +52,10 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiPass"
-        style="@style/TextInput"
+        style="@style/TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/password"
+        android:hint="@string/auth_hint_password"
         android:theme="@style/InputTheme"
         app:layout_constraintTop_toBottomOf="@+id/tiEmail">
 
